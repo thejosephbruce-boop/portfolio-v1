@@ -1,34 +1,54 @@
 // ─────────────────────────────────────────
-// Logo parallax on scroll
+// Hero scroll animation
+// Phase 1 (0–50%): tagline → CREATIVE crossfade, logo parallax
+// Phase 2 (50–100%): lockup exits upward
 // ─────────────────────────────────────────
-const hero = document.getElementById('hero');
+(function () {
+  const hero       = document.getElementById('hero');
+  const lockup     = document.getElementById('heroLockup');
+  const logo       = document.getElementById('heroLogo');
+  const tagline    = document.getElementById('heroTagline');
+  const creative   = document.getElementById('heroCreative');
+  const scrollWrap = document.getElementById('heroScrollWrap');
 
-function initParallax() {
-  const logoEl = document.querySelector('.hero-logo');
-  if (!logoEl || !hero) return;
+  if (!hero || !lockup) return;
+
+  let rafId = null;
+
+  function tick() {
+    rafId = null;
+    const maxScroll = hero.offsetHeight - window.innerHeight;
+    if (maxScroll <= 0) return;
+
+    const p = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+
+    // ── Tagline fades out: progress 0 → 0.35
+    tagline.style.opacity = Math.max(0, 1 - p / 0.35).toFixed(3);
+
+    // ── CREATIVE fades in: progress 0.2 → 0.5
+    creative.style.opacity = Math.max(0, Math.min(1, (p - 0.2) / 0.3)).toFixed(3);
+
+    // ── Scroll line fades in: progress 0.35 → 0.5
+    scrollWrap.style.opacity = Math.max(0, Math.min(1, (p - 0.35) / 0.15)).toFixed(3);
+
+    // ── Logo: subtle upward parallax during phase 1 (max 20px)
+    const logoY = -(Math.min(p / 0.5, 1) * 20);
+    logo.style.transform = `translateY(${logoY.toFixed(1)}px)`;
+
+    // ── Lockup exits upward: phase 2 (0.5 → 1.0), ease-in curve
+    const p2 = Math.max(0, (p - 0.5) / 0.5);
+    const lockupY = -(p2 * p2) * (window.innerHeight * 1.2);
+    lockup.style.transform = `translateY(${lockupY.toFixed(1)}px)`;
+  }
 
   function onScroll() {
-    const scrollY = window.scrollY;
-    const heroH   = hero.offsetHeight;
-
-    // Only active while hero is in view
-    if (scrollY > heroH) return;
-
-    // Logo moves up at 35% of scroll speed — floats behind the page
-    const y       = scrollY * 0.35;
-    // Gentle fade starts at 60% through the hero, finishes at 100%
-    const progress = scrollY / heroH;
-    const opacity  = Math.max(1 - Math.max(progress - 0.6, 0) * 2.5, 0);
-
-    logoEl.style.transform = `translateY(-${y}px)`;
-    logoEl.style.opacity   = opacity;
+    if (!rafId) rafId = requestAnimationFrame(tick);
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
-
-window.addEventListener('load', initParallax);
+  window.addEventListener('resize', tick);
+  tick();
+}());
 
 // ─────────────────────────────────────────
 // Scroll reveal
@@ -60,26 +80,45 @@ window.addEventListener('scroll', () => {
 
 // ─────────────────────────────────────────
 // Expand thumbnail on title OR image hover
+// — scroll guard + open delay + close grace period
 // ─────────────────────────────────────────
-document.querySelectorAll('.project').forEach(project => {
-  const triggers = [
-    project.querySelector('.project-text'),
-    project.querySelector('.project-media')
-  ].filter(Boolean);
+(function () {
+  let isScrolling = false;
+  let scrollTimer = null;
 
-  const hovering = new Set();
+  window.addEventListener('scroll', () => {
+    isScrolling = true;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => { isScrolling = false; }, 250);
+  }, { passive: true });
 
-  triggers.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      hovering.add(el);
-      project.classList.add('title-hover');
-    });
-    el.addEventListener('mouseleave', () => {
-      hovering.delete(el);
-      if (hovering.size === 0) project.classList.remove('title-hover');
+  document.querySelectorAll('.project').forEach(project => {
+    const triggers = [
+      project.querySelector('.project-text'),
+      project.querySelector('.project-media')
+    ].filter(Boolean);
+
+    let openTimer  = null;
+    let closeTimer = null;
+
+    triggers.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimer);        // cancel any pending close
+        if (isScrolling) return;
+        openTimer = setTimeout(() => {
+          project.classList.add('title-hover');
+        }, 1000);
+      });
+
+      el.addEventListener('mouseleave', () => {
+        clearTimeout(openTimer);         // cancel pending open
+        closeTimer = setTimeout(() => {  // grace period before closing
+          project.classList.remove('title-hover');
+        }, 200);
+      });
     });
   });
-});
+}());
 
 // ─────────────────────────────────────────
 // Smooth scroll for anchor links

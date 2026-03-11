@@ -169,27 +169,6 @@
       margin-left: 4px;
     }
 
-    /* ── CREDITS ─────────────────────────────── */
-    .project-credits {
-      max-width: 800px;
-      margin: 5rem auto 0;
-      padding: 3rem var(--pad) 5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem 4.5rem;
-    }
-    .credit-item dt {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-    .credit-item dd {
-      font-size: 0.88rem;
-      font-weight: 300;
-    }
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -221,7 +200,6 @@
 
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
-      .project-credits { gap: 1.5rem 2.5rem; }
       .media-contained { padding: 0; }
     }
   </style>
@@ -236,9 +214,7 @@
 
   <!-- Project header -->
   <header class="project-header">
-    <p class="project-client">Nike &middot; W+K London</p>
     <h1 class="project-title">Nike — A Beautiful Run</h1>
-    <p class="project-brief">We were tasked with creating a social-first campaign to celebrate Eliud Kipchoge's unique outlook on running. The campaign also coincided with his fifth Berlin Marathon and the launch of his own Nike Running Collection.</p>
   </header>
 
   <!-- Main film — 1:04, 16:9 -->
@@ -303,26 +279,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Credits -->
-  <section class="project-credits">
-    <dl class="credit-item">
-      <dt>Director</dt>
-      <dd>Joe Bruce</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Agency</dt>
-      <dd>Wieden+Kennedy London</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Client</dt>
-      <dd>Nike</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Year</dt>
-      <dd>2021</dd>
-    </dl>
-  </section>
 
   <!-- Next project -->
   <nav class="next-project">

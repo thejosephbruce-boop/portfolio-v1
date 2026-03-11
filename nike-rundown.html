@@ -185,27 +185,6 @@
       border: 0;
     }
 
-    /* ── CREDITS ─────────────────────────────── */
-    .project-credits {
-      max-width: 800px;
-      margin: 5rem auto 0;
-      padding: 3rem var(--pad) 5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem 4.5rem;
-    }
-    .credit-item dt {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-    .credit-item dd {
-      font-size: 0.88rem;
-      font-weight: 300;
-    }
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -237,7 +216,6 @@
 
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
-      .project-credits { gap: 1.5rem 2.5rem; }
       .media-contained { padding: 0; }
     }
   </style>
@@ -252,104 +230,16 @@
 
   <!-- Project header -->
   <header class="project-header">
-    <p class="project-client">Nike &middot; Wieden+Kennedy London</p>
     <h1 class="project-title">Nike — The Rundown</h1>
-    <p class="project-brief">Sir Mo Farah was about to run the London Marathon and Nike asked us to create a campaign that would make young people living in the city take notice. We built 'The Rundown' — a social-first content series.</p>
   </header>
 
-  <div class="media-full">
-    <div class="video-wrap"
-         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2eb6fb70-8b4d-4b10-aeab-2bb7486def9b/playlist.m3u8">
-      <video
-        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2eb6fb70-8b4d-4b10-aeab-2bb7486def9b/thumbnail"
-        preload="none"
-        playsinline
-      ></video>
-      <div class="video-overlay">
-        <div class="play-btn"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/77d5e6a8-6c59-45b6-b062-967d28cbad6e/Screenshot+2023-09-26+at+18.54.40.png?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fd01e110-81a2-4f06-92b8-d661e5be919c/PHONE%2BTUBE%2B02.jpg?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b0527db9-a9ea-4999-baee-90c845c48096/CHXN1099.jpg?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af90255c-6442-4cfc-a730-e9fe31c4336b/CLOCK-ANIMATION-FINAL.gif?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-contained">
-    <div class="video-wrap"
-         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/aeaf122d-8ff4-4d4e-8006-3301d451b448/playlist.m3u8">
-      <video
-        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/aeaf122d-8ff4-4d4e-8006-3301d451b448/thumbnail"
-        preload="none"
-        playsinline
-      ></video>
-      <div class="video-overlay">
-        <div class="play-btn"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="media-contained">
-    <div class="video-wrap"
-         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a893f222-e152-4e9b-b048-f1c57b95bf10/playlist.m3u8">
-      <video
-        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a893f222-e152-4e9b-b048-f1c57b95bf10/thumbnail"
-        preload="none"
-        playsinline
-      ></video>
-      <div class="video-overlay">
-        <div class="play-btn"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Credits -->
-  <section class="project-credits">
-    <dl class="credit-item">
-      <dt>Director</dt>
-      <dd>Joe Bruce</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Agency</dt>
-      <dd>Wieden+Kennedy London</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Client</dt>
-      <dd>Nike</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Year</dt>
-      <dd>2017</dd>
-    </dl>
-  </section>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fd01e110-81a2-4f06-92b8-d661e5be919c/PHONE%2BTUBE%2B02.jpg?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b0527db9-a9ea-4999-baee-90c845c48096/CHXN1099.jpg?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af90255c-6442-4cfc-a730-e9fe31c4336b/CLOCK-ANIMATION-FINAL.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7063a930-4439-4df9-bc90-2eb2be83bb7d/JELLYLEGGIES_FINAL_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5833215-e6a2-458c-b521-50cb10411821/RUNNINGLEGS_FINAL_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/48d19207-c221-4c47-b5f2-6feda858437e/RUNTHEROADMEDAL_FINAL_1500_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e0ca00be-d096-405e-bf6f-f1ac75d57598/TREADMILL_FINAL_1500_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
 
   <!-- Next project -->
   <nav class="next-project">

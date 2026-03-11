@@ -185,27 +185,6 @@
       border: 0;
     }
 
-    /* ── CREDITS ─────────────────────────────── */
-    .project-credits {
-      max-width: 800px;
-      margin: 5rem auto 0;
-      padding: 3rem var(--pad) 5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem 4.5rem;
-    }
-    .credit-item dt {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-    .credit-item dd {
-      font-size: 0.88rem;
-      font-weight: 300;
-    }
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -237,7 +216,6 @@
 
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
-      .project-credits { gap: 1.5rem 2.5rem; }
       .media-contained { padding: 0; }
     }
   </style>
@@ -252,98 +230,25 @@
 
   <!-- Project header -->
   <header class="project-header">
-    <p class="project-client">Bud Light &middot; Wieden+Kennedy London</p>
     <h1 class="project-title">Bud Light — Box Heads</h1>
-    <p class="project-brief">Bud Light were the official beer of the England Men's Team. They wanted to find a way to shout about this on their packaging. We also created a load of reaction GIFs featuring players responding to key moments.</p>
   </header>
 
-  <div class="media-full">
-    <div class="video-wrap"
-         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/585dff32-d07f-45af-9ce1-66f7058e3381/playlist.m3u8">
-      <video
-        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/585dff32-d07f-45af-9ce1-66f7058e3381/thumbnail"
-        preload="none"
-        playsinline
-      ></video>
-      <div class="video-overlay">
-        <div class="play-btn"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f3aca262-3e1a-4b3c-97e7-c9235bcae9c8/16-9+%281%29.jpg?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2e28a28b-4750-471d-8249-bb4fdbab6d10/GROUP_JUMP_FOOTBALL_.gif?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ed189473-4c7c-44f5-a848-60708269f452/Copy+of+WALKER_WE_DID_IT.gif?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9a71ae5b-b619-43f1-9ac2-0f252530dc2b/MINGS_FACEPALM.gif?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7030854b-99b2-4126-a8f2-ef2a5fe39c97/MINGS_PARTY_TIME.gif?format=2500w"
-      alt=""
-      loading="lazy"
-    />
-  </div>
-
-  <div class="media-full">
-    <div class="video-wrap"
-         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/301f01b8-ba05-414d-a249-c290a5f9956a/playlist.m3u8">
-      <video
-        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/301f01b8-ba05-414d-a249-c290a5f9956a/thumbnail"
-        preload="none"
-        playsinline
-      ></video>
-      <div class="video-overlay">
-        <div class="play-btn"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Credits -->
-  <section class="project-credits">
-    <dl class="credit-item">
-      <dt>Director</dt>
-      <dd>Joe Bruce</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Agency</dt>
-      <dd>Wieden+Kennedy London</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Client</dt>
-      <dd>Bud Light</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Year</dt>
-      <dd>2021</dd>
-    </dl>
-  </section>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f3aca262-3e1a-4b3c-97e7-c9235bcae9c8/16-9+%281%29.jpg?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2e28a28b-4750-471d-8249-bb4fdbab6d10/GROUP_JUMP_FOOTBALL_.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ed189473-4c7c-44f5-a848-60708269f452/Copy+of+WALKER_WE_DID_IT.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9a71ae5b-b619-43f1-9ac2-0f252530dc2b/MINGS_FACEPALM.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7030854b-99b2-4126-a8f2-ef2a5fe39c97/MINGS_PARTY_TIME.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/df3525ea-265d-49df-bc66-8bd9191cbd0c/PICKFORD_CAN_DROP.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fbed7686-49f4-4455-86fb-246a4383b25f/WALKER_FLEX.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cc742874-9820-463b-9847-eb2eadad516d/MINGS_SAVAGE.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/85f6e30d-492d-455b-9fc3-92baadcd342b/PICKFORD_PAPER_SIGN.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/bb7c42f9-2dac-48f4-8d23-496bba94fe45/MINGS_SKILLS_FLEX_BALLER.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2f5346fa-2d3b-4345-b634-4e4e6501465b/PICKFORD_THUMB_ROCKET.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c8a8437e-e8c8-415b-9676-37728daf007a/STONE_SLIDE.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/80a12df8-d8a4-4733-b178-27858e6d8d4f/STONES_KEEPY_UPS.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/aa74f082-1094-4a2d-a5e8-5c30292573ad/WALKER_JUMP.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6b40df98-c119-4040-ba34-a5332a430f58/TRIPPIER_CLEAN_SHEET_NO_MOTION.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/435faab1-871a-4cc3-bfe3-d8a46ae2359f/WALKER_RIVERDANCE_MECH.gif?format=2500w" alt="Bud Light Boxheads" loading="lazy" /></div>
 
   <!-- Next project -->
   <nav class="next-project">

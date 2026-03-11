@@ -90,24 +90,32 @@ ul {
    Hero
 ───────────────────────────────────────── */
 .hero {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: calc(var(--nav-h) + 48px) var(--pad) 80px;
+  height: 200vh;
   position: relative;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.hero-content {
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-lockup {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-
-.hero-content .hero-title {
-  margin-bottom: 0;
+  padding: 0 var(--pad);
+  padding-top: var(--nav-h);
+  will-change: transform;
 }
 
 .hero-title {
@@ -116,7 +124,7 @@ ul {
   font-weight: 300;
   line-height: 0.93;
   letter-spacing: -0.025em;
-  margin-bottom: 3rem;
+  margin-bottom: 0;
 }
 
 .hero-title em {
@@ -128,32 +136,43 @@ ul {
   display: block;
   width: clamp(280px, 48vw, 680px);
   height: auto;
-  will-change: transform, opacity;
+  will-change: transform;
   transform-origin: center center;
 }
 
-.hero-meta {
+/* Text area — tagline & creative occupy the same space */
+.hero-text-area {
+  position: relative;
+  margin-top: 1.5rem;
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-tagline,
+.hero-creative {
+  position: absolute;
   font-size: 0.75rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 1.5rem;
+  white-space: nowrap;
+  will-change: opacity;
 }
 
-/* Scroll indicator */
+.hero-creative {
+  opacity: 0;
+}
+
+/* Scroll indicator — no label, just the animated line */
 .hero-scroll {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  margin-top: 2.5rem;
-}
-
-.hero-scroll span {
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
+  margin-top: 2rem;
+  opacity: 0;
+  will-change: opacity;
 }
 
 .hero-scroll-line {
@@ -200,6 +219,10 @@ ul {
 ───────────────────────────────────────── */
 .work {
   padding-bottom: 80px;
+  position: relative;
+  z-index: 1;
+  margin-top: -50vh;
+  background: var(--bg);
 }
 
 .projects {
@@ -209,22 +232,22 @@ ul {
 
 .project {
   border-bottom: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 0fr;
   cursor: pointer;
+  transition: grid-template-rows 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Thumbnail — hidden by default, expands on hover */
+.project.title-hover {
+  grid-template-rows: auto 1fr;
+}
+
+/* Thumbnail — collapses/expands via grid row, not max-height */
 .project-media {
-  order: 2;
+  grid-row: 2;
   position: relative;
   overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.project.title-hover .project-media {
-  max-height: 1000px;
+  min-height: 0;
 }
 
 .project-thumb {
@@ -243,7 +266,7 @@ ul {
   transform: scale(1.025);
 }
 
-/* Hover overlay */
+/* Hover overlay — also serves as the project link */
 .project-overlay {
   position: absolute;
   inset: 0;
@@ -252,6 +275,11 @@ ul {
   justify-content: center;
   background: rgba(17, 17, 17, 0);
   transition: background 0.35s;
+  pointer-events: none; /* not clickable until thumbnail is open */
+}
+
+.project.title-hover .project-overlay {
+  pointer-events: auto;
 }
 
 .project-overlay span {
@@ -276,7 +304,7 @@ ul {
 
 /* Project info row */
 .project-info {
-  order: 1;
+  grid-row: 1;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -295,13 +323,11 @@ ul {
   line-height: 1.1;
 }
 
-.project-meta {
-  font-size: 0.73rem;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  margin-top: 0.3rem;
-  text-align: center;
+.project-title a {
+  color: inherit;
+  text-decoration: none;
 }
+
 
 /* ─────────────────────────────────────────
    About
@@ -330,6 +356,7 @@ ul {
   color: var(--muted);
   line-height: 1.85;
   max-width: 52ch;
+  margin-top: 1.25rem;
 }
 
 .about-details {
@@ -524,15 +551,6 @@ ul {
 @media (max-width: 600px) {
   .nav-links {
     gap: 1.5rem;
-  }
-
-  .hero-meta {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .hero-scroll {
-    display: none;
   }
 
   .project-info {

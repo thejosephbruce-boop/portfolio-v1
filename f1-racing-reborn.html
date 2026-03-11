@@ -185,27 +185,6 @@
       border: 0;
     }
 
-    /* ── CREDITS ─────────────────────────────── */
-    .project-credits {
-      max-width: 800px;
-      margin: 5rem auto 0;
-      padding: 3rem var(--pad) 5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem 4.5rem;
-    }
-    .credit-item dt {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-    .credit-item dd {
-      font-size: 0.88rem;
-      font-weight: 300;
-    }
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -237,7 +216,6 @@
 
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
-      .project-credits { gap: 1.5rem 2.5rem; }
       .media-contained { padding: 0; }
     }
   </style>
@@ -252,9 +230,7 @@
 
   <!-- Project header -->
   <header class="project-header">
-    <p class="project-client">Formula 1 &middot; Wieden+Kennedy London</p>
     <h1 class="project-title">F1 — Racing Reborn</h1>
-    <p class="project-brief">The 2022 F1 season ushered in the biggest changes to the sport in a decade. New rules breathed new life into top-tier motor racing.</p>
   </header>
 
   <div class="media-full">
@@ -270,26 +246,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Credits -->
-  <section class="project-credits">
-    <dl class="credit-item">
-      <dt>Director</dt>
-      <dd>Joe Bruce</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Agency</dt>
-      <dd>Wieden+Kennedy London</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Client</dt>
-      <dd>Formula 1</dd>
-    </dl>
-    <dl class="credit-item">
-      <dt>Year</dt>
-      <dd>2022</dd>
-    </dl>
-  </section>
 
   <!-- Next project -->
   <nav class="next-project">
