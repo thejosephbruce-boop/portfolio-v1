@@ -11,419 +11,262 @@
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav"></nav>
+  <!-- Splash overlay -->
+  <div class="splash" id="splash">
+    <div class="splash-content">
+      <img src="download.png" class="splash-logo" id="splashLogo" alt="Joe Bruce" />
+      <p class="splash-tagline" id="splashTagline">Executive Creative Director &amp; Creative Partner</p>
+    </div>
+  </div>
 
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero-sticky">
-      <div class="hero-lockup" id="heroLockup">
-        <h1 class="hero-title">
-          <img src="download.png" alt="Joe Bruce" class="hero-logo" id="heroLogo" />
-        </h1>
-        <div class="hero-text-area">
-          <div class="hero-tagline" id="heroTagline">Executive Creative Director &amp; Creative Partner</div>
-          <div class="hero-creative" id="heroCreative">Creative</div>
-        </div>
-        <div class="hero-scroll" aria-hidden="true" id="heroScrollWrap">
-          <div class="hero-scroll-line"></div>
-        </div>
+  <!-- About / Contact view — full-screen fixed overlay, triggered from bottom of project list -->
+  <div class="about-view" id="aboutView">
+    <div class="about-col" id="aboutCol">
+
+      <div class="section-header about-first-header">
+        <span class="section-label">About</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Work -->
-  <section class="work" id="work">
-    <div class="projects">
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Beautiful Run Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-a-beautiful-run.html" class="project-overlay" aria-label="View Nike - A Beautiful Run"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">01</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-a-beautiful-run.html">Nike - A Beautiful Run</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('OWN the floor thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-own-the-floor.html" class="project-overlay" aria-label="View Nike Own The Floor"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">02</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-own-the-floor.html">Nike Own The Floor</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Jamshed thumb.jpg'); background-size: cover; background-position: center;"></div>
-          <a href="#" class="project-overlay" aria-label="View Jamshed There's No Such Thing As Too Jammy"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">03</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="#">Jamshed There's No Such Thing As Too Jammy</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Camden recall thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="camden-town-brewery-recall.html" class="project-overlay" aria-label="View Camden Town Brewery Recall"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">04</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="camden-town-brewery-recall.html">Camden Town Brewery Recall</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Welcome to the edge thumb.png'); background-size: 140% auto; background-position: center;"></div>
-          <a href="f1-welcome-to-the-edge.html" class="project-overlay" aria-label="View F1 Welcome To The Edge"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">05</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="f1-welcome-to-the-edge.html">F1 Welcome To The Edge</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Like a lioness thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-like-a-lioness.html" class="project-overlay" aria-label="View Nike Like a Lioness"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">06</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-like-a-lioness.html">Nike Like a Lioness</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike Human Race Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-human-race.html" class="project-overlay" aria-label="View Nike Human Race"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">07</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-human-race.html">Nike Human Race</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0c3176d7-1c86-407b-9323-fb300d372d27/gravy3.jpg?format=2500w'); background-size: cover; background-position: center;"></div>
-          <a href="sainsburys-christmas.html" class="project-overlay" aria-label="View Sainsbury's Christmas"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">08</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="sainsburys-christmas.html">Sainsbury's Christmas</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/60d09ab2-1dd7-43b1-b5ca-b0fd0941aa39/testnike1.jpg?format=2500w'); background-size: cover; background-position: center;"></div>
-          <a href="nike-berlin.html" class="project-overlay" aria-label="View Nike Berlin"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">09</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-berlin.html">Nike Berlin</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike Kids Move Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-kids-move.html" class="project-overlay" aria-label="View Nike Kids Move"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">10</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-kids-move.html">Nike Kids Move</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike Fade Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-never-fade.html" class="project-overlay" aria-label="View Nike Never Fade"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">11</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-never-fade.html">Nike Never Fade</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike Rundown thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-rundown.html" class="project-overlay" aria-label="View Nike Rundown"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">12</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-rundown.html">Nike Rundown</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike LDNR thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-ldnr.html" class="project-overlay" aria-label="View Nike Nothing Beats A LDNR"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">13</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-ldnr.html">Nike Nothing Beats A LDNR</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike WWC thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-wwc-2019.html" class="project-overlay" aria-label="View Nike WWC 2019"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">14</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-wwc-2019.html">Nike WWC 2019</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike Deceptive by nature thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-hypervenom.html" class="project-overlay" aria-label="View Nike Deceptive By Nature"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">15</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-hypervenom.html">Nike Deceptive By Nature</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Nike We Run With It thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="nike-we-run-with-it.html" class="project-overlay" aria-label="View Nike We Run With It"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">16</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="nike-we-run-with-it.html">Nike We Run With It</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('itsu thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="#" class="project-overlay" aria-label="View itsu Sorry For Any Convenience"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">17</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="#">itsu Sorry For Any Convenience</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Camden Tour Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="camden-town-brewery-the-usual.html" class="project-overlay" aria-label="View Camden Town Brewery The Usual"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">18</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="camden-town-brewery-the-usual.html">Camden Town Brewery The Usual</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('F1 racing reborn thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="f1-racing-reborn.html" class="project-overlay" aria-label="View F1 Racing Reborn"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">19</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="f1-racing-reborn.html">F1 Racing Reborn</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Bud light Box heads thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="bud-light-box-heads.html" class="project-overlay" aria-label="View Bud Light Box Heads"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">20</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="bud-light-box-heads.html">Bud Light Box Heads</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('McDonalds Family thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="mcdonalds-family.html" class="project-overlay" aria-label="View McDonalds Family"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">21</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="mcdonalds-family.html">McDonalds Family</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Lurpak Hope Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="lurpak-hope.html" class="project-overlay" aria-label="View Lurpak Hope"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">22</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="lurpak-hope.html">Lurpak Hope</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('National Art Fund thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="national-art-fun.html" class="project-overlay" aria-label="View National Art Fun Miss Nothing"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">23</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="national-art-fun.html">National Art Fun Miss Nothing</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Paddy Power thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="paddy-power.html" class="project-overlay" aria-label="View Paddy Power 2012 - 2015"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">24</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="paddy-power.html">Paddy Power 2012 - 2015</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Turkish Airlines thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="turkish-airlines-fly-africa.html" class="project-overlay" aria-label="View Turkish Airlines Fly Africa"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">25</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="turkish-airlines-fly-africa.html">Turkish Airlines Fly Africa</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="background-image: url('Grolsch Thumb.png'); background-size: cover; background-position: center;"></div>
-          <a href="grolsch-beer.html" class="project-overlay" aria-label="View Grolsch Beer"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">26</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="grolsch-beer.html">Grolsch Beer</a></h2>
-          </div>
-        </div>
-      </article>
-
-      <article class="project reveal">
-        <div class="project-media">
-          <div class="project-thumb" style="--c1:#c3c5c1;--c2:#e2e4e0;--c3:#d3d5d1"></div>
-          <a href="#" class="project-overlay" aria-label="View Sprite and Tabasco"><span>View</span></a>
-        </div>
-        <div class="project-info">
-          <span class="project-num">27</span>
-          <div class="project-text">
-            <h2 class="project-title"><a href="#">Sprite and Tabasco</a></h2>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- About -->
-  <section class="about" id="about">
-    <div class="section-header">
-      <span class="section-label">About</span>
-    </div>
-    <div class="about-content reveal">
-      <div class="about-text">
+      <div class="about-content">
         <p class="about-intro">I know I know. Hear me out, I'll keep this short. I've spent 16+ years working at great advertising agencies, big and small. Most recently I've helped build a new creative department and improve the creative ambition at The Beyond Collective.</p>
         <p class="about-body">Prior to my time at Beyond, I was Creative Director on the Nike account at W+K London, where I spent a number of years working across all sorts of fun, important and ridiculous things.</p>
         <p class="about-body">I studied Design for Visual Communication at Central St Martins, but I have, more often than not, been credited as a writer on the work I've produced and have been lucky enough to work with some of the best Art Directors in the world. In my toolbox, I have a knack for summoning words, finding the light in the cracks and creating big creative platforms that outlive campaigns. I love getting the best out of my teams and have a passion for mentoring and educating young people too. Some of my favourite years in this industry were spent running the Kennedys internship programme at W+K London.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- Contact -->
-  <section class="contact" id="contact">
-    <div class="section-header">
-      <span class="section-label">Contact</span>
+      <div class="section-header">
+        <span class="section-label">Contact</span>
+      </div>
+      <div class="about-contact">
+        <a href="mailto:hello@joebruce.com" class="contact-email">hello@joebruce.com</a>
+        <div class="contact-links">
+          <a href="#" class="contact-link">Instagram</a>
+          <a href="#" class="contact-link">Vimeo</a>
+          <a href="#" class="contact-link">LinkedIn</a>
+        </div>
+      </div>
+
+      <footer class="footer about-footer">
+        <span>&copy; 2024 Joe Bruce</span>
+        <span>London, UK</span>
+      </footer>
+
     </div>
-    <div class="contact-content reveal">
-      <a href="mailto:hello@joebruce.com" class="contact-email">hello@joebruce.com</a>
-      <div class="contact-links">
-        <a href="#" class="contact-link">Instagram</a>
-        <a href="#" class="contact-link">Vimeo</a>
-        <a href="#" class="contact-link">LinkedIn</a>
+    <div class="about-logo-col" id="aboutLogoCol"></div>
+  </div>
+
+  <!-- Portfolio: two-column grid -->
+  <div class="portfolio-layout">
+
+    <!-- Left: sticky logo panel -->
+    <div class="logo-panel" id="logoPanel">
+      <div class="logo-reveal" id="logoReveal">
+        <img src="download.png" class="logo-sizer" alt="Joe Bruce" />
+        <div class="logo-thumb logo-thumb--a" id="logoThumbA"></div>
+        <div class="logo-thumb logo-thumb--b" id="logoThumbB"></div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <span>&copy; 2024 Joe Bruce</span>
-    <span>London, UK</span>
-  </footer>
+    <!-- Right: scrolling project list -->
+    <section class="project-list" id="work">
+
+      <article class="project" data-thumb="Beautiful Run Thumb.png">
+        <a href="nike-a-beautiful-run.html">
+          <span class="project-num">01</span>
+          <h2 class="project-title">Nike — A Beautiful Run</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="OWN the floor thumb.png">
+        <a href="nike-own-the-floor.html">
+          <span class="project-num">02</span>
+          <h2 class="project-title">Nike Own The Floor</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Jamshed thumb.jpg">
+        <a href="#">
+          <span class="project-num">03</span>
+          <h2 class="project-title">Jamshed There's No Such Thing As Too Jammy</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Camden recall thumb.png">
+        <a href="camden-town-brewery-recall.html">
+          <span class="project-num">04</span>
+          <h2 class="project-title">Camden Town Brewery Recall</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Welcome to the edge thumb.png">
+        <a href="f1-welcome-to-the-edge.html">
+          <span class="project-num">05</span>
+          <h2 class="project-title">F1 Welcome To The Edge</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Like a lioness thumb.png">
+        <a href="nike-like-a-lioness.html">
+          <span class="project-num">06</span>
+          <h2 class="project-title">Nike Like a Lioness</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike Human Race Thumb.png">
+        <a href="nike-human-race.html">
+          <span class="project-num">07</span>
+          <h2 class="project-title">Nike Human Race</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0c3176d7-1c86-407b-9323-fb300d372d27/gravy3.jpg?format=2500w">
+        <a href="sainsburys-christmas.html">
+          <span class="project-num">08</span>
+          <h2 class="project-title">Sainsbury's Christmas</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/60d09ab2-1dd7-43b1-b5ca-b0fd0941aa39/testnike1.jpg?format=2500w">
+        <a href="nike-berlin.html">
+          <span class="project-num">09</span>
+          <h2 class="project-title">Nike Berlin</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike Kids Move Thumb.png">
+        <a href="nike-kids-move.html">
+          <span class="project-num">10</span>
+          <h2 class="project-title">Nike Kids Move</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike Fade Thumb.png">
+        <a href="nike-never-fade.html">
+          <span class="project-num">11</span>
+          <h2 class="project-title">Nike Never Fade</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike Rundown thumb.png">
+        <a href="nike-rundown.html">
+          <span class="project-num">12</span>
+          <h2 class="project-title">Nike Rundown</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike LDNR thumb.png">
+        <a href="nike-ldnr.html">
+          <span class="project-num">13</span>
+          <h2 class="project-title">Nike Nothing Beats A LDNR</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike WWC thumb.png">
+        <a href="nike-wwc-2019.html">
+          <span class="project-num">14</span>
+          <h2 class="project-title">Nike WWC 2019</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike Deceptive by nature thumb.png">
+        <a href="nike-hypervenom.html">
+          <span class="project-num">15</span>
+          <h2 class="project-title">Nike Deceptive By Nature</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Nike We Run With It thumb.png">
+        <a href="nike-we-run-with-it.html">
+          <span class="project-num">16</span>
+          <h2 class="project-title">Nike We Run With It</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="itsu thumb.png">
+        <a href="#">
+          <span class="project-num">17</span>
+          <h2 class="project-title">itsu Sorry For Any Convenience</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Camden Tour Thumb.png">
+        <a href="camden-town-brewery-the-usual.html">
+          <span class="project-num">18</span>
+          <h2 class="project-title">Camden Town Brewery The Usual</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="F1 racing reborn thumb.png">
+        <a href="f1-racing-reborn.html">
+          <span class="project-num">19</span>
+          <h2 class="project-title">F1 Racing Reborn</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Bud light Box heads thumb.png">
+        <a href="bud-light-box-heads.html">
+          <span class="project-num">20</span>
+          <h2 class="project-title">Bud Light Box Heads</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="McDonalds Family thumb.png">
+        <a href="mcdonalds-family.html">
+          <span class="project-num">21</span>
+          <h2 class="project-title">McDonalds Family</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Lurpak Hope Thumb.png">
+        <a href="lurpak-hope.html">
+          <span class="project-num">22</span>
+          <h2 class="project-title">Lurpak Hope</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="National Art Fund thumb.png">
+        <a href="national-art-fun.html">
+          <span class="project-num">23</span>
+          <h2 class="project-title">National Art Fun Miss Nothing</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Paddy Power thumb.png">
+        <a href="paddy-power.html">
+          <span class="project-num">24</span>
+          <h2 class="project-title">Paddy Power 2012 – 2015</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Turkish Airlines thumb.png">
+        <a href="turkish-airlines-fly-africa.html">
+          <span class="project-num">25</span>
+          <h2 class="project-title">Turkish Airlines Fly Africa</h2>
+        </a>
+      </article>
+
+      <article class="project" data-thumb="Grolsch Thumb.png">
+        <a href="grolsch-beer.html">
+          <span class="project-num">26</span>
+          <h2 class="project-title">Grolsch Beer</h2>
+        </a>
+      </article>
+
+      <article class="project">
+        <a href="#">
+          <span class="project-num">27</span>
+          <h2 class="project-title">Sprite and Tabasco</h2>
+        </a>
+      </article>
+
+      <article class="project">
+        <a href="#">
+          <span class="project-num">28</span>
+          <h2 class="project-title">More Stuff</h2>
+        </a>
+      </article>
+
+    </section>
+
+  </div>
 
 <script src="main.js"></script>
 </body>
