@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lurpak — Hope · Joe Bruce</title>
+  <title>The Kennedys · Joe Bruce</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
@@ -108,83 +108,36 @@
       display: block;
     }
 
-    /* Contained (narrower) block for square social cut */
-    .media-contained {
-      padding: 0 var(--pad);
-      margin-bottom: 3px;
-    }
-    .media-contained .video-wrap {
-      max-width: 720px;
+    /* ── TEXT SECTION ────────────────────────── */
+    .text-section {
+      max-width: 680px;
       margin: 0 auto;
+      padding: 5rem var(--pad);
     }
-
-    /* ── VIDEO PLAYER ────────────────────────── */
-    .video-wrap {
-      position: relative;
-      background: #0d0d0d;
-      cursor: pointer;
-      line-height: 0;
+    .text-section h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 2rem;
     }
-    .video-wrap video {
-      width: 100%;
-      display: block;
+    .text-section p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
     }
-    /* Custom play overlay — visible until first play */
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.22);
-      transition: opacity 0.35s;
+    .text-section p:last-child {
+      margin-bottom: 0;
     }
-    .video-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
+    .text-section a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
-    .play-btn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 1px solid rgba(245, 243, 239, 0.55);
-      background: rgba(245, 243, 239, 0.1);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s, background 0.25s;
+    .text-section a:hover {
+      opacity: 0.6;
     }
-    .video-wrap:hover .play-btn {
-      transform: scale(1.08);
-      background: rgba(245, 243, 239, 0.2);
-    }
-    .play-btn::after {
-      content: '';
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 9px 0 9px 17px;
-      border-color: transparent transparent transparent rgba(245, 243, 239, 0.9);
-      margin-left: 4px;
-    }
-
-    /* ── VIMEO EMBED ─────────────────────────── */
-    .vimeo-wrap {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0d0d0d;
-      line-height: 0;
-    }
-    .vimeo-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -213,11 +166,6 @@
     }
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
-
-    /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 600px) {
-      .media-contained { padding: 0; }
-    }
   </style>
 </head>
 <body>
@@ -230,77 +178,50 @@
 
   <!-- Project header -->
   <header class="project-header">
-    <h1 class="project-title">Lurpak — Hope</h1>
-    <p class="project-brief">I worked with Tom Bender and Tom Corcoran to write this spot for Lurpak. I didn't end up creating the final film, but I did manage to carve out a brand new job title for myself: 'Creative Support'.</p>
+    <p class="project-client">W+K London</p>
+    <h1 class="project-title">The Kennedys</h1>
+    <p class="project-brief">The Kennedys is a 5-month creative course open to anyone trying to get into the creative industry. The selection process is geared up to provide a doorway for people who wouldn't normally see creative advertising as an option — and we get an incredible mix of brilliant young people from many different backgrounds.</p>
   </header>
 
+  <!-- Hero image -->
   <div class="media-full">
-    <div class="video-wrap"
-         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0f2a1cfc-78fe-450d-a138-ad7d2396b34b/playlist.m3u8">
-      <video
-        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0f2a1cfc-78fe-450d-a138-ad7d2396b34b/thumbnail"
-        preload="none"
-        playsinline
-      ></video>
-      <div class="video-overlay">
-        <div class="play-btn"></div>
-      </div>
-    </div>
+    <img
+      src="Kennedys Thumb.png"
+      alt="The Kennedys"
+      loading="eager"
+    />
+  </div>
+
+  <!-- Body copy -->
+  <div class="text-section">
+    <h2>Welcome to Kennadise Island</h2>
+    <p>Do you know someone who is looking to jam their foot in the door of the advertising industry? Someone who is creatively minded, but has no previous agency experience, or ad-school training? Then send them our way.</p>
+    <p>We are recruiting for our 5-month crash-course in creative advertising at Wieden + Kennedy London. We have space for 8 incredibly talented creative, non-advertising newbies to get paid London Living Wage whilst getting trained to make incredible creative advertising.</p>
+    <p>You won't have to pay for this wisdom. We'll pay you. You won't need to worry about AI here. AI will worry about you. You won't need your own boat, laptop, trust-fund or nepo-daddy for this trip. We've got you covered.</p>
+    <p>Literally the opposite of uni.</p>
+    <p>2024 was my second year as Course Director and I'm incredibly excited for what the future of The Kennedys will hold. Find out more at <a href="https://thekennedyslondon.com/" target="_blank" rel="noopener">thekennedyslondon.com</a>.</p>
+  </div>
+
+  <!-- Promotional image -->
+  <div class="media-full">
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/26b9e53a-8cbd-4ff7-8b4c-2ab2d424709a/59LANDINGPAGE-1.png"
+      alt="The Kennedys 2024"
+      loading="lazy"
+    />
   </div>
 
   <!-- Next project -->
   <nav class="next-project">
-    <p class="next-label">Next project</p>
-    <a href="paddy-power.html" class="next-link">Paddy Power</a>
+    <p class="next-label">Next</p>
+    <a href="more-stuff.html" class="next-link">More Stuff</a>
   </nav>
 
-  <!-- HLS.js for cross-browser video -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    // ── Nav scroll ──────────────────────────────
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
-
-    // ── Video players ───────────────────────────
-    document.querySelectorAll('.video-wrap').forEach(wrap => {
-      const video   = wrap.querySelector('video');
-      const overlay = wrap.querySelector('.video-overlay');
-      const hlsSrc  = wrap.dataset.hls;
-      let   ready   = false;
-
-      function initVideo() {
-        if (ready) return;
-        ready = true;
-
-        if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-          const hls = new Hls({ startLevel: -1 });
-          hls.loadSource(hlsSrc);
-          hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          // Safari — native HLS support
-          video.src = hlsSrc;
-        }
-
-        // Show native controls after first load
-        video.controls = true;
-      }
-
-      // Click on overlay or video → play/pause
-      wrap.addEventListener('click', (e) => {
-        initVideo();
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-      });
-
-      video.addEventListener('play',  () => overlay.classList.add('hidden'));
-      video.addEventListener('pause', () => overlay.classList.remove('hidden'));
-      video.addEventListener('ended', () => overlay.classList.remove('hidden'));
-    });
   </script>
 
 </body>

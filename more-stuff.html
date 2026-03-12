@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>More Stuff · Joe Bruce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #f5f3ef;
+      --ink:    #111111;
+      --muted:  #888880;
+      --border: rgba(17, 17, 17, 0.12);
+      --pad:    clamp(1.5rem, 5vw, 4rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem var(--pad);
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(245, 243, 239, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+    .nav-back {
+      font-size: 0.7rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 1; }
+    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
+    .nav-logo {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    /* ── PAGE HEADER ─────────────────────────── */
+    .page-header {
+      padding: calc(5.5rem + var(--pad)) var(--pad) 3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.6rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.06;
+      margin-bottom: 2rem;
+    }
+    .page-intro {
+      font-size: 0.93rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ── CONTENT SECTIONS ────────────────────── */
+    .content-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem var(--pad) 6rem;
+    }
+
+    .story {
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 0;
+    }
+
+    .story:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .story-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .story h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.75rem;
+    }
+
+    .story p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      max-width: 60ch;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .story a:hover {
+      opacity: 0.6;
+    }
+
+    /* ── CLOSING ─────────────────────────────── */
+    .closing {
+      border-top: 1px solid var(--border);
+      padding: 3.5rem var(--pad) 5rem;
+      text-align: center;
+    }
+
+    .closing p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.4;
+    }
+
+    .closing a {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .closing a:hover { opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-back">Work</a>
+    <a href="index.html" class="nav-logo">Joe Bruce</a>
+  </nav>
+
+  <!-- Page header -->
+  <header class="page-header">
+    <h1 class="page-title">More Stuff</h1>
+    <p class="page-intro">A few other interesting things I've been involved in that are not directly connected to my day job.</p>
+  </header>
+
+  <!-- Stories -->
+  <div class="content-wrap">
+
+    <div class="story">
+      <p class="story-label">Agency Within an Agency</p>
+      <h2>Night Shop</h2>
+      <p>At BMB, me and my creative partner started an 'agency within an agency' called Night Shop. We were young and foolish and thought it would be fun to work all night on our own briefs and pitch for our own pieces of business.</p>
+      <p>Amongst many other things, Night Shop ran a successful campaign to save the Ministry of Sound nightclub from closure and helped launch the charity C.A.L.M in London.</p>
+    </div>
+
+    <div class="story">
+      <p class="story-label">Charity</p>
+      <h2>C.A.L.M</h2>
+      <p>The Campaign Against Living Miserably is a suicide prevention phone-line, support network and information hub that was founded in Merseyside in the early 2000s. Its primary function was to respond to the skyrocketing male suicide rates in that area of Liverpool at the time.</p>
+      <p>In 2010, C.A.L.M turned its attention to London. This is where I got involved. I helped launch the charity in the city and was responsible for a number of marketing campaigns and fundraising initiatives. I even ran the 2012 London Marathon in a pair of pants to raise money to keep the phone lines open.</p>
+      <p>Suicide is the single biggest killer of men under 45 in the UK. Almost 80% of all suicide is male and 1 in 4 men in this country have admitted to having suicidal thoughts. If you'd like to support C.A.L.M and the amazing work they now do for men all around the UK, please <a href="https://www.thecalmzone.net/" target="_blank" rel="noopener">visit their website</a>.</p>
+    </div>
+
+    <div class="story">
+      <p class="story-label">Photography</p>
+      <h2>Squatting in Paris</h2>
+      <p>I've always enjoyed photography and, particularly, simple ideas repeated ad nauseam. In 2013 I went to Paris to see if I could document myself squatting in as many iconic locations as possible. 'Squatting in Paris' was born.</p>
+    </div>
+
+    <div class="story">
+      <p class="story-label">Jewellery</p>
+      <h2>Hatton Garden Heist Necklace</h2>
+      <p>Do you remember the Hatton Garden Heist? It captured the imagination of the British public — the large man-sized hole that was drilled into the vault was on the front cover of every newspaper and magazine for weeks.</p>
+      <p>I decided to go to Hatton Garden to have a poke around and found a jeweller who was willing to help me design and make a piece of gold jewellery to commemorate the robbery, and the aforementioned hole. My Hatton Heist Necklace ended up making the news and I had to lay low for a while.</p>
+    </div>
+
+    <div class="story">
+      <p class="story-label">Side Hustle</p>
+      <h2>Bubble Bros Ltd</h2>
+      <p>In 2015 I decided to start a side hustle. I opened a small mobile bar business called Bubble Bros Ltd. The business was responsible for the first ever 'Prosecco Van' and appeared in national newspapers and on Good Morning Britain.</p>
+      <p>Bubble Bros Ltd grew so quickly that, for a while, it became my main hustle. The business now has mobile bars as far afield as New York, Cayman Islands and UAE. We also have our own on-tap sparkling wine product that can be found in bars and restaurants all over the UK. Find out more at <a href="https://bubblebros.co.uk/" target="_blank" rel="noopener">bubblebros.co.uk</a>.</p>
+    </div>
+
+    <div class="story">
+      <p class="story-label">W+K London</p>
+      <h2>Shop Window</h2>
+      <p>W+K has the best shop window in London — a 3m × 3m piece of glass that looks out onto sunny Hanbury Street. The window has a footfall of thousands; scores of tourists, fashionistas and Jack the Ripper enthusiasts pass in front of it every single day.</p>
+      <p>As of August 2022, I've been the Creative Director of this window, working with an amazing team to bring brilliant installations to life — from giant Cost of Living utility bills for Halloween, to light installations for Ramadan, exploding balloons for Air Max day, and a working photocopier for Christmas.</p>
+    </div>
+
+    <div class="story">
+      <p class="story-label">Education</p>
+      <h2>The Kennedys</h2>
+      <p>The Kennedys is a 5-month creative course open to anyone trying to get into the creative industry. The selection process is geared up to provide a doorway for people who wouldn't normally see creative advertising as an option — the course is not open to anyone who has attended an ad school or already worked in an advertising agency, so we get an incredible mix of brilliant young people from many different backgrounds.</p>
+      <p>We take these 8 innocent, malleable minds and turn them into sharp, well-oiled thinking machines. 2024 was my second year as Course Director. Find out more at <a href="https://thekennedyslondon.com/" target="_blank" rel="noopener">thekennedyslondon.com</a>.</p>
+    </div>
+
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <p>If you'd like to hear any more of my boring stories, drop me a line.</p>
+    <a href="mailto:thejosephbruce@gmail.com">thejosephbruce@gmail.com</a>
+  </div>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

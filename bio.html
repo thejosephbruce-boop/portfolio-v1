@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Bio · Joe Bruce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #f5f3ef;
+      --ink:    #111111;
+      --muted:  #888880;
+      --border: rgba(17, 17, 17, 0.12);
+      --pad:    clamp(1.5rem, 5vw, 4rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem var(--pad);
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav.scrolled {
+      background: rgba(245, 243, 239, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+    .nav-back {
+      font-size: 0.7rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 1; }
+    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
+    .nav-logo {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    /* ── PAGE HEADER ─────────────────────────── */
+    .page-header {
+      padding: calc(5.5rem + var(--pad)) var(--pad) 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .page-intro {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    /* ── BIO SECTIONS ────────────────────────── */
+    .bio-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--pad) 6rem;
+    }
+
+    .bio-section {
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 0;
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+    }
+
+    .bio-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.25rem;
+    }
+
+    .bio-content h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+
+    .bio-content p {
+      font-size: 0.93rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 1.1rem;
+    }
+
+    .bio-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bio-content a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .bio-content a:hover {
+      opacity: 0.6;
+    }
+
+    /* ── CONTACT SECTION ─────────────────────── */
+    .contact-section {
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 0 0;
+    }
+
+    .contact-section .bio-label {
+      display: block;
+      margin-bottom: 2rem;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 3.5rem);
+      font-weight: 300;
+      color: var(--ink);
+      text-decoration: none;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .contact-email::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .contact-email:hover::after {
+      width: 100%;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 2.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .contact-link {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .contact-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--ink);
+    }
+
+    .contact-link:hover::after {
+      width: 100%;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 640px) {
+      .bio-section {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-back">Work</a>
+    <a href="index.html" class="nav-logo">Joe Bruce</a>
+  </nav>
+
+  <!-- Page header -->
+  <header class="page-header">
+    <p class="page-intro">Joe Bruce is an established Creative with over 16 years in the advertising industry. He is currently a Creative Partner at Beyond.</p>
+  </header>
+
+  <!-- Bio content -->
+  <div class="bio-wrap">
+
+    <div class="bio-section">
+      <span class="bio-label">Currently</span>
+      <div class="bio-content">
+        <h2>Beyond</h2>
+        <p>Joe joined Beyond as Executive Creative Director in summer 2024 and has since become Creative Partner across the wider holding company. A role that has seen him foster creativity within his own teams as well as in the company's Media, Production and Innovation offerings.</p>
+        <p>In May 2025, Joe played a pivotal role in the restructuring, redesigning and relaunching of Beyond — taking it from four separate businesses to one unified agency brand, and rebuilding and bolstering the creative department in the process.</p>
+        <p>In his time at the agency, Joe has brought in new clients and overseen global projects for Yamaha Music and Jam Shed wines, while creating local campaigns for Back Market, ARUK and Itsu.</p>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <span class="bio-label">W+K London</span>
+      <div class="bio-content">
+        <h2>Wieden + Kennedy</h2>
+        <p>Prior to his role at Beyond, Joe was Creative Director on the Nike account at Wieden + Kennedy London — a position he held for a number of years, running large campaigns and establishing creative platforms in both local and global markets.</p>
+        <p>Before his time on Nike, Joe and his creative partner Albert Pukies looked after important accounts including F1, Sainsbury's and Camden Town Brewery.</p>
+        <p>In addition to his day-to-day responsibilities, Joe was Creative Director for the renowned Hanbury Street shop window — a project that garnered widespread recognition in the creative community. He also served as Course Director for The Kennedys; a groundbreaking 5-month programme dedicated to nurturing new, young creative people into the industry.</p>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <span class="bio-label">Career</span>
+      <div class="bio-content">
+        <h2>Earlier Career</h2>
+        <p>Prior to W+K, Joe held roles as a writer and Creative Director at agencies 101 and Crispin Porter + Bogusky London, where he worked on a wide variety of accounts including Paddy Power, Tango, National Art Fund, Turkish Airlines and Milka chocolate.</p>
+        <p>His journey into advertising began at BMB, where he cut his teeth working on iconic brands like IKEA, Yorkshire Tea, Carling, Corona, Grolsch, William Hill and Penguin Books. Whilst at BMB, Joe also helped launch the charity C.A.L.M in London — a cause that remains very close to his heart.</p>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <span class="bio-label">Entrepreneurship</span>
+      <div class="bio-content">
+        <h2>Bubble Bros Ltd</h2>
+        <p>Beyond his career in advertising, Joe is a founder and driving force behind Bubble Bros Ltd, a successful sparkling wine business that has experienced remarkable growth. Starting as an events bar operation at major festivals including Glastonbury, Lovebox, Wireless and Download, it has since expanded into an on-trade sparkling wine enterprise with products available in venues across the country — and more recently, the world.</p>
+      </div>
+    </div>
+
+    <div class="contact-section">
+      <span class="bio-label">Contact</span>
+      <div>
+        <a href="mailto:thejosephbruce@gmail.com" class="contact-email">thejosephbruce@gmail.com</a>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/joe-bruce-23833426/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="#" class="contact-link">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

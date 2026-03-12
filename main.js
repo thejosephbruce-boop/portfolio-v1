@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────
-// Splash → Portfolio transition (+ reverse)
+// Splash → Portfolio transition
 // ─────────────────────────────────────────
 (function () {
   const splash      = document.getElementById('splash');
@@ -9,15 +9,11 @@
   const projectList = document.querySelector('.project-list');
   if (!splash) return;
 
-  let triggered    = false;
-  let taglineTimer = null;   // tracked so we can cancel it if the user reverses quickly
+  let triggered = false;
 
   function reveal() {
     if (triggered) return;
     triggered = true;
-
-    // Cancel any pending tagline fade-in from a previous reverse
-    if (taglineTimer) { clearTimeout(taglineTimer); taglineTimer = null; }
 
     // 1. Fade out tagline immediately
     tagline.style.opacity = '0';
@@ -47,101 +43,30 @@
         if (projectList) projectList.classList.add('is-visible');
       }, 480);
 
-      // Keep splash in DOM for reverse — just disable pointer events
+      // Remove splash from DOM once transition is complete
       setTimeout(() => {
-        splash.style.pointerEvents = 'none';
+        splash.remove();
       }, 1100);
 
     }, 300);
   }
 
-  function reverse() {
-    if (!triggered) return;
-    triggered = false;
-
-    // Fade out portfolio
-    if (projectList) projectList.classList.remove('is-visible');
-    logoReveal.classList.remove('is-visible');
-
-    // Fade splash background back in smoothly (not an instant snap)
-    splash.style.transition      = 'background-color 0.5s ease';
-    splash.style.backgroundColor = 'var(--bg)';
-    splash.style.pointerEvents   = 'auto';
-
-    // Snap logo back to center — invisible because opacity is still 0
-    splashLogo.style.transition = 'none';
-    splashLogo.style.transform  = '';
-
-    // Once background has appeared, fade the logo back in
-    setTimeout(() => {
-      splashLogo.style.transition = 'opacity 0.5s ease';
-      splashLogo.style.opacity    = '1';
-    }, 300);
-
-    // Fade tagline back in just after the logo — track the timer so reveal() can cancel it
-    taglineTimer = setTimeout(() => {
-      tagline.style.opacity = '1';
-      taglineTimer = null;
-    }, 500);
-
-    // Re-attach mouseenter listener so the user can trigger forward again
-    setTimeout(() => {
-      splashLogo.addEventListener('mouseenter', reveal, { once: true });
-    }, 900);
-  }
-
-  // Trigger forward reveal when cursor enters the logo
-  splashLogo.addEventListener('mouseenter', reveal, { once: true });
-
-  // Scroll down → reveal; also track when we arrive at the top
-  let atTopSince  = null;
-  let touchStartY = 0;
-
-  window.addEventListener('scroll', () => {
-    if (!triggered && window.scrollY > 0) {
-      reveal();
-      atTopSince = null;
-    } else if (triggered) {
-      if (window.scrollY === 0 && atTopSince === null) {
-        atTopSince = Date.now();   // note when we landed at the top
-      } else if (window.scrollY > 0) {
-        atTopSince = null;         // left the top — reset
-      }
-    }
-  }, { passive: true });
-
-  // Desktop: wheel up while already at the top (after a 300ms dwell) → reverse
-  // The dwell stops scroll momentum from accidentally triggering it on arrival
-  window.addEventListener('wheel', (e) => {
-    if (triggered && window.scrollY === 0 && e.deltaY < 0) {
-      if (atTopSince && Date.now() - atTopSince > 300) {
-        reverse();
-      }
-    }
-  }, { passive: true });
-
-  // Mobile: pull-down overscroll at the top → reverse
-  window.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    if (triggered && window.scrollY === 0 && atTopSince) {
-      if (Date.now() - atTopSince > 300 && e.touches[0].clientY - touchStartY > 40) {
-        reverse();
-      }
-    }
-  }, { passive: true });
+  // Trigger only on first scroll
+  window.addEventListener('scroll', reveal, { once: true, passive: true });
 
 }());
 
 // ─────────────────────────────────────────
-// Logo thumbnail reveal — crossfade on hover
+// Logo thumbnail reveal — hover + scroll crossfade + full-bleed click
 // ─────────────────────────────────────────
 (function () {
-  const thumbA   = document.getElementById('logoThumbA');
-  const thumbB   = document.getElementById('logoThumbB');
-  const projects = Array.from(document.querySelectorAll('.project'));
+  const thumbA      = document.getElementById('logoThumbA');
+  const thumbB      = document.getElementById('logoThumbB');
+  const projects    = Array.from(document.querySelectorAll('.project'));
+  const logoPanel   = document.getElementById('logoPanel');
+  const fullBleed   = document.getElementById('fullBleed');
+  const viewBtn     = document.getElementById('viewProjectBtn');
+  const projectList = document.querySelector('.project-list');
 
   if (!thumbA || !thumbB || !projects.length) return;
 
@@ -172,8 +97,54 @@
   }
   activateProject(projects[0]);
 
-  // Activate on hover — last hovered project stays active when cursor leaves
-  projects.forEach(p => p.addEventListener('mouseenter', () => activateProject(p)));
+  // Hover: activate project + update full-bleed if already expanded
+  projects.forEach(p => {
+    p.addEventListener('mouseenter', () => {
+      activateProject(p);
+      if (logoPanel && logoPanel.classList.contains('is-expanded') && p.dataset.thumb) {
+        if (fullBleed) fullBleed.style.backgroundImage = "url('" + p.dataset.thumb + "')";
+        const link = p.querySelector('a');
+        if (link && viewBtn) viewBtn.href = link.getAttribute('href');
+      }
+    });
+  });
+
+  // Scroll: activate topmost visible project
+  const visibleSet = new Set();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) visibleSet.add(e.target);
+      else visibleSet.delete(e.target);
+    });
+    const top = projects.find(p => visibleSet.has(p));
+    if (top) activateProject(top);
+  }, { threshold: 0.3 });
+  projects.forEach(p => observer.observe(p));
+
+  // Click: expand thumbnail to full-bleed
+  if (logoPanel && fullBleed && viewBtn) {
+    projects.forEach(p => {
+      const link = p.querySelector('a');
+      if (!link) return;
+      link.addEventListener('click', (e) => {
+        const url  = p.dataset.thumb;
+        const href = link.getAttribute('href');
+        if (!url || href === '#') return;
+        e.preventDefault();
+        fullBleed.style.backgroundImage = "url('" + url + "')";
+        viewBtn.href = href;
+        logoPanel.classList.add('is-expanded');
+      });
+    });
+
+    // Hover back over project list: collapse full-bleed
+    if (projectList) {
+      projectList.addEventListener('mouseenter', () => {
+        logoPanel.classList.remove('is-expanded');
+      });
+    }
+  }
+
 }());
 
 // ─────────────────────────────────────────
