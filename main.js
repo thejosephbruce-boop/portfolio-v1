@@ -23,9 +23,24 @@ window.scrollTo(0, 0);
     if (triggered) return;
     triggered = true;
 
-    // Reset scroll to top now — splash is still fully visible so there's no jump,
-    // and when it fades away the project list will be at position 01
-    window.scrollTo(0, 0);
+    // Capture scroll position immediately, then animate back to top.
+    // We delay the animation ~500ms so it starts just as the splash background
+    // begins turning transparent — the user sees the list glide up to project 01
+    // as the splash fades, rather than a hidden snap.
+    const scrollStart = window.scrollY;
+    if (scrollStart > 0) {
+      setTimeout(() => {
+        const duration  = 750;
+        const startTime = performance.now();
+        function scrollStep(now) {
+          const t    = Math.min((now - startTime) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3); // cubic ease-out
+          window.scrollTo(0, scrollStart * (1 - ease));
+          if (t < 1) requestAnimationFrame(scrollStep);
+        }
+        requestAnimationFrame(scrollStep);
+      }, 500);
+    }
 
     // 1. Fade out tagline immediately
     tagline.style.opacity = '0';
