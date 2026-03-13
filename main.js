@@ -1,4 +1,12 @@
 // ─────────────────────────────────────────
+// Always start at the top — prevent browser scroll restoration
+// ─────────────────────────────────────────
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
+// ─────────────────────────────────────────
 // Splash → Portfolio transition
 // ─────────────────────────────────────────
 (function () {
@@ -66,7 +74,6 @@
   const logoPanel   = document.getElementById('logoPanel');
   const fullBleed   = document.getElementById('fullBleed');
   const viewBtn     = document.getElementById('viewProjectBtn');
-  const projectList = document.querySelector('.project-list');
 
   if (!thumbA || !thumbB || !projects.length) return;
 
@@ -97,14 +104,33 @@
   }
   activateProject(projects[0]);
 
-  // Hover: activate project + update full-bleed if already expanded
+  // Restore full-bleed state after back-navigation from a project page
+  if (fullBleed && viewBtn && logoPanel) {
+    const savedBg   = sessionStorage.getItem('jbFullBleedBg');
+    const savedHref = sessionStorage.getItem('jbFullBleedHref');
+    if (savedBg) {
+      fullBleed.style.backgroundImage = savedBg;
+      if (savedHref) viewBtn.href = savedHref;
+      logoPanel.classList.add('is-expanded');
+    }
+  }
+
+  // Hover: activate project + keep full-bleed in sync if already expanded
   projects.forEach(p => {
     p.addEventListener('mouseenter', () => {
       activateProject(p);
       if (logoPanel && logoPanel.classList.contains('is-expanded') && p.dataset.thumb) {
-        if (fullBleed) fullBleed.style.backgroundImage = "url('" + p.dataset.thumb + "')";
+        const newBg = "url('" + p.dataset.thumb + "')";
+        if (fullBleed) {
+          fullBleed.style.backgroundImage = newBg;
+          sessionStorage.setItem('jbFullBleedBg', newBg);
+        }
         const link = p.querySelector('a');
-        if (link && viewBtn) viewBtn.href = link.getAttribute('href');
+        if (link && viewBtn) {
+          const href = link.getAttribute('href');
+          viewBtn.href = href;
+          sessionStorage.setItem('jbFullBleedHref', href);
+        }
       }
     });
   });
@@ -121,7 +147,7 @@
   }, { threshold: 0.3 });
   projects.forEach(p => observer.observe(p));
 
-  // Click: expand thumbnail to full-bleed
+  // Click project title → expand to full-bleed, save state for back-navigation
   if (logoPanel && fullBleed && viewBtn) {
     projects.forEach(p => {
       const link = p.querySelector('a');
@@ -131,18 +157,23 @@
         const href = link.getAttribute('href');
         if (!url || href === '#') return;
         e.preventDefault();
-        fullBleed.style.backgroundImage = "url('" + url + "')";
+        const bgValue = "url('" + url + "')";
+        fullBleed.style.backgroundImage = bgValue;
         viewBtn.href = href;
         logoPanel.classList.add('is-expanded');
+        sessionStorage.setItem('jbFullBleedBg', bgValue);
+        sessionStorage.setItem('jbFullBleedHref', href);
       });
     });
 
-    // Hover back over project list: collapse full-bleed
-    if (projectList) {
-      projectList.addEventListener('mouseenter', () => {
-        logoPanel.classList.remove('is-expanded');
-      });
-    }
+    // "View project" clicked — save final state then let browser navigate
+    viewBtn.addEventListener('click', () => {
+      sessionStorage.setItem('jbFullBleedBg', fullBleed.style.backgroundImage);
+      sessionStorage.setItem('jbFullBleedHref', viewBtn.href);
+    });
+
+    // Full-bleed only collapses when the about-view opens (see about IIFE below)
+    // — NOT on mouseenter, so clicking a project keeps the full-bleed persistent
   }
 
 }());
@@ -183,6 +214,11 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (inAbout) return;
     inAbout = true;
     atBottomSince = null;
+
+    // Collapse any active full-bleed and clear its persisted state
+    logoPanelEl.classList.remove('is-expanded');
+    sessionStorage.removeItem('jbFullBleedBg');
+    sessionStorage.removeItem('jbFullBleedHref');
 
     const rect    = logoPanelEl.getBoundingClientRect();
     const targetX = window.innerWidth - rect.width - rect.left;
