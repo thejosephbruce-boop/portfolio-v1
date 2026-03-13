@@ -23,6 +23,10 @@ window.scrollTo(0, 0);
     if (triggered) return;
     triggered = true;
 
+    // Reset scroll to top now — splash is still fully visible so there's no jump,
+    // and when it fades away the project list will be at position 01
+    window.scrollTo(0, 0);
+
     // 1. Fade out tagline immediately
     tagline.style.opacity = '0';
 
