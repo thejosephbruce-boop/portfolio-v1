@@ -17,6 +17,15 @@ window.scrollTo(0, 0);
   const projectList = document.querySelector('.project-list');
   if (!splash) return;
 
+  // Coming back from a project page — skip splash, go straight to the list
+  if (window.location.hash === '#projects') {
+    splash.remove();
+    logoReveal.classList.add('is-visible');
+    if (projectList) projectList.classList.add('is-visible');
+    history.replaceState(null, '', window.location.pathname);
+    return;
+  }
+
   let triggered = false;
 
   function reveal() {
