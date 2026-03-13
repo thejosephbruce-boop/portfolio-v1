@@ -60,13 +60,16 @@
     }
     .nav-back:hover { opacity: 1; }
     .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
-    .nav-logo {
+    .nav-label {
       font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--ink);
       text-decoration: none;
+      opacity: 0.55;
+      transition: opacity 0.2s;
     }
+    .nav-label:hover { opacity: 1; }
 
     /* ── PROJECT HEADER ──────────────────────── */
     .project-header {
@@ -209,7 +212,7 @@
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <a href="index.html#projects" class="nav-back">Projects</a>
-    <a href="index.html" class="nav-logo">Joe Bruce</a>
+    <a href="index.html#about" class="nav-label">About</a>
   </nav>
 
   <!-- Project header -->

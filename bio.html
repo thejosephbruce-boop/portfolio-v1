@@ -46,7 +46,17 @@
       -webkit-backdrop-filter: blur(12px);
       border-color: var(--border);
     }
-    .nav-back {
+    .nav-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+    .nav-label:hover { opacity: 1; }
+    .nav-forward {
       font-size: 0.7rem;
       letter-spacing: 0.09em;
       text-transform: uppercase;
@@ -58,15 +68,8 @@
       opacity: 0.55;
       transition: opacity 0.2s;
     }
-    .nav-back:hover { opacity: 1; }
-    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
-    .nav-logo {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-    }
+    .nav-forward:hover { opacity: 1; }
+    .nav-forward::after { content: '→'; font-size: 0.9rem; letter-spacing: 0; }
 
     /* ── PAGE HEADER ─────────────────────────── */
     .page-header {
@@ -220,8 +223,8 @@
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
-    <a href="index.html#projects" class="nav-back">Projects</a>
-    <a href="index.html" class="nav-logo">Joe Bruce</a>
+    <a href="index.html#about" class="nav-label">About</a>
+    <a href="index.html#projects" class="nav-forward">Projects</a>
   </nav>
 
   <!-- Page header -->
@@ -238,7 +241,7 @@
         <h2>Beyond</h2>
         <p>Joe joined Beyond as Executive Creative Director in summer 2024 and has since become Creative Partner across the wider holding company. A role that has seen him foster creativity within his own teams as well as in the company's Media, Production and Innovation offerings.</p>
         <p>In May 2025, Joe played a pivotal role in the restructuring, redesigning and relaunching of Beyond — taking it from four separate businesses to one unified agency brand, and rebuilding and bolstering the creative department in the process.</p>
-        <p>In his time at the agency, Joe has brought in new clients and overseen global projects for Yamaha Music and Jam Shed wines, while creating local campaigns for Back Market, ARUK and Itsu.</p>
+        <p>In his time at the agency, Joe has brought in new clients — Find My Past, Branston Pickle, Mizkan Group, Sprite and Tabasco — and overseen global projects for Yamaha Music and Jam Shed wines, while creating local campaigns for Back Market, ARUK and Itsu.</p>
       </div>
     </div>
 
@@ -270,13 +273,10 @@
     </div>
 
     <div class="contact-section">
-      <span class="bio-label">Contact</span>
-      <div>
-        <a href="mailto:thejosephbruce@gmail.com" class="contact-email">thejosephbruce@gmail.com</a>
-        <div class="contact-links">
-          <a href="https://www.linkedin.com/in/joe-bruce-23833426/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="#" class="contact-link">Instagram</a>
-        </div>
+      <div class="contact-links">
+        <a href="#" class="contact-link">Instagram</a>
+        <a href="https://www.linkedin.com/in/joe-bruce-23833426/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:thejosephbruce@gmail.com" class="contact-link">Email</a>
       </div>
     </div>
 

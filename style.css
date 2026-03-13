@@ -156,6 +156,11 @@ ul {
   border-bottom: 1px solid var(--border);
 }
 
+.project--break {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
 .project a {
   display: flex;
   align-items: baseline;
