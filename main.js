@@ -23,6 +23,7 @@ window.scrollTo(0, 0);
     logoReveal.classList.add('is-visible');
     if (projectList) projectList.classList.add('is-visible');
     history.replaceState(null, '', window.location.pathname);
+    window.__restoreFullBleed = true;
     return;
   }
 
@@ -169,8 +170,15 @@ window.scrollTo(0, 0);
   }
   activateProject(projects[0]);
 
-  // Restore full-bleed state after back-navigation from a project page
+  // Restore full-bleed state after back-navigation from a project page.
+  // Only restore when genuinely returning via #projects — on a plain refresh, clear it.
   if (fullBleed && viewBtn && logoPanel) {
+    if (!window.__restoreFullBleed) {
+      sessionStorage.removeItem('jbFullBleedBg');
+      sessionStorage.removeItem('jbFullBleedPos');
+      sessionStorage.removeItem('jbFullBleedHref');
+    }
+    window.__restoreFullBleed = false;
     const savedBg   = sessionStorage.getItem('jbFullBleedBg');
     const savedPos  = sessionStorage.getItem('jbFullBleedPos');
     const savedHref = sessionStorage.getItem('jbFullBleedHref');
