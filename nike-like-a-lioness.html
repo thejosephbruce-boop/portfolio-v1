@@ -269,6 +269,22 @@
       display: block;
     }
 
+    /* ── 2-COL EQUAL HEIGHT (crop to match taller) ── */
+    .media-grid-2-equal {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+      align-items: stretch;
+    }
+    .media-grid-2-equal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
@@ -304,50 +320,78 @@
     </div>
   </div>
 
-  <!-- Campaign logo — full width -->
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9c8c0bb9-e456-44c5-8914-ace43d919e14/1697716372240.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" /></div>
-  <!-- Landscapes × 3 — cropped to 16:9 -->
-  <div class="media-grid-3-ls">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1df12d5e-c3b2-4192-854c-e4c676bfa4f5/unnamed.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f2730d04-e4e4-4d51-9f65-f59374138d00/Screenshot-2023-09-18-at-19.47.07.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fbef02ef-f784-4fd0-89be-b84261580385/unnamed-1.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-  </div>
-  <!-- Portraits group A × 5 → 3-col -->
+  <!-- Post hero full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/post video images.webp" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Phone shots full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Phone shots.png" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Tweet gifs -->
   <div class="media-grid-3">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f1c22bb6-110b-49bf-8874-fa7d7e255821/js.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/892cadb6-7262-499d-93b2-1701a759beed/Seeding-1.png.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2d3682d2-a4dc-4d27-8d41-8d0aed214bd3/Screenshot-2023-08-11-at-14_35_57-1.png.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/aa4fc162-a155-469b-b8fe-cb231a4a242d/Seeding2.png.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c5585b17-9dac-4e0b-b5f4-43ea2bb57810/Screenshot-2023-08-11-at-14_36_50-1.png.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Like a lioness tweet gifs/f8858a_138a5424e3144b48b75a55bc03520725mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Like a lioness tweet gifs/f8858a_11d403dacee748b3b7e6e566d9a561b0mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Like a lioness tweet gifs/f8858a_baab255325a04ce981a6c8968c698235mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
   </div>
-  <!-- Landscape separator — full width -->
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b21afe3d-1182-4c24-8c43-24f4529d43b2/Screenshot-2023-08-20-at-19.05.27.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" /></div>
-  <!-- Portraits group B × 3 → 3-col -->
+
+  <!-- Merch full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Merch LAL.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Seeding 1 + 2 side by side -->
+  <div class="media-gif-grid">
+    <img src="Like a Lioness Project images and gifs/Seeding-1.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Seeding2.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
+
+  <!-- Mason Mount full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Mason Mount.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Row 4 -->
   <div class="media-grid-3">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/34442fbc-2f53-4ddb-a476-3a74cb6faa67/Screenshot-2023-09-16-at-21.03.31-1.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/258d0949-da4f-43bd-9bad-3133045657c7/Seedin02.png-1.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fe00a1fc-c69a-4a1d-87de-e7dc7955f48a/7d51c3c6-b33d-42f1-8248-bdd4c44b9c07.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 4 images/Screenshot-2023-08-11-at-14_35_57-1.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 4 images/Screenshot-2023-08-11-at-14_36_50-1.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 4 images/f8858a_b915825511d94316b699fd42c5d22837mv2-1.gif" alt="Nike Like a Lioness" loading="lazy" />
   </div>
-  <!-- Landscapes × 2 — cropped to 16:9 -->
-  <div class="media-grid-2-ls">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f90d9692-ceab-4184-9237-28782444998b/unnamed-2.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/92f94867-357b-4b04-882a-4d024a7dd892/34057b46-814a-425f-a3de-86ddeb35eaef-1.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-  </div>
-  <!-- Portraits group C × 6 → 3-col -->
+
+  <!-- Row 6 -->
   <div class="media-grid-3">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/89cc16b5-2e84-4cc1-88c9-ffc002960afb/28961070-A4AF-413A-8039-503DD20E4357-1.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/72b62cbb-ba68-446a-861a-017e82eed57d/Screenshot-2023-09-16-at-21.07.03.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0a87b679-5f14-4f21-8449-8c51b5649d08/Phone_09_MM.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ede4068f-0c1f-49ae-be9a-ce7daea9620c/Screenshot-2023-09-16-at-21.06.04-1.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c460338a-156d-4879-b50f-386426bde1f5/f81674db-8705-4f8a-9146-57c55023b5b1.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/238f3d5f-7058-482a-8a90-4c40508912d9/Screenshot-2023-09-17-at-00.13.50.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 6 images/28961070-A4AF-413A-8039-503DD20E4357.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 6 images/Phone_09_MM.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 6 images/Seedin02.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
-  <!-- Landscapes × 3 — cropped to 16:9 -->
-  <div class="media-grid-3-ls">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a6beced6-2767-4879-ac99-fc3d8e1e4c33/9528c579-9fd0-4939-86cc-6e57826a7c2f-1.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/85ea64cc-c39b-4e35-a764-afac4e7f0caa/IMG_2136_JPG.jpg?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e06111a1-4b8b-4dae-85df-17ec5d1246ca/Screenshot-2023-09-16-at-19.35.44.png?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
+
+  <!-- Row 8 -->
+  <div class="media-grid-2-equal">
+    <img src="Like a Lioness Project images and gifs/Row 8 images/js.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 8 images/9528c579-9fd0-4939-86cc-6e57826a7c2f.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Row 8 images/34057b46-814a-425f-a3de-86ddeb35eaef.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Row 9 -->
+  <div class="media-grid-3">
+    <img src="Like a Lioness Project images and gifs/Row 9 images/Screenshot-2023-09-16-at-21.03.31.png" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 9 images/Screenshot-2023-09-16-at-21.06.04.png" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 9 images/Screenshot-2023-09-17-at-00.13.50.png" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
+
+  <!-- Row 10 -->
+  <div class="media-gif-grid">
+    <img src="Like a Lioness Project images and gifs/Row 10 images/7d51c3c6-b33d-42f1-8248-bdd4c44b9c07.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 10 images/Screenshot-2023-09-16-at-21.07.03.png" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
+
+  <!-- Row 11 -->
+  <div class="media-gif-grid">
+    <img src="Like a Lioness Project images and gifs/Row 11 images/giphy-copy.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 11 images/giphy-copy-2.gif" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
+
+  <!-- Row 12 -->
+  <div class="media-grid-3">
+    <img src="Like a Lioness Project images and gifs/Row 12 images/Screenshot-2023-09-17-at-00.25.30.png" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 12 images/Screenshot-2023-09-17-at-00.26.10.png" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 12 images/Screenshot-2023-09-17-at-01.09.25.png" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
+
   <!-- GRM Daily Duppy films — side by side -->
   <div class="media-grid-3-vid">
     <div class="vimeo-wrap">
@@ -360,19 +404,23 @@
       <iframe src="https://www.youtube.com/embed/wuI2jT8qBCw" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="TeeZandos - Daily Duppy | GRM Daily"></iframe>
     </div>
   </div>
-  <!-- GIFs — 2-col, natural aspect ratios -->
+
+  <!-- Row 13 -->
   <div class="media-gif-grid">
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f821e8f1-ba2d-4722-915b-2ad58b19459f/f8858a_138a5424e3144b48b75a55bc03520725mv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/51d903ea-d947-4114-b967-e19228fb0b65/f8858a_11d403dacee748b3b7e6e566d9a561b0mv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3f108c0f-b031-4431-819d-a8d78141da63/f8858a_9b5ab8b6fa314cbe8189434567c664cemv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c862a6bc-fd95-4c58-89c8-49b9e3028ded/f8858a_baab255325a04ce981a6c8968c698235mv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2d1364da-cc6f-4d4a-b243-7af514522c86/f8858a_b915825511d94316b699fd42c5d22837mv2-1.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b50f3ab4-0622-4e91-883b-f87a55ff841c/f8858a_dfed8554e5394813b21c3724bdb00ebdmv2-1.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c2ac7d2d-b686-4fd3-a458-7b3f82d8063a/f8858a_20c7102f15cb4a1aaaa07364ff33bd9fmv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/54fb8047-2686-4934-ab1d-b134ae08b3d5/f8858a_d207dc9915d846e1a1e125efa9ed5a24mv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a818d376-76c8-4b5a-88ee-00e2350242b4/f8858a_b0d739689fd94e43a77b569d15218abcmv2.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/bad6270d-c83b-4918-8991-76ecf0f55ec7/unnamed.gif?format=2500w" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 13 gifs/f8858a_9b5ab8b6fa314cbe8189434567c664cemv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="Like a Lioness Project images and gifs/Row 13 gifs/f8858a_dfed8554e5394813b21c3724bdb00ebdmv2-1.gif" alt="Nike Like a Lioness" loading="lazy" />
   </div>
+
+  <!-- Spotify full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Like a lioness spotify.png" alt="Nike Like a Lioness" loading="lazy" /></div>
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Like a lioness spotify 2.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Custom gifs full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Custom.gif" alt="Nike Like a Lioness" loading="lazy" /></div>
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Custom 2.gif" alt="Nike Like a Lioness" loading="lazy" /></div>
+
+  <!-- Prem boards full width -->
+  <div class="media-full"><img src="Like a Lioness Project images and gifs/Prem boards.gif" alt="Nike Like a Lioness" loading="lazy" /></div>
 
   <!-- Next project -->
   <nav class="next-project">
