@@ -228,13 +228,37 @@
     .media-gif-grid img {
       width: 100%;
       display: block;
-      aspect-ratio: 9 / 16;
-      object-fit: cover;
+    }
+
+    /* ── IMAGE GRIDS ─────────────────────────── */
+    .media-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-4 img,
+    .media-grid-3 img {
+      width: 100%;
+      display: block;
     }
 
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 768px) {
-      .media-gif-grid { grid-template-columns: repeat(2, 1fr); }
+      .media-gif-grid,
+      .media-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .media-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .media-grid-3 { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
@@ -269,24 +293,6 @@
     </div>
   </div>
 
-  <!-- Campaign still 1 -->
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/5ffa64765a6fae169d932358/6b44ccde-f08b-4c26-a4b9-305e9c4093a6/SU23_Dance_EMEA_60_16x9_Stills_3.jpg?format=2500w"
-      alt="Nike — Own the Floor, campaign still"
-      loading="lazy"
-    />
-  </div>
-
-  <!-- Campaign still 2 -->
-  <div class="media-full">
-    <img
-      src="Dance1.jpg"
-      alt="Nike — Own the Floor, campaign still"
-      loading="lazy"
-    />
-  </div>
-
   <!-- Dancer GIFs — Diablo, India, Trina, Karam -->
   <div class="media-gif-grid">
     <img
@@ -309,6 +315,59 @@
       alt="Nike — Own the Floor, Karam"
       loading="lazy"
     />
+  </div>
+
+  <!-- Campaign still 1 -->
+  <div class="media-full">
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/5ffa64765a6fae169d932358/6b44ccde-f08b-4c26-a4b9-305e9c4093a6/SU23_Dance_EMEA_60_16x9_Stills_3.jpg?format=2500w"
+      alt="Nike — Own the Floor, campaign still"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Campaign still 2 -->
+  <div class="media-full">
+    <img
+      src="Dance1.jpg"
+      alt="Nike — Own the Floor, campaign still"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Dancer portraits — 4-col grid -->
+  <div class="media-grid-4">
+    <img src="Dance%20KV/DIABLO/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_Diablo_Portrait_v05.pdf.png" alt="Nike — Own the Floor, Diablo portrait" loading="lazy" />
+    <img src="Dance%20KV/INDIA/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_India_Portrait_v03.pdf.png" alt="Nike — Own the Floor, India portrait" loading="lazy" />
+    <img src="Dance%20KV/STEFANI/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_Stefani_Portrait_v03.pdf.png" alt="Nike — Own the Floor, Stefani portrait" loading="lazy" />
+    <img src="Dance%20KV/TRINA/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_Trina_Hero_v03.pdf.png" alt="Nike — Own the Floor, Trina" loading="lazy" />
+  </div>
+
+  <!-- In-action shots — 3-col grid -->
+  <div class="media-grid-3">
+    <img src="Dance%20KV/DIABLO/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_Diablo_InTheAction_v04.pdf.png" alt="Nike — Own the Floor, Diablo in action" loading="lazy" />
+    <img src="Dance%20KV/INDIA/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_India_InTheAction_v03.pdf.png" alt="Nike — Own the Floor, India in action" loading="lazy" />
+    <img src="Dance%20KV/FURIA/NIKLGENF0305_Dance_6Sheet_1800x1200mm@25pc_Ana_InTheAction_v04.pdf.png" alt="Nike — Own the Floor, Furia in action" loading="lazy" />
+  </div>
+
+  <!-- 48-sheet billboards — 3-col -->
+  <div class="media-grid-3">
+    <img src="Dance%20KV/DIABLO/NIKLGENF0305_Dance_48Sheet_3048x6096mm@10pc_Diablo_v03.pdf.png" alt="Nike — Own the Floor, Diablo billboard" loading="lazy" />
+    <img src="Dance%20KV/STEFANI/NIKLGENF0305_Dance_48Sheet_3048x6096mm@10pc_Stefani_v02.pdf.png" alt="Nike — Own the Floor, Stefani billboard" loading="lazy" />
+    <img src="Dance%20KV/TRINA/NIKLGENF0305_Dance_48Sheet_3048x6096mm@10pc_Trina_v03.pdf.png" alt="Nike — Own the Floor, Trina billboard" loading="lazy" />
+  </div>
+
+  <!-- Multi-dancer triptych — full width -->
+  <div class="media-full">
+    <img src="Dance%20KV/MULTI%20DANCER/NIKLGENF0305_Dance_48Sheet_3048x6096mm@10pc_Multi_Athlete_Triptych01_v05.pdf.png" alt="Nike — Own the Floor, multi-dancer triptych" loading="lazy" />
+  </div>
+
+  <!-- 96-sheet panoramics — full width -->
+  <div class="media-full">
+    <img src="Dance%20KV/FURIA/NIKLGENF0305_Dance_96Sheet_3048x12192@10pc_Ana_Series_v04.pdf.png" alt="Nike — Own the Floor, Furia series" loading="lazy" />
+  </div>
+  <div class="media-full">
+    <img src="Dance%20KV/MULTI%20DANCER/NIKLGENF0305_Dance_96Sheet_3048x12192@10pc_Ana_Series_v04.pdf.png" alt="Nike — Own the Floor, multi-dancer series" loading="lazy" />
   </div>
 
   <!-- Next project -->
