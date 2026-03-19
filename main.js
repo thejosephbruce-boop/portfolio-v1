@@ -681,8 +681,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const splashEl = document.createElement('div');
     splashEl.style.cssText = [
       'position:fixed', 'inset:0', 'z-index:500',
-      'background-color:transparent', 'pointer-events:none',
-      'transition:background-color 0.7s 0.15s ease',
+      'background-color:#f8f8f6', 'pointer-events:none',
     ].join(';');
 
     const imgEl = document.createElement('img');
@@ -723,10 +722,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     // the exact pixel coordinates of the original splash logo.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        imgEl.style.transition         = 'transform 0.85s cubic-bezier(0.76,0,0.24,1)';
-        imgEl.style.transform          = 'translate(0,0) scale(1)';
-        splashEl.style.backgroundColor = '#f8f8f6';
-        taglineEl.style.opacity        = '1';
+        imgEl.style.transition  = 'transform 0.85s cubic-bezier(0.76,0,0.24,1)';
+        imgEl.style.transform   = 'translate(0,0) scale(1)';
+        taglineEl.style.opacity = '1';
       });
     });
 

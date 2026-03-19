@@ -217,6 +217,60 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── VIDEO POSTER (click to play) ───────── */
+    .video-poster-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      overflow: hidden;
+      cursor: pointer;
+      background: #0d0d0d;
+      line-height: 0;
+    }
+    .video-poster-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.25s;
+    }
+    .video-poster-wrap:hover img { opacity: 0.85; }
+    .video-poster-wrap .vp-play {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,243,239,0.55);
+      background: rgba(245,243,239,0.1);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      pointer-events: none;
+      transition: transform 0.25s, background 0.25s;
+    }
+    .video-poster-wrap:hover .vp-play {
+      transform: translate(-50%, -50%) scale(1.08);
+      background: rgba(245,243,239,0.2);
+    }
+    .video-poster-wrap .vp-play::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 55%;
+      transform: translate(-50%, -50%);
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 17px;
+      border-color: transparent transparent transparent rgba(245,243,239,0.9);
+    }
+    .video-poster-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
@@ -237,11 +291,36 @@
     <p class="project-brief">At Crispin Porter + Bogusky I spent three years working on the Paddy Power account — both as a writer and a creative director. We produced loads of great work in that time and had a lot of fun.</p>
   </header>
 
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/125036803?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/72093468?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/77392472?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/83381788?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/92724792?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
+  <div class="media-full">
+    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/125036803">
+      <img src="PADDY POWER VID THUMBS/Paddy power Thumb 1.png" alt="Paddy Power" loading="lazy" />
+      <div class="vp-play"></div>
+    </div>
+  </div>
+  <div class="media-full">
+    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/72093468">
+      <img src="PADDY POWER VID THUMBS/P{addy Power tumb 2.jpg" alt="Paddy Power" loading="lazy" />
+      <div class="vp-play"></div>
+    </div>
+  </div>
+  <div class="media-full">
+    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/77392472">
+      <img src="PADDY POWER VID THUMBS/Paddy Power thumb 3.png" alt="Paddy Power" loading="lazy" />
+      <div class="vp-play"></div>
+    </div>
+  </div>
+  <div class="media-full">
+    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/83381788">
+      <img src="PADDY POWER VID THUMBS/Paddy Power thumb 4.png" alt="Paddy Power" loading="lazy" />
+      <div class="vp-play"></div>
+    </div>
+  </div>
+  <div class="media-full">
+    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/92724792">
+      <img src="PADDY POWER VID THUMBS/Paddy power thumb 5.png" alt="Paddy Power" loading="lazy" />
+      <div class="vp-play"></div>
+    </div>
+  </div>
   <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/107905928?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
   <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/64308429?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
   <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/122417142?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
@@ -301,6 +380,15 @@
     });
   </script>
 
+<script>
+  document.querySelectorAll('.video-poster-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const src = wrap.dataset.src;
+      wrap.innerHTML = '<iframe src="' + src + '?autoplay=1&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+      wrap.style.cursor = 'default';
+    });
+  });
+</script>
 <script src="project.js"></script>
 </body>
 </html>
