@@ -179,7 +179,7 @@ window.scrollTo(0, 0);
       const href = link && link.getAttribute('href');
       if (href === '#') {
         viewBtn.style.pointerEvents = 'none';
-        viewBtn.style.opacity       = '0.6';
+        viewBtn.style.opacity       = '1';
       } else {
         viewBtn.style.pointerEvents = '';
         viewBtn.style.opacity       = '';
@@ -285,8 +285,10 @@ window.scrollTo(0, 0);
             mobileLastTapped = p;
             fullBleed.style.backgroundImage    = "url('" + url + "')";
             fullBleed.style.backgroundPosition = position || 'center';
+            viewBtn.href = href;
             logoPanel.classList.add('is-expanded');
             expandedProject = p;
+            updateViewBtn(p);
             return;
           }
           // Second tap of same project: navigate
