@@ -284,6 +284,22 @@ window.scrollTo(0, 0);
     // — NOT on mouseenter, so clicking a project keeps the full-bleed persistent
   }
 
+  // Allow other IIFEs to restore the current thumbnail after they've
+  // temporarily overridden it (e.g. the Full Face / about view).
+  // transitionToAbout() always leaves thumbA showing Full Face at opacity 1,
+  // thumbB at opacity 0 — so we crossfade by loading the project image into
+  // thumbB and fading it in while thumbA (Full Face) fades out.
+  window.__restoreCurrentThumb = function () {
+    if (!currentProject || !currentProject.dataset.thumb) return;
+    const url = currentProject.dataset.thumb;
+    const pos = currentProject.dataset.thumbPosition;
+    thumbB.style.backgroundImage    = "url('" + url + "')";
+    thumbB.style.backgroundPosition = pos || 'center';
+    thumbB.style.opacity            = '1';
+    thumbA.style.opacity            = '0';
+    activeLayer = 'b';
+  };
+
 }());
 
 // ─────────────────────────────────────────
@@ -335,6 +351,7 @@ revealEls.forEach(el => revealObserver.observe(el));
     // Collapse any active project full-bleed and clear its persisted state
     logoPanelEl.classList.remove('is-expanded');
     sessionStorage.removeItem('jbFullBleedBg');
+    sessionStorage.removeItem('jbFullBleedPos');
     sessionStorage.removeItem('jbFullBleedHref');
 
     // Show Full Face image through the logo letter mask
@@ -392,23 +409,28 @@ revealEls.forEach(el => revealObserver.observe(el));
     logoPanelEl.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
     logoPanelEl.style.transform  = '';
 
-    // Once logo returns, reset everything
+    // Once logo returns, reset everything and restore the project thumbnail
     setTimeout(() => {
       aboutView.style.transition    = 'none';
       aboutView.style.opacity       = '0';
       aboutView.style.pointerEvents = 'none';
 
-      logoPanelEl.style.position  = '';
-      logoPanelEl.style.left      = '';
-      logoPanelEl.style.top       = '';
-      logoPanelEl.style.width     = '';
-      logoPanelEl.style.height    = '';
-      logoPanelEl.style.zIndex    = '';
+      logoPanelEl.style.position   = '';
+      logoPanelEl.style.left       = '';
+      logoPanelEl.style.top        = '';
+      logoPanelEl.style.width      = '';
+      logoPanelEl.style.height     = '';
+      logoPanelEl.style.zIndex     = '';
       logoPanelEl.style.transition = '';
       logoPanelEl.style.transform  = '';
 
-      aboutCol.style.opacity    = '0';
       aboutCol.style.transition = '';
+      aboutCol.style.opacity    = '0';
+
+      // Restore the current project's thumbnail — about view replaced it with Full Face
+      if (typeof window.__restoreCurrentThumb === 'function') {
+        window.__restoreCurrentThumb();
+      }
     }, 800);
   }
 
