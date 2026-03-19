@@ -536,33 +536,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (returning) return;
     returning = true;
 
-    // Strip thumbnails and collapse any full-bleed so the logo reads
-    // as its plain black self before we FLIP it back to the splash
+    // ── Measure first, before any DOM changes ────────────────────────
+    const fromRect    = logoReveal.getBoundingClientRect();
+    const logoPanelEl = document.getElementById('logoPanel');
     const thumbA      = document.getElementById('logoThumbA');
     const thumbB      = document.getElementById('logoThumbB');
-    const logoPanelEl = document.getElementById('logoPanel');
-    if (thumbA) { thumbA.style.transition = 'opacity 0.15s'; thumbA.style.opacity = '0'; }
-    if (thumbB) { thumbB.style.transition = 'opacity 0.15s'; thumbB.style.opacity = '0'; }
-    if (logoPanelEl) logoPanelEl.classList.remove('is-expanded');
-
-    // Where the logo currently lives in the portfolio layout
-    const fromRect = logoReveal.getBoundingClientRect();
 
     // Target splash-logo width: clamp(280px, 42vw, 680px)
-    const targetWidth  = Math.min(Math.max(280, window.innerWidth * 0.42), 680);
+    const targetWidth = Math.min(Math.max(280, window.innerWidth * 0.42), 680);
+    const finalCX     = window.innerWidth  / 2;
+    const finalCY     = window.innerHeight / 2;
+    const fromCX      = fromRect.left + fromRect.width  / 2;
+    const fromCY      = fromRect.top  + fromRect.height / 2;
+    const dx          = fromCX - finalCX;
+    const dy          = fromCY - finalCY;
+    const scale       = fromRect.width / targetWidth;
 
-    // Centers
-    const finalCX = window.innerWidth  / 2;
-    const finalCY = window.innerHeight / 2;
-    const fromCX  = fromRect.left + fromRect.width  / 2;
-    const fromCY  = fromRect.top  + fromRect.height / 2;
+    // Hide the portfolio logo so it doesn't show through the overlay
+    logoReveal.style.opacity = '0';
 
-    // Invert transform — start at the portfolio logo position, animate to centre
-    const dx    = fromCX - finalCX;
-    const dy    = fromCY - finalCY;
-    const scale = fromRect.width / targetWidth;
-
-    // Build a fresh splash overlay
+    // ── Build the splash overlay ──────────────────────────────────────
     const splashEl = document.createElement('div');
     splashEl.style.cssText = [
       'position:fixed', 'inset:0', 'z-index:500',
@@ -574,12 +567,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const imgEl = document.createElement('img');
     imgEl.src = 'download.png';
     imgEl.alt = 'Joe Bruce';
+    // No transition yet — prevents the browser firing an unwanted animation
+    // from the element's default (identity) state to the initial inverted position
     imgEl.style.cssText = [
       'display:block',
       'width:' + targetWidth + 'px',
       'height:auto',
       'transform:translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')',
-      'transition:transform 0.75s cubic-bezier(0.76,0,0.24,1)',
     ].join(';');
 
     const taglineEl = document.createElement('p');
@@ -598,14 +592,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     splashEl.appendChild(taglineEl);
     document.body.appendChild(splashEl);
 
-    // FLIP: animate logo to centre + fade in background + fade in tagline
+    // ── FLIP: one frame to paint the initial position, then animate ──
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        imgEl.style.transform            = 'translate(0,0) scale(1)';
-        splashEl.style.backgroundColor   = '#f8f8f6';
-        taglineEl.style.opacity          = '1';
+        imgEl.style.transition         = 'transform 0.75s cubic-bezier(0.76,0,0.24,1)';
+        imgEl.style.transform          = 'translate(0,0) scale(1)';
+        splashEl.style.backgroundColor = '#f8f8f6';
+        taglineEl.style.opacity        = '1';
       });
     });
+
+    // Collapse full-bleed / thumbnails only once the splash background has
+    // faded in enough to cover the panel — avoids a jarring pop when
+    // the full-bleed image disappears underneath
+    setTimeout(() => {
+      if (thumbA) { thumbA.style.transition = 'opacity 0.15s'; thumbA.style.opacity = '0'; }
+      if (thumbB) { thumbB.style.transition = 'opacity 0.15s'; thumbB.style.opacity = '0'; }
+      if (logoPanelEl) logoPanelEl.classList.remove('is-expanded');
+    }, 350);
 
     // Reload once the animation has settled
     setTimeout(() => { window.location.reload(); }, 1400);
