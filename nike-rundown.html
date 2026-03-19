@@ -78,13 +78,6 @@
       margin: 0 auto;
       text-align: center;
     }
-    .project-client {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
     .project-title {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-size: clamp(2.6rem, 6vw, 4.5rem);
@@ -111,16 +104,6 @@
       display: block;
     }
 
-    /* Contained (narrower) block for square social cut */
-    .media-contained {
-      padding: 0 var(--pad);
-      margin-bottom: 3px;
-    }
-    .media-contained .video-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
     /* ── VIDEO PLAYER ────────────────────────── */
     .video-wrap {
       position: relative;
@@ -132,7 +115,6 @@
       width: 100%;
       display: block;
     }
-    /* Custom play overlay — visible until first play */
     .video-overlay {
       position: absolute;
       inset: 0;
@@ -172,22 +154,37 @@
       margin-left: 4px;
     }
 
-    /* ── VIMEO EMBED ─────────────────────────── */
-    .vimeo-wrap {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0d0d0d;
-      line-height: 0;
+    /* Smaller play button for grid clips */
+    .play-btn--sm {
+      width: 40px;
+      height: 40px;
     }
-    .vimeo-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .play-btn--sm::after {
+      border-width: 6px 0 6px 11px;
     }
 
+    /* ── VIDEO GRID (short clips) ─────────────── */
+    .media-grid-3-video {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+    }
+
+    /* ── GIF GRID (contained, smaller) ─────── */
+    .media-gif-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin: 3rem auto;
+      padding: 0 var(--pad);
+      max-width: 900px;
+      line-height: 0;
+    }
+    .media-gif-grid img {
+      width: 100%;
+      display: block;
+    }
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -218,8 +215,13 @@
     .next-link::after { content: '→'; font-style: normal; }
 
     /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 600px) {
-      .media-contained { padding: 0; }
+    @media (max-width: 768px) {
+      .media-grid-3-video { grid-template-columns: repeat(2, 1fr); }
+      .media-gif-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .media-grid-3-video { grid-template-columns: 1fr; }
+      .media-gif-grid { grid-template-columns: 1fr; padding: 0; }
     }
   </style>
 </head>
@@ -237,13 +239,188 @@
     <p class="project-brief">Sir Mo Farah was about to run the London Marathon and Nike asked us to create a campaign that would make young people living in the city take notice. We teamed up with Michael Dapaah and he went 'mile for mile' with Mo.</p>
   </header>
 
+  <!-- Case study film — full width -->
+  <div class="media-full">
+    <div class="video-wrap"
+         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2eb6fb70-8b4d-4b10-aeab-2bb7486def9b/playlist.m3u8">
+      <video
+        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2eb6fb70-8b4d-4b10-aeab-2bb7486def9b/thumbnail"
+        preload="none"
+        playsinline
+      ></video>
+      <div class="video-overlay">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campaign photos -->
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fd01e110-81a2-4f06-92b8-d661e5be919c/PHONE%2BTUBE%2B02.jpg?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b0527db9-a9ea-4999-baee-90c845c48096/CHXN1099.jpg?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af90255c-6442-4cfc-a730-e9fe31c4336b/CLOCK-ANIMATION-FINAL.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7063a930-4439-4df9-bc90-2eb2be83bb7d/JELLYLEGGIES_FINAL_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5833215-e6a2-458c-b521-50cb10411821/RUNNINGLEGS_FINAL_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/48d19207-c221-4c47-b5f2-6feda858437e/RUNTHEROADMEDAL_FINAL_1500_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e0ca00be-d096-405e-bf6f-f1ac75d57598/TREADMILL_FINAL_1500_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" /></div>
+
+  <!-- 30 short clips — 3-column grid -->
+  <div class="media-grid-3-video">
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/aeaf122d-8ff4-4d4e-8006-3301d451b448/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/aeaf122d-8ff4-4d4e-8006-3301d451b448/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/067dc217-a7d3-49c0-8055-4ed1bdb3fabf/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/067dc217-a7d3-49c0-8055-4ed1bdb3fabf/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b47d2ba6-299b-4c77-a528-1518338dbc6f/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b47d2ba6-299b-4c77-a528-1518338dbc6f/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fa1ae2c6-805a-4f1f-8202-7b59b8635f66/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fa1ae2c6-805a-4f1f-8202-7b59b8635f66/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a893f222-e152-4e9b-b048-f1c57b95bf10/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a893f222-e152-4e9b-b048-f1c57b95bf10/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c6b258a0-7c5f-419e-9e5a-c9190bad1471/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c6b258a0-7c5f-419e-9e5a-c9190bad1471/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/daf4bed1-d8ee-4ef2-82ca-cde62760a402/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/daf4bed1-d8ee-4ef2-82ca-cde62760a402/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f81fdea8-4ffe-46a8-9553-89855d6220d6/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f81fdea8-4ffe-46a8-9553-89855d6220d6/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/49ee8d9a-ac66-4085-88fc-9ad55334ffb0/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/49ee8d9a-ac66-4085-88fc-9ad55334ffb0/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/db833bea-fb4d-4ca0-9579-92bd4279f1b7/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/db833bea-fb4d-4ca0-9579-92bd4279f1b7/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2d93781c-6890-48c6-857e-282be696475f/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2d93781c-6890-48c6-857e-282be696475f/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af7d1bc4-f988-4df0-b8ff-f6b8e2c7e8ce/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af7d1bc4-f988-4df0-b8ff-f6b8e2c7e8ce/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/270284e0-af48-405a-8537-18016a25b5fc/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/270284e0-af48-405a-8537-18016a25b5fc/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/66f376b0-2295-4016-9c84-d9b7f785fced/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/66f376b0-2295-4016-9c84-d9b7f785fced/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/bff2704f-9f9c-441d-81bd-8f0e39ff078d/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/bff2704f-9f9c-441d-81bd-8f0e39ff078d/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9b266a16-6cd5-42f2-968b-6e1c6c34008d/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9b266a16-6cd5-42f2-968b-6e1c6c34008d/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a418f423-9b0d-42b5-91a5-ab6446a21ed4/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a418f423-9b0d-42b5-91a5-ab6446a21ed4/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/423063f5-b5f0-434b-83fd-dffe78b28ce4/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/423063f5-b5f0-434b-83fd-dffe78b28ce4/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3187e296-9cf2-49bc-ae83-22ca81ff8f11/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3187e296-9cf2-49bc-ae83-22ca81ff8f11/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/62eba227-7b47-47ba-bda2-97b8675795e4/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/62eba227-7b47-47ba-bda2-97b8675795e4/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fb452374-b09a-4900-9e6e-6f271eb58e3d/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fb452374-b09a-4900-9e6e-6f271eb58e3d/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d228fb47-f26b-4d11-8a5f-56df4b88305a/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d228fb47-f26b-4d11-8a5f-56df4b88305a/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e2bddaef-0acb-492e-b3f9-727d995d39c9/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e2bddaef-0acb-492e-b3f9-727d995d39c9/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/05dcbb10-af82-42c1-b4f0-ba7531836b32/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/05dcbb10-af82-42c1-b4f0-ba7531836b32/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9bcd28b6-5f14-4617-be9c-22e2aaa3b3c7/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9bcd28b6-5f14-4617-be9c-22e2aaa3b3c7/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a4be0187-44cf-46b5-b105-381e8ee0a98c/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a4be0187-44cf-46b5-b105-381e8ee0a98c/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6483d980-4640-4ae7-be64-066a6b40fc6b/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6483d980-4640-4ae7-be64-066a6b40fc6b/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c216cdb3-c475-46c1-8c27-fa8b9b3e8935/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c216cdb3-c475-46c1-8c27-fa8b9b3e8935/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5153290-f14a-49c3-b8e5-d1e4363ddb91/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5153290-f14a-49c3-b8e5-d1e4363ddb91/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/67f47754-95fa-49c5-a2d8-0c00d89e1b0a/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/67f47754-95fa-49c5-a2d8-0c00d89e1b0a/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn play-btn--sm"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Campaign GIFs — contained 3-col grid -->
+  <div class="media-gif-grid">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af90255c-6442-4cfc-a730-e9fe31c4336b/CLOCK-ANIMATION-FINAL.gif?format=2500w" alt="Nike Rundown" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7063a930-4439-4df9-bc90-2eb2be83bb7d/JELLYLEGGIES_FINAL_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5833215-e6a2-458c-b521-50cb10411821/RUNNINGLEGS_FINAL_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/48d19207-c221-4c47-b5f2-6feda858437e/RUNTHEROADMEDAL_FINAL_1500_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e0ca00be-d096-405e-bf6f-f1ac75d57598/TREADMILL_FINAL_1500_170418.gif?format=2500w" alt="Nike Rundown" loading="lazy" />
+  </div>
 
   <!-- Next project -->
   <nav class="next-project">
@@ -285,7 +462,7 @@
       }
 
       // Click on overlay or video → play/pause
-      wrap.addEventListener('click', (e) => {
+      wrap.addEventListener('click', () => {
         initVideo();
         if (video.paused) {
           video.play();

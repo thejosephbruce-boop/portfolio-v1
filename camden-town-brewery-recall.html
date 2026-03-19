@@ -217,9 +217,37 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── MEDIA GRIDS ─────────────────────────── */
+    .media-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-2 img {
+      width: 100%;
+      display: block;
+    }
+    .media-grid-3-ls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-3-ls img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
+      .media-grid-2 { grid-template-columns: 1fr; }
+      .media-grid-3-ls { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -237,13 +265,48 @@
     <p class="project-brief">Camden Town Brewery never pasteurise their beer. That's why it tastes fresh as hells. They asked us to come up with an idea that would make people care about this unique USP. We then hired a chief pasteurisation officer, to make sure it never happened again.</p>
   </header>
 
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/bf2eeb1a-30ea-409d-8305-e59f6cf75915/Pasteurised+Can+1+%5B1%5D.jpg?format=2500w" alt="Camden Recall" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7d96efe2-c5ae-4908-9e57-f121e8faad51/Pasteurised+Can+3.jpg?format=2500w" alt="Camden Recall" loading="lazy" /></div>
+  <!-- Video 1 — main 60s film -->
+  <div class="media-full">
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a00e0ea1-fc34-4732-b088-48d45f51728a/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a00e0ea1-fc34-4732-b088-48d45f51728a/thumbnail" preload="none"></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+  </div>
+
+  <!-- Cans 1 & 3 — paired landscape -->
+  <div class="media-grid-2">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/bf2eeb1a-30ea-409d-8305-e59f6cf75915/Pasteurised+Can+1+%5B1%5D.jpg?format=2500w" alt="Camden Recall" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7d96efe2-c5ae-4908-9e57-f121e8faad51/Pasteurised+Can+3.jpg?format=2500w" alt="Camden Recall" loading="lazy" />
+  </div>
+
+  <!-- Can 5 — portrait, full width -->
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/4309f994-72f9-4612-a785-667df61ceb25/Pasteurised+Can+5.jpg?format=2500w" alt="Camden Recall" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f71ac15b-6948-4802-b8c2-2e87691693ea/03-Camden-Pasteurised-LinkedIn-Job-description+%281%29.jpg?format=2500w" alt="Camden Recall" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/093a9c28-c7b0-4099-9753-3cf74fc398df/02-Camden-Pasteurised-LinkedIn-Job-description+%281%29.jpg?format=2500w" alt="Camden Recall" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/516ee056-81f3-470f-b8e9-02df2cd5ef2c/01-Camden-Pasteurised-LinkedIn-Job-description+%281%29.jpg?format=2500w" alt="Camden Recall" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d74050eb-6edd-4d0b-9b45-f8e5704f21b9/Hotline+gif.gif?format=2500w" alt="Camden Recall" loading="lazy" /></div>
+
+  <!-- Video 2 — map film 16:9 -->
+  <div class="media-full">
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2f464b87-d618-419c-97d0-6afde945dd41/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2f464b87-d618-419c-97d0-6afde945dd41/thumbnail" preload="none"></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+  </div>
+
+  <!-- LinkedIn job description stills — 3-col 16:9 -->
+  <div class="media-grid-3-ls">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/516ee056-81f3-470f-b8e9-02df2cd5ef2c/01-Camden-Pasteurised-LinkedIn-Job-description+%281%29.jpg?format=2500w" alt="Camden Recall" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/093a9c28-c7b0-4099-9753-3cf74fc398df/02-Camden-Pasteurised-LinkedIn-Job-description+%281%29.jpg?format=2500w" alt="Camden Recall" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f71ac15b-6948-4802-b8c2-2e87691693ea/03-Camden-Pasteurised-LinkedIn-Job-description+%281%29.jpg?format=2500w" alt="Camden Recall" loading="lazy" />
+  </div>
+
+  <!-- Video 3 — square 1:1 social teaser -->
+  <div class="media-contained">
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/01b3f1f9-dc71-4497-abc1-0ff48ff03b84/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/01b3f1f9-dc71-4497-abc1-0ff48ff03b84/thumbnail" preload="none"></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+  </div>
+
+  <!-- Hotline GIF — full width -->
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d74050eb-6edd-4d0b-9b45-f8e5704f21b9/Hotline+gif.gif" alt="Camden Recall — Hotline GIF" loading="lazy" /></div>
 
   <!-- Next project -->
   <nav class="next-project">

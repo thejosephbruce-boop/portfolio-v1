@@ -217,9 +217,25 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── 2-COL IMAGE GRID ────────────────────── */
+    .media-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-2 img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
+      .media-grid-2 { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -238,12 +254,14 @@
   </header>
 
   <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f6945d25-ddc2-4e76-ac49-3de71590a611/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f6945d25-ddc2-4e76-ac49-3de71590a611/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/24c8f89e-d7a8-44a6-bdbf-3099c99b33d0/art-fund-ian-pons-jewell-01.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0d735f18-6fd3-47b0-bc7c-47adf91e83bf/art-fund-ian-pons-jewell-03.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f00421b4-2565-401b-a90a-df010b195c79/art-fund-ian-pons-jewell-06.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ff898b57-4430-410d-8970-6abe38a7a0ee/art-fund-ian-pons-jewell-02.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e8b82f80-ff15-4b52-a9a8-de862b4fd55c/art-fund-ian-pons-jewell-04.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/73d9eb63-42ab-40cb-a1c4-65065d31fd54/art-fund-ian-pons-jewell-05.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" /></div>
+  <div class="media-grid-2">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/24c8f89e-d7a8-44a6-bdbf-3099c99b33d0/art-fund-ian-pons-jewell-01.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/0d735f18-6fd3-47b0-bc7c-47adf91e83bf/art-fund-ian-pons-jewell-03.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f00421b4-2565-401b-a90a-df010b195c79/art-fund-ian-pons-jewell-06.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ff898b57-4430-410d-8970-6abe38a7a0ee/art-fund-ian-pons-jewell-02.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e8b82f80-ff15-4b52-a9a8-de862b4fd55c/art-fund-ian-pons-jewell-04.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/73d9eb63-42ab-40cb-a1c4-65065d31fd54/art-fund-ian-pons-jewell-05.jpg?format=2500w" alt="National Art Fund — Miss Nothing" loading="lazy" />
+  </div>
 
   <!-- Next project -->
   <nav class="next-project">

@@ -217,9 +217,23 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── 3-COL IMAGE GRID ────────────────────── */
+    .media-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-3 img {
+      width: 100%;
+      display: block;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
+      .media-grid-3 { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -237,28 +251,30 @@
     <p class="project-brief">Nike asked us to develop a new running platform just for London. We launched it on Peckham Rye Lane with fly-posters and a takeover of shops, shutters and paving slabs.</p>
   </header>
 
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/19b670d1-6455-4ed7-bfb2-abf7b51f286b/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v04.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f56a9e97-cd63-4c49-b277-f7be45061b66/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v03.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d0b92296-63fc-4845-a651-82a186071af2/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v032.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/47d53638-d32d-48b0-85ef-0f97193df8f9/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v033.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cbb1694d-dc8f-4c2d-a3f9-24cef11ebc39/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v034.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/384dc03c-58c6-463e-bacb-eadce3c0057c/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v035.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7b811c7c-7bd0-41aa-9336-b94c3ebd0b06/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v033.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b1170048-d1fd-45f9-a1d9-67c571c075f9/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v032.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/8528ec18-23b6-43e7-8a57-65b54d7d8242/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v036.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3c4be0b4-cff9-4a62-b136-a7576fa110f8/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v042.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/102db838-028a-4be8-9c70-7063467fa4f6/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v043.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e71c5cae-fcc5-4351-9532-51fec3263c87/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v04.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cf932cbd-a24c-4b4f-8e4c-4ed5c9f71d2a/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v044.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/93881edf-97c9-447d-a815-451a081670dd/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v03.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c0030088-f886-4625-8983-e9678fe28253/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v034.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/78468168-7fb1-4fae-a21f-15df86a02c72/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v042.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d0c7b88e-7ca0-432e-983f-20a9f24d4265/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v033.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9dcd1c29-1caf-4982-b791-12ce820e994c/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v043.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5fce78a-cd8d-43b5-bf0e-9c00d738b45a/1704040247238.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/873b4518-3d9a-4c44-96c4-e6c12f1435c8/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v032.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/01176288-a71a-4a12-9240-32fcf6b1cf0a/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v042.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d6334175-3ff5-456c-9de8-cbc608bdcc27/1704040247472.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" /></div>
+  <div class="media-grid-3">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/19b670d1-6455-4ed7-bfb2-abf7b51f286b/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v04.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f56a9e97-cd63-4c49-b277-f7be45061b66/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v03.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d0b92296-63fc-4845-a651-82a186071af2/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v032.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/47d53638-d32d-48b0-85ef-0f97193df8f9/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v033.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cbb1694d-dc8f-4c2d-a3f9-24cef11ebc39/NIKLBRDV0314+Nike_WhateverPeckhamThrowsAtYou_6S_Master_1800x1200mm+%4025pc_v034.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/384dc03c-58c6-463e-bacb-eadce3c0057c/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v035.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7b811c7c-7bd0-41aa-9336-b94c3ebd0b06/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v033.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b1170048-d1fd-45f9-a1d9-67c571c075f9/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v032.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/8528ec18-23b6-43e7-8a57-65b54d7d8242/NIKLBRDV0314+Nike_PeaceInTheLashingRain_6S_Master_1800x1200mm+%4025pc_v036.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3c4be0b4-cff9-4a62-b136-a7576fa110f8/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v042.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/102db838-028a-4be8-9c70-7063467fa4f6/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v043.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e71c5cae-fcc5-4351-9532-51fec3263c87/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v04.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cf932cbd-a24c-4b4f-8e4c-4ed5c9f71d2a/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V2_6S_Master_1800x1200mm+%4025pc_v044.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/93881edf-97c9-447d-a815-451a081670dd/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v03.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c0030088-f886-4625-8983-e9678fe28253/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v034.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/78468168-7fb1-4fae-a21f-15df86a02c72/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v042.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d0c7b88e-7ca0-432e-983f-20a9f24d4265/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v033.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9dcd1c29-1caf-4982-b791-12ce820e994c/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v043.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a5fce78a-cd8d-43b5-bf0e-9c00d738b45a/1704040247238.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/873b4518-3d9a-4c44-96c4-e6c12f1435c8/NIKLBRDV0314+Nike_PeckhamMovesDifferent_V2_6S_Master_1800x1200mm+%4025pc_v032.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/01176288-a71a-4a12-9240-32fcf6b1cf0a/NIKLBRDV0314+Nike_MentalPaceMentalSpace_V1_6S_Master_1800x1200mm+%4025pc_v042.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d6334175-3ff5-456c-9de8-cbc608bdcc27/1704040247472.jpg?format=2500w" alt="Nike We Run With It" loading="lazy" />
+  </div>
 
   <!-- Next project -->
   <nav class="next-project">

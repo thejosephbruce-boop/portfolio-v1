@@ -173,6 +173,37 @@
     }
 
 
+    /* ── IMAGE GRIDS ────────────────────────── */
+    .media-grid-2,
+    .media-grid-3 {
+      display: grid;
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .media-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    .media-grid-2 img,
+    .media-grid-3 img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .media-grid-3 img { aspect-ratio: 1 / 1; }
+    .media-grid-2 img { aspect-ratio: 16 / 9; }
+
+    /* OOH row — portrait feel */
+    .media-grid-ooh img { aspect-ratio: 3 / 4; }
+
+    @media (max-width: 600px) {
+      .media-grid-2,
+      .media-grid-3 { grid-template-columns: 1fr; }
+      .media-grid-2 img,
+      .media-grid-3 img,
+      .media-grid-ooh img { aspect-ratio: auto; }
+    }
+
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
       border-top: 1px solid var(--border);
@@ -236,20 +267,72 @@
     </div>
   </div>
 
-  <!-- Campaign still — road -->
+  <!-- Film still — runner in purple landscape -->
   <div class="media-full">
     <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6f31d94b-0112-400f-a59e-51f32d6d48e8/NIKLGENK0321_01_HaveABeautifulRun_ROAD_STILL_1080x1080px_v02.jpeg?format=2500w"
-      alt="Nike — A Beautiful Run, campaign still"
+      src="BEAUTIFUL%20RUN%20IMAGES/Screenshot%202023-09-29%20at%2017.29.45.png"
+      alt="Nike — A Beautiful Run, film still"
       loading="lazy"
     />
   </div>
 
-  <!-- Campaign still — Kipchoge on grass -->
+  <!-- Key art — 3-col: Patience (4:5), See Magic (1:1), Brand asset (1:1) -->
+  <div class="media-grid-3">
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/NIKLGENK0321_01_HaveABeautifulRun_PATIENCE_STILL_1080x1350px_v01%20copy.jpeg"
+      alt="Nike — A Beautiful Run, Patience Gets You There Faster"
+      loading="lazy"
+    />
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/NIKLGENK0321_01_HaveABeautifulRun_ROAD_STILL_1080x1080px_v02%20copy.jpeg"
+      alt="Nike — A Beautiful Run, See Magic Not Miles"
+      loading="lazy"
+    />
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/1702555541365.jpg"
+      alt="Nike — A Beautiful Run, brand asset"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Film still — woman with abstract mask -->
   <div class="media-full">
     <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c2b1dc4d-63dc-4287-b5a6-e943a3f47765/NIKLGENK0321_01_HaveABeautifulRun_REST_1_1+online+%281%29.jpeg?format=2500w"
-      alt="Nike — A Beautiful Run, campaign still"
+      src="BEAUTIFUL%20RUN%20IMAGES/Screenshot%202023-10-02%20at%2021.48.18.png"
+      alt="Nike — A Beautiful Run, film still"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Film stills — 2-col wide -->
+  <div class="media-grid-2">
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/Screenshot%202023-10-02%20at%2021.48.59.png"
+      alt="Nike — A Beautiful Run, Runners Helping Runners"
+      loading="lazy"
+    />
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/Screenshot%202023-12-20%20at%2016.31.53.png"
+      alt="Nike — A Beautiful Run, film still"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- OOH — 3-col: station portrait, building billboard, bus shelter -->
+  <div class="media-grid-3 media-grid-ooh">
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/1702555541945.jpg"
+      alt="Nike — A Beautiful Run, OOH"
+      loading="lazy"
+    />
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/1702555542088.jpg"
+      alt="Nike — A Beautiful Run, OOH"
+      loading="lazy"
+    />
+    <img
+      src="BEAUTIFUL%20RUN%20IMAGES/1702555542336.jpg"
+      alt="Nike — A Beautiful Run, OOH"
       loading="lazy"
     />
   </div>

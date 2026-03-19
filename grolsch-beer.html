@@ -217,9 +217,18 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── 2-COL VIDEO GRID ────────────────────── */
+    .media-grid-2-vid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
+      .media-grid-2-vid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -236,6 +245,15 @@
     <h1 class="project-title">Grolsch — Big Bold</h1>
     <p class="project-brief">I've included this campaign from 2010 because I'm really proud of the interactive elements we developed. The films were also beautifully shot and still look fantastic all these years later.</p>
   </header>
+
+  <!-- Video 1 — Vimeo hero film -->
+  <div class="media-full"><div class="vimeo-wrap"><iframe src="https://player.vimeo.com/video/48131191" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
+
+  <!-- Videos 2 & 3 — YouTube campaign cuts, side by side -->
+  <div class="media-grid-2-vid">
+    <div class="vimeo-wrap"><iframe src="https://www.youtube.com/embed/cyZfNfLI758" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="vimeo-wrap"><iframe src="https://www.youtube.com/embed/GnIfRWkX_jA" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/438b3169-b76f-4509-b701-b2bfd2933619/Grolsch_Tab_2_1260.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" /></div>
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/82744729-882e-495c-942a-5c8972520a6f/image-asset-1.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" /></div>

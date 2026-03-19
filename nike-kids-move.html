@@ -172,6 +172,55 @@
       margin-left: 4px;
     }
 
+    /* ── IMAGE GRIDS ────────────────────────── */
+    .media-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-grid-3 img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 9 / 16;
+    }
+
+    /* Contained 2-col for GIFs */
+    .media-grid-2-contained {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin: 3rem auto;
+      padding: 0 var(--pad);
+      max-width: 900px;
+      line-height: 0;
+    }
+    .media-grid-2-contained img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Contained single image */
+    .media-contained-img {
+      padding: 3rem var(--pad);
+      max-width: 1000px;
+      margin: 0 auto;
+      line-height: 0;
+    }
+    .media-contained-img img {
+      width: 100%;
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      .media-grid-3 { grid-template-columns: 1fr; }
+      .media-grid-3 img { aspect-ratio: auto; }
+      .media-grid-2-contained { grid-template-columns: 1fr; padding: 0; }
+      .media-contained-img { padding: 2rem var(--pad); }
+    }
+
     /* ── VIMEO EMBED ─────────────────────────── */
     .vimeo-wrap {
       position: relative;
@@ -237,13 +286,43 @@
     <p class="project-brief">As part of Nike's 'Play New' initiative we were asked to create a campaign to encourage kids of all abilities to dance. We created 'The Move Challenge', where every dance move submitted was turned into a fun character by YONK.</p>
   </header>
 
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3f10dd86-347a-45e1-8e4f-39080ff37ef1/selection.png?format=2500w" alt="Nike Kids Move" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/41397ce8-9ad8-489e-9145-201532a98f14/box+design.png?format=2500w" alt="Nike Kids Move" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6e69c8e1-cd43-43e7-99d6-15fa08cfc8e7/HO21_Kids_Dance_Moove_Challenge_03.jpg?format=2500w" alt="Nike Kids Move" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9b5186b5-84a1-471a-8b7e-a7afbc9b197e/HO21_Kids_Dance_Moove_Challenge_01.jpg?format=2500w" alt="Nike Kids Move" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/91048f6d-2843-4409-89f6-20a5fc6bb4d1/HO21_Kids_Dance_Moove_Challenge_04.jpg?format=2500w" alt="Nike Kids Move" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ba5cc6d6-e0a9-4787-ae6c-eba9af9a9d0a/icecream.gif" alt="Nike Kids Move" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7d22dc45-53a1-494d-8665-11c82d71090f/pigeon.gif" alt="Nike Kids Move" loading="lazy" /></div>
+  <!-- Main film — full width -->
+  <div class="media-full">
+    <div class="video-wrap"
+         data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f05b8795-2eba-4896-b724-eac411b70b91/playlist.m3u8">
+      <video
+        poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f05b8795-2eba-4896-b724-eac411b70b91/thumbnail"
+        preload="none"
+        playsinline
+      ></video>
+      <div class="video-overlay">
+        <div class="play-btn"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Characters overview — full width opener -->
+  <div class="media-full">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/3f10dd86-347a-45e1-8e4f-39080ff37ef1/selection.png?format=2500w" alt="Nike Kids Move — characters" loading="lazy" />
+  </div>
+
+  <!-- Box design — contained -->
+  <div class="media-contained-img">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/41397ce8-9ad8-489e-9145-201532a98f14/box+design.png?format=2500w" alt="Nike Kids Move — box design" loading="lazy" />
+  </div>
+
+  <!-- Campaign shots — 3-col grid -->
+  <div class="media-grid-3">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6e69c8e1-cd43-43e7-99d6-15fa08cfc8e7/HO21_Kids_Dance_Moove_Challenge_03.jpg?format=2500w" alt="Nike Kids Move" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9b5186b5-84a1-471a-8b7e-a7afbc9b197e/HO21_Kids_Dance_Moove_Challenge_01.jpg?format=2500w" alt="Nike Kids Move" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/91048f6d-2843-4409-89f6-20a5fc6bb4d1/HO21_Kids_Dance_Moove_Challenge_04.jpg?format=2500w" alt="Nike Kids Move" loading="lazy" />
+  </div>
+
+  <!-- Character GIFs — contained 2-col -->
+  <div class="media-grid-2-contained">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ba5cc6d6-e0a9-4787-ae6c-eba9af9a9d0a/icecream.gif" alt="Nike Kids Move — ice cream character" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/7d22dc45-53a1-494d-8665-11c82d71090f/pigeon.gif" alt="Nike Kids Move — pigeon character" loading="lazy" />
+  </div>
 
   <!-- Next project -->
   <nav class="next-project">

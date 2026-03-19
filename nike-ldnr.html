@@ -172,22 +172,32 @@
       margin-left: 4px;
     }
 
-    /* ── VIMEO EMBED ─────────────────────────── */
-    .vimeo-wrap {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0d0d0d;
-      line-height: 0;
+    /* ── PORTRAIT VIDEO GRID ─────────────────── */
+    .media-grid-2-portrait {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
     }
-    .vimeo-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .media-grid-2-portrait .video-wrap video {
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
     }
 
+    /* ── GIF GRID (3×3, full-width, square-cropped) */
+    .media-gif-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-gif-grid img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
 
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
@@ -220,6 +230,8 @@
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
+      .media-grid-2-portrait { grid-template-columns: 1fr; }
+      .media-gif-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -237,27 +249,86 @@
     <p class="project-brief">Nike and W+K were in the process of creating a huge film for London. I was tasked with blowing the idea out 360 degrees — across social and beyond.</p>
   </header>
 
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d762cc53-9c1c-49d5-90c1-87dcf29a6aba/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d762cc53-9c1c-49d5-90c1-87dcf29a6aba/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b79a01d6-0be2-4655-9c9a-e7baa1ff8174/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b79a01d6-0be2-4655-9c9a-e7baa1ff8174/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/beb2f4f9-ff4a-4608-8108-8f0ca8a9c2cf/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/beb2f4f9-ff4a-4608-8108-8f0ca8a9c2cf/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cd74ee2d-08c8-430b-b7fc-4c9cd591a92a/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cd74ee2d-08c8-430b-b7fc-4c9cd591a92a/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6526ec3f-7203-46b3-a107-0000efa85592/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6526ec3f-7203-46b3-a107-0000efa85592/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af225716-c325-4478-a0c8-9e3dc3f8cfb0/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af225716-c325-4478-a0c8-9e3dc3f8cfb0/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/5f87f33e-4844-4392-a543-186bca71e6a1/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/5f87f33e-4844-4392-a543-186bca71e6a1/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1ffc21f3-674b-41c9-b830-ca93fbd191df/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1ffc21f3-674b-41c9-b830-ca93fbd191df/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/76cc676c-78d7-49e5-9100-4c191188047f/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/76cc676c-78d7-49e5-9100-4c191188047f/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b9c1821d-a533-414a-a845-3a55eb546025/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b9c1821d-a533-414a-a845-3a55eb546025/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/174d6588-8a0a-4fa1-9e24-5558ffc11932/playlist.m3u8"><video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/174d6588-8a0a-4fa1-9e24-5558ffc11932/thumbnail" preload="none" playsinline></video><div class="video-overlay"><div class="play-btn"></div></div></div></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f4a849ba-b3b0-4cec-9b32-b51071779abe/IMG-20180621-WA0001.jpg?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/95cab405-858a-4bd4-9134-821b0d31cd67/100.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/636e0bbc-4a16-415d-8be9-af4ed040a060/Male+Football.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/08d3061a-a7af-4a9d-ab33-1313a5527718/BARBER.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cc6f172b-22cf-43b4-b2e2-89a976209ffd/FINGER.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b14f7943-d16f-4e37-a2d9-820509fc98bc/Basketball.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f0bf4c2f-0ba4-4184-9507-f26adf62c27f/Female+Footballer.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/07f0bf7c-13c0-436c-87b1-012cc9d86137/Boxer.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/de7708bd-1543-41af-a327-5abda01411b1/BIKER3.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a1d94848-14a5-4de1-b09a-3c798ae624b7/CHICKEN.gif?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" /></div>
+  <!-- Main film — 16:9, full width -->
+  <div class="media-full">
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d762cc53-9c1c-49d5-90c1-87dcf29a6aba/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/d762cc53-9c1c-49d5-90c1-87dcf29a6aba/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+  </div>
+
+  <!-- Character GIFs — 3×3 full-width square grid -->
+  <div class="media-gif-grid">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/95cab405-858a-4bd4-9134-821b0d31cd67/100.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/636e0bbc-4a16-415d-8be9-af4ed040a060/Male+Football.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/08d3061a-a7af-4a9d-ab33-1313a5527718/BARBER.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cc6f172b-22cf-43b4-b2e2-89a976209ffd/FINGER.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b14f7943-d16f-4e37-a2d9-820509fc98bc/Basketball.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f0bf4c2f-0ba4-4184-9507-f26adf62c27f/Female+Footballer.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/07f0bf7c-13c0-436c-87b1-012cc9d86137/Boxer.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/de7708bd-1543-41af-a327-5abda01411b1/BIKER3.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a1d94848-14a5-4de1-b09a-3c798ae624b7/CHICKEN.gif?format=2500w" alt="Nike LDNR" loading="lazy" />
+  </div>
+
+  <!-- 10 portrait social clips — 2-col grid -->
+  <div class="media-grid-2-portrait">
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b79a01d6-0be2-4655-9c9a-e7baa1ff8174/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b79a01d6-0be2-4655-9c9a-e7baa1ff8174/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/beb2f4f9-ff4a-4608-8108-8f0ca8a9c2cf/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/beb2f4f9-ff4a-4608-8108-8f0ca8a9c2cf/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cd74ee2d-08c8-430b-b7fc-4c9cd591a92a/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/cd74ee2d-08c8-430b-b7fc-4c9cd591a92a/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6526ec3f-7203-46b3-a107-0000efa85592/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/6526ec3f-7203-46b3-a107-0000efa85592/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af225716-c325-4478-a0c8-9e3dc3f8cfb0/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/af225716-c325-4478-a0c8-9e3dc3f8cfb0/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/5f87f33e-4844-4392-a543-186bca71e6a1/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/5f87f33e-4844-4392-a543-186bca71e6a1/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1ffc21f3-674b-41c9-b830-ca93fbd191df/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1ffc21f3-674b-41c9-b830-ca93fbd191df/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/76cc676c-78d7-49e5-9100-4c191188047f/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/76cc676c-78d7-49e5-9100-4c191188047f/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b9c1821d-a533-414a-a845-3a55eb546025/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b9c1821d-a533-414a-a845-3a55eb546025/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/174d6588-8a0a-4fa1-9e24-5558ffc11932/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/174d6588-8a0a-4fa1-9e24-5558ffc11932/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Campaign photo -->
+  <div class="media-full">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/f4a849ba-b3b0-4cec-9b32-b51071779abe/IMG-20180621-WA0001.jpg?format=2500w" alt="Nike LDNR — Nothing Beats a Londoner" loading="lazy" />
+  </div>
 
   <!-- Next project -->
   <nav class="next-project">

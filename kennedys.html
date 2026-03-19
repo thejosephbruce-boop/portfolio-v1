@@ -142,6 +142,44 @@
       opacity: 0.6;
     }
 
+    /* ── VIDEO PLAYER ────────────────────────── */
+    .video-wrap {
+      position: relative;
+      background: #0d0d0d;
+      cursor: pointer;
+      line-height: 0;
+    }
+    .video-wrap video { width: 100%; display: block; }
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.22);
+      transition: opacity 0.35s;
+    }
+    .video-overlay.hidden { opacity: 0; pointer-events: none; }
+    .play-btn {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 243, 239, 0.55);
+      background: rgba(245, 243, 239, 0.1);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.25s, background 0.25s;
+    }
+    .video-wrap:hover .play-btn { transform: scale(1.08); background: rgba(245, 243, 239, 0.2); }
+    .play-btn::after {
+      content: '';
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 17px;
+      border-color: transparent transparent transparent rgba(245, 243, 239, 0.9);
+      margin-left: 4px;
+    }
+
     /* ── NEXT PROJECT ────────────────────────── */
     .next-project {
       border-top: 1px solid var(--border);
@@ -186,12 +224,20 @@
     <p class="project-brief">The Kennedys is a 5-month creative course open to anyone trying to get into the creative industry. The selection process is geared up to provide a doorway for people who wouldn't normally see creative advertising as an option — and we get an incredible mix of brilliant young people from many different backgrounds.</p>
   </header>
 
-  <!-- Hero image -->
+  <!-- Hero video -->
+  <div class="media-full">
+    <div class="video-wrap" data-hls="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e0a5f3b4-3a7e-4c75-b132-67225d76445f/playlist.m3u8">
+      <video poster="https://video.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e0a5f3b4-3a7e-4c75-b132-67225d76445f/thumbnail" preload="none" playsinline></video>
+      <div class="video-overlay"><div class="play-btn"></div></div>
+    </div>
+  </div>
+
+  <!-- Landing page image -->
   <div class="media-full">
     <img
-      src="Kennedys Thumb.png"
-      alt="The Kennedys"
-      loading="eager"
+      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/26b9e53a-8cbd-4ff7-8b4c-2ab2d424709a/59LANDINGPAGE-1.png"
+      alt="The Kennedys 2024"
+      loading="lazy"
     />
   </div>
 
@@ -205,26 +251,39 @@
     <p>2024 was my second year as Course Director and I'm incredibly excited for what the future of The Kennedys will hold. Find out more at <a href="https://thekennedyslondon.com/" target="_blank" rel="noopener">thekennedyslondon.com</a>.</p>
   </div>
 
-  <!-- Promotional image -->
-  <div class="media-full">
-    <img
-      src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/26b9e53a-8cbd-4ff7-8b4c-2ab2d424709a/59LANDINGPAGE-1.png"
-      alt="The Kennedys 2024"
-      loading="lazy"
-    />
-  </div>
-
   <!-- Next project -->
   <nav class="next-project">
     <p class="next-label">Next</p>
     <a href="more-stuff.html" class="next-link">More Stuff</a>
   </nav>
 
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
+
+    document.querySelectorAll('.video-wrap').forEach(wrap => {
+      const video   = wrap.querySelector('video');
+      const overlay = wrap.querySelector('.video-overlay');
+      const hlsSrc  = wrap.dataset.hls;
+      let   ready   = false;
+      function initVideo() {
+        if (ready) return; ready = true;
+        if (typeof Hls !== 'undefined' && Hls.isSupported()) {
+          const hls = new Hls({ startLevel: -1 });
+          hls.loadSource(hlsSrc); hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = hlsSrc;
+        }
+        video.controls = true;
+      }
+      wrap.addEventListener('click', () => { initVideo(); video.paused ? video.play() : video.pause(); });
+      video.addEventListener('play',  () => overlay.classList.add('hidden'));
+      video.addEventListener('pause', () => overlay.classList.remove('hidden'));
+      video.addEventListener('ended', () => overlay.classList.remove('hidden'));
+    });
   </script>
 
 </body>

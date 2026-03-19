@@ -217,9 +217,28 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── GIF GRID ────────────────────────────── */
+    .media-gif-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      margin-bottom: 3px;
+      line-height: 0;
+    }
+    .media-gif-grid img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
     /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .media-gif-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 480px) {
       .media-contained { padding: 0; }
+      .media-gif-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -256,18 +275,21 @@
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/040ef653-5e33-421f-84c4-b55028eac994/image-asset%2811%29.jpg?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c9ccd58c-0f52-4998-8719-b5d8ecf803b9/Nike_ShareYourDream_Retail.jpg?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
   <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/b42b67be-7cd2-4bd1-a51d-f2aedb6aa43e/DreamBooth.png?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/02268c14-eb4c-4190-b6cf-5f3ee4603cad/Fran_Pack.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1d282741-2639-4ad1-bc23-bcfbccdcc301/Lieke_Pack.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c673e094-6f5b-4d17-81a4-3eeb723afa61/bedroom1.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/457dfba3-43fc-4c75-9664-ac4fc1e51f0b/bedroom2.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9fcf4b6c-f18c-475e-9fda-ce105cd1ae8b/bedroom3.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ad25e770-7b5f-44ab-a772-25c0f05bfd55/image-asset%287%29.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2a9bbf1b-274d-44e0-ad3a-b2c701055d9a/image-asset%289%29.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a73911a7-3dbd-4045-ae4a-f87e02472b25/Jun-03-2019%2B15-41-03.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a2e5730c-9040-4580-a1fb-4580e68b1688/image-asset.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fe1e8270-dbff-41b4-a40f-1c78253e753e/image-asset%288%29.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e304ad90-5a00-4bfc-8953-c8cd458b7e1c/Jun-10-2019%2B23-37-06.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/99acb0e6-df76-4584-8a02-c380d56caaaf/Jun-10-2019%2B23-31-04.gif?format=2500w" alt="Nike WWC 2019 — Wall of Dreams" loading="lazy" /></div>
+  <!-- GIFs — 4×3 square grid -->
+  <div class="media-gif-grid">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/02268c14-eb4c-4190-b6cf-5f3ee4603cad/Fran_Pack.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/1d282741-2639-4ad1-bc23-bcfbccdcc301/Lieke_Pack.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/c673e094-6f5b-4d17-81a4-3eeb723afa61/bedroom1.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/457dfba3-43fc-4c75-9664-ac4fc1e51f0b/bedroom2.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/9fcf4b6c-f18c-475e-9fda-ce105cd1ae8b/bedroom3.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/ad25e770-7b5f-44ab-a772-25c0f05bfd55/image-asset%287%29.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/2a9bbf1b-274d-44e0-ad3a-b2c701055d9a/image-asset%289%29.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a73911a7-3dbd-4045-ae4a-f87e02472b25/Jun-03-2019%2B15-41-03.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/a2e5730c-9040-4580-a1fb-4580e68b1688/image-asset.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/fe1e8270-dbff-41b4-a40f-1c78253e753e/image-asset%288%29.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/e304ad90-5a00-4bfc-8953-c8cd458b7e1c/Jun-10-2019%2B23-37-06.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/99acb0e6-df76-4584-8a02-c380d56caaaf/Jun-10-2019%2B23-31-04.gif?format=2500w" alt="Nike WWC 2019" loading="lazy" />
+  </div>
 
   <!-- Next project -->
   <nav class="next-project">

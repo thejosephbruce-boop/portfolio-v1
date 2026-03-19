@@ -217,9 +217,39 @@
     .next-link:hover { opacity: 0.45; }
     .next-link::after { content: '→'; font-style: normal; }
 
+    /* ── IMAGE GRIDS ─────────────────────────── */
+    .media-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px; margin-bottom: 3px; line-height: 0;
+    }
+    .media-grid-2 img { width: 100%; display: block; }
+
+    .media-grid-2-ls {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px; margin-bottom: 3px; line-height: 0;
+    }
+    .media-grid-2-ls img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+
+    .media-grid-3-ls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px; margin-bottom: 3px; line-height: 0;
+    }
+    .media-grid-3-ls img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+
+    .media-grid-3-pt {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px; margin-bottom: 3px; line-height: 0;
+    }
+    .media-grid-3-pt img { width: 100%; display: block; aspect-ratio: 595/842; object-fit: cover; }
+
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 600px) {
       .media-contained { padding: 0; }
+      .media-grid-2, .media-grid-2-ls, .media-grid-3-ls, .media-grid-3-pt { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -277,6 +307,37 @@
         <div class="play-btn"></div>
       </div>
     </div>
+  </div>
+
+  <!-- Player hero renders — 3-col 16:9 -->
+  <div class="media-grid-3-ls">
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/63652f31-d451-43c6-97db-8d546c0e5953/Neymar.png?format=2500w" alt="Nike Deceptive by Nature — Neymar" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/c9521eea-fc59-473a-bfe8-753bcad0aa2b/LEW2.png?format=2500w" alt="Nike Deceptive by Nature — Lewandowski" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/01ee9ff1-6011-4b0c-a225-cb4ed781eeec/Kane.png?format=2500w" alt="Nike Deceptive by Nature — Kane" loading="lazy" />
+  </div>
+
+  <!-- Character dev sketches — 2-col natural ratio -->
+  <div class="media-grid-2">
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/ead0d3e1-ae19-4062-9b96-f25eae9c7eda/CharacterDev2.jpg?format=2500w" alt="Nike Deceptive by Nature — Character Development" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/fe77af21-93ed-4d93-bb7d-4850ceccf305/Character%2BDev.jpg?format=2500w" alt="Nike Deceptive by Nature — Character Development" loading="lazy" />
+  </div>
+
+  <!-- Character dev detailed — 2-col 16:9 (2 rows) -->
+  <div class="media-grid-2-ls">
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/6f3b330f-176c-462a-964e-8295b15c317c/CharacterDev3.jpg?format=2500w" alt="Nike Deceptive by Nature — Character Development" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/2a73e396-0468-4580-b657-e9ea9892fcf4/CharacterDev4.jpg?format=2500w" alt="Nike Deceptive by Nature — Character Development" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/090bc4f0-9b30-45fc-b4ce-21d84f4272f3/CharacterDev5.jpg?format=2500w" alt="Nike Deceptive by Nature — Character Development" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/2d02f42e-2bc0-4878-b978-119374f9e892/CharacterDev6.jpg?format=2500w" alt="Nike Deceptive by Nature — Character Development" loading="lazy" />
+  </div>
+
+  <!-- Screenshot — full width -->
+  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/df90212a-dfbf-4890-9175-68dbdec9149b/Screenshot+2022-07-07+at+00.09.38.png?format=2500w" alt="Nike Deceptive by Nature" loading="lazy" /></div>
+
+  <!-- Campaign stills — 3-col portrait -->
+  <div class="media-grid-3-pt">
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/f08a9c43-9df3-43d7-96e8-8b812405c10e/STILL10.jpg?format=2500w" alt="Nike Deceptive by Nature — Still" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/b5e1e5a6-3816-48d7-83a3-bc55e32ed6be/STILL7.jpg?format=2500w" alt="Nike Deceptive by Nature — Still" loading="lazy" />
+    <img src="https://images.squarespace-cdn.com/content/v1/5fecac55d34bf204b45218c5/e3221dee-0c8a-46f3-8973-6201a27a9d6e/MarioM.jpg?format=2500w" alt="Nike Deceptive by Nature — Still" loading="lazy" />
   </div>
 
   <!-- Next project -->
