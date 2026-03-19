@@ -70,6 +70,14 @@ window.scrollTo(0, 0);
       const from = splashLogo.getBoundingClientRect();
       const to   = logoReveal.getBoundingClientRect();
 
+      // Store the splash logo's exact position so returnToSplash() can land
+      // the logo at precisely the right spot (it is above-centre due to the tagline)
+      window.__splashLogoRect = {
+        left: from.left, top: from.top,
+        width: from.width, height: from.height,
+        bottom: from.bottom,
+      };
+
       const dx    = (to.left + to.width  / 2) - (from.left + from.width  / 2);
       const dy    = (to.top  + to.height / 2) - (from.top  + from.height / 2);
       const scale = to.width / from.width;
@@ -564,24 +572,31 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const thumbA      = document.getElementById('logoThumbA');
     const thumbB      = document.getElementById('logoThumbB');
 
-    // Target splash-logo width: clamp(280px, 42vw, 680px)
-    const targetWidth = Math.min(Math.max(280, window.innerWidth * 0.42), 680);
-    const finalCX     = window.innerWidth  / 2;
-    const finalCY     = window.innerHeight / 2;
-    const fromCX      = fromRect.left + fromRect.width  / 2;
-    const fromCY      = fromRect.top  + fromRect.height / 2;
-    const dx          = fromCX - finalCX;
-    const dy          = fromCY - finalCY;
-    const scale       = fromRect.width / targetWidth;
+    // ── Work out the landing position ────────────────────────────────
+    // Use the exact rect captured when the original splash played —
+    // the logo is above-centre (flex-column with tagline below), so
+    // window.innerHeight/2 would be wrong and cause a jump on reload.
+    const r           = window.__splashLogoRect;
+    const targetWidth = r ? r.width : Math.min(Math.max(280, window.innerWidth * 0.42), 680);
+    const finalLeft   = r ? r.left  : (window.innerWidth - targetWidth) / 2;
+    const finalTop    = r ? r.top   : (window.innerHeight - targetWidth * 0.28) / 2;
+    const finalCX     = finalLeft + targetWidth / 2;
+    const finalCY     = finalTop  + (r ? r.height / 2 : targetWidth * 0.14);
+
+    const fromCX = fromRect.left + fromRect.width  / 2;
+    const fromCY = fromRect.top  + fromRect.height / 2;
+    const dx     = fromCX - finalCX;
+    const dy     = fromCY - finalCY;
+    const scale  = fromRect.width / targetWidth;
 
     // Hide the portfolio logo so it doesn't show through the overlay
     logoReveal.style.opacity = '0';
 
     // ── Build the splash overlay ──────────────────────────────────────
+    // Elements are absolutely positioned to land at pixel-perfect splash coords
     const splashEl = document.createElement('div');
     splashEl.style.cssText = [
       'position:fixed', 'inset:0', 'z-index:500',
-      'display:flex', 'align-items:center', 'justify-content:center',
       'background-color:transparent', 'pointer-events:none',
       'transition:background-color 0.7s 0.15s ease',
     ].join(';');
@@ -592,16 +607,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     // No transition yet — prevents the browser firing an unwanted animation
     // from the element's default (identity) state to the initial inverted position
     imgEl.style.cssText = [
-      'display:block',
+      'position:absolute',
+      'left:' + finalLeft + 'px',
+      'top:'  + finalTop  + 'px',
       'width:' + targetWidth + 'px',
       'height:auto',
       'transform:translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')',
     ].join(';');
 
-    const taglineEl = document.createElement('p');
+    // Tagline sits below the logo, matching the real .splash-content gap (1.75 rem ≈ 28 px)
+    const taglineTop = r ? r.bottom + 28 : finalTop + targetWidth * 0.28 + 28;
+    const taglineEl  = document.createElement('p');
     taglineEl.textContent = 'Executive Creative Director & Creative Partner';
     taglineEl.style.cssText = [
-      'position:absolute', 'left:50%', 'bottom:clamp(24px,5vw,80px)',
+      'position:absolute', 'left:50%',
+      'top:' + taglineTop + 'px',
       'transform:translateX(-50%)',
       'font-family:"Cormorant Garamond",Georgia,serif',
       'font-size:clamp(0.9rem,1.4vw,1.2rem)',
@@ -614,10 +634,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     splashEl.appendChild(taglineEl);
     document.body.appendChild(splashEl);
 
-    // ── FLIP: one frame to paint the initial position, then animate ──
+    // ── FLIP: one frame to paint at the portfolio position, then animate ──
+    // translate(0,0) scale(1) lands the image at (finalLeft, finalTop) —
+    // the exact pixel coordinates of the original splash logo.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        imgEl.style.transition         = 'transform 0.75s cubic-bezier(0.76,0,0.24,1)';
+        imgEl.style.transition         = 'transform 0.85s cubic-bezier(0.76,0,0.24,1)';
         imgEl.style.transform          = 'translate(0,0) scale(1)';
         splashEl.style.backgroundColor = '#f8f8f6';
         taglineEl.style.opacity        = '1';
@@ -633,8 +655,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       if (logoPanelEl) logoPanelEl.classList.remove('is-expanded');
     }, 350);
 
-    // Reload once the animation has settled
-    setTimeout(() => { window.location.reload(); }, 1400);
+    // Reload once the animation has fully settled — delay is generous so the
+    // logo and tagline are completely visible before the real splash takes over
+    setTimeout(() => { window.location.reload(); }, 1600);
   }
 
   // Desktop: wheel-up at the very top, but only after momentum from the first
