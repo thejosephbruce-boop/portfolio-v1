@@ -508,3 +508,119 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
+
+// ─────────────────────────────────────────
+// Double-scroll-to-top → return to splash
+// ─────────────────────────────────────────
+(function () {
+  const logoReveal = document.getElementById('logoReveal');
+  if (!logoReveal) return;
+
+  let wasBelow        = false;
+  let arrivedAtTopTime = null;
+  let returning       = false;
+  let topTouchY       = 0;
+
+  // Track the moment the user arrives back at the very top after scrolling down
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+      wasBelow = true;
+      arrivedAtTopTime = null;        // reset if they scroll away from top again
+    } else if (wasBelow) {
+      arrivedAtTopTime = Date.now(); // just bounced back to top
+      wasBelow = false;
+    }
+  }, { passive: true });
+
+  function returnToSplash() {
+    if (returning) return;
+    returning = true;
+
+    // Where the logo currently lives in the portfolio layout
+    const fromRect = logoReveal.getBoundingClientRect();
+
+    // Target splash-logo width: clamp(280px, 42vw, 680px)
+    const targetWidth  = Math.min(Math.max(280, window.innerWidth * 0.42), 680);
+
+    // Centers
+    const finalCX = window.innerWidth  / 2;
+    const finalCY = window.innerHeight / 2;
+    const fromCX  = fromRect.left + fromRect.width  / 2;
+    const fromCY  = fromRect.top  + fromRect.height / 2;
+
+    // Invert transform — start at the portfolio logo position, animate to centre
+    const dx    = fromCX - finalCX;
+    const dy    = fromCY - finalCY;
+    const scale = fromRect.width / targetWidth;
+
+    // Build a fresh splash overlay
+    const splashEl = document.createElement('div');
+    splashEl.style.cssText = [
+      'position:fixed', 'inset:0', 'z-index:500',
+      'display:flex', 'align-items:center', 'justify-content:center',
+      'background-color:transparent', 'pointer-events:none',
+      'transition:background-color 0.7s 0.15s ease',
+    ].join(';');
+
+    const imgEl = document.createElement('img');
+    imgEl.src = 'download.png';
+    imgEl.alt = 'Joe Bruce';
+    imgEl.style.cssText = [
+      'display:block',
+      'width:' + targetWidth + 'px',
+      'height:auto',
+      'transform:translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')',
+      'transition:transform 0.75s cubic-bezier(0.76,0,0.24,1)',
+    ].join(';');
+
+    const taglineEl = document.createElement('p');
+    taglineEl.textContent = 'Executive Creative Director & Creative Partner';
+    taglineEl.style.cssText = [
+      'position:absolute', 'left:50%', 'bottom:clamp(24px,5vw,80px)',
+      'transform:translateX(-50%)',
+      'font-family:"Cormorant Garamond",Georgia,serif',
+      'font-size:clamp(0.9rem,1.4vw,1.2rem)',
+      'font-weight:300', 'letter-spacing:0.08em',
+      'color:#888888', 'white-space:nowrap',
+      'opacity:0', 'transition:opacity 0.4s ease 0.6s',
+    ].join(';');
+
+    splashEl.appendChild(imgEl);
+    splashEl.appendChild(taglineEl);
+    document.body.appendChild(splashEl);
+
+    // FLIP: animate logo to centre + fade in background + fade in tagline
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        imgEl.style.transform            = 'translate(0,0) scale(1)';
+        splashEl.style.backgroundColor   = '#f8f8f6';
+        taglineEl.style.opacity          = '1';
+      });
+    });
+
+    // Reload once the animation has settled
+    setTimeout(() => { window.location.reload(); }, 1400);
+  }
+
+  // Desktop: wheel-up at the very top within 1500 ms of arriving there
+  window.addEventListener('wheel', (e) => {
+    if (returning) return;
+    if (e.deltaY < 0 && window.scrollY === 0 && arrivedAtTopTime !== null && Date.now() - arrivedAtTopTime < 1500) {
+      returnToSplash();
+    }
+  }, { passive: true });
+
+  // Mobile: pull down (finger moves down = overscroll upward) within 1500 ms
+  window.addEventListener('touchstart', (e) => {
+    topTouchY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (returning) return;
+    const dy = e.touches[0].clientY - topTouchY;
+    if (dy > 40 && window.scrollY === 0 && arrivedAtTopTime !== null && Date.now() - arrivedAtTopTime < 1500) {
+      returnToSplash();
+    }
+  }, { passive: true });
+
+}());
