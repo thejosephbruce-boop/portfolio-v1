@@ -112,6 +112,26 @@ window.scrollTo(0, 0);
 }());
 
 // ─────────────────────────────────────────
+// Mobile: fixed logo panel — push project list below it
+// ─────────────────────────────────────────
+(function () {
+  const logoPanel   = document.getElementById('logoPanel');
+  const projectList = document.getElementById('work');
+  if (!logoPanel || !projectList) return;
+
+  function applyMobilePadding() {
+    if (window.innerWidth <= 768) {
+      projectList.style.paddingTop = logoPanel.getBoundingClientRect().height + 'px';
+    } else {
+      projectList.style.paddingTop = '';
+    }
+  }
+
+  applyMobilePadding();
+  window.addEventListener('resize', applyMobilePadding, { passive: true });
+}());
+
+// ─────────────────────────────────────────
 // Logo thumbnail reveal — hover + scroll crossfade + full-bleed click
 // ─────────────────────────────────────────
 (function () {
@@ -124,9 +144,10 @@ window.scrollTo(0, 0);
 
   if (!thumbA || !thumbB || !projects.length) return;
 
-  let activeLayer    = 'a';
-  let currentProject = null;
+  let activeLayer     = 'a';
+  let currentProject  = null;
   let expandedProject = null;
+  let mobileLastTapped = null;
 
   function setThumb(url, position) {
     const next    = activeLayer === 'a' ? thumbB : thumbA;
@@ -254,6 +275,30 @@ window.scrollTo(0, 0);
         const href     = link.getAttribute('href');
         if (!url) return; // no thumb → let browser handle naturally
 
+        // ── Mobile: double-tap to navigate ──────────────────────────
+        if (window.innerWidth <= 768) {
+          if (href === '#') { e.preventDefault(); return; } // coming-soon or about
+          if (mobileLastTapped !== p) {
+            // First tap: fill logo panel with full thumb
+            e.preventDefault();
+            activateProject(p);
+            mobileLastTapped = p;
+            fullBleed.style.backgroundImage    = "url('" + url + "')";
+            fullBleed.style.backgroundPosition = position || 'center';
+            logoPanel.classList.add('is-expanded');
+            expandedProject = p;
+            return;
+          }
+          // Second tap of same project: navigate
+          mobileLastTapped = null;
+          logoPanel.classList.remove('is-expanded');
+          sessionStorage.setItem('jbFullBleedBg',   "url('" + url + "')");
+          sessionStorage.setItem('jbFullBleedPos',  position);
+          sessionStorage.setItem('jbFullBleedHref', href);
+          return; // let browser navigate
+        }
+
+        // ── Desktop: full-bleed expand then navigate ─────────────────
         // Full-bleed already open → single click navigates directly
         if (logoPanel.classList.contains('is-expanded')) {
           if (href === '#') { e.preventDefault(); return; } // coming-soon — stay on page
@@ -291,6 +336,15 @@ window.scrollTo(0, 0);
     // Full-bleed only collapses when the about-view opens (see about IIFE below)
     // — NOT on mouseenter, so clicking a project keeps the full-bleed persistent
   }
+
+  // Mobile: collapse full-thumb in logo panel when user scrolls
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth > 768) return;
+    if (mobileLastTapped && logoPanel) {
+      logoPanel.classList.remove('is-expanded');
+      mobileLastTapped = null;
+    }
+  }, { passive: true });
 
   // Allow other IIFEs to restore the current thumbnail after they've
   // temporarily overridden it (e.g. the Full Face / about view).
@@ -379,15 +433,30 @@ revealEls.forEach(el => revealObserver.observe(el));
     aboutView.style.pointerEvents = 'auto';
     aboutCol.style.opacity      = '0';
 
+    const isMobile = window.innerWidth <= 768;
+
     // Pull logo panel out of the grid and fix it at its current position
     logoPanelEl.style.position  = 'fixed';
     logoPanelEl.style.left      = rect.left + 'px';
     logoPanelEl.style.top       = '0';
     logoPanelEl.style.width     = rect.width + 'px';
-    logoPanelEl.style.height    = '100vh';
+    logoPanelEl.style.height    = isMobile ? 'auto' : '100vh';
     logoPanelEl.style.zIndex    = '150';
 
-    // Slide logo to the right column
+    // On mobile: pin about text to the space below the logo panel
+    if (isMobile) {
+      requestAnimationFrame(() => {
+        const panelH = logoPanelEl.getBoundingClientRect().height;
+        aboutCol.style.position  = 'absolute';
+        aboutCol.style.top       = panelH + 'px';
+        aboutCol.style.bottom    = '0';
+        aboutCol.style.left      = '0';
+        aboutCol.style.right     = '0';
+        aboutCol.style.overflowY = 'auto';
+      });
+    }
+
+    // Slide logo to the right column (desktop only — on mobile targetX is 0)
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         logoPanelEl.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
@@ -432,8 +501,14 @@ revealEls.forEach(el => revealObserver.observe(el));
       logoPanelEl.style.transition = '';
       logoPanelEl.style.transform  = '';
 
-      aboutCol.style.transition = '';
-      aboutCol.style.opacity    = '0';
+      aboutCol.style.transition  = '';
+      aboutCol.style.opacity     = '0';
+      aboutCol.style.position    = '';
+      aboutCol.style.top         = '';
+      aboutCol.style.bottom      = '';
+      aboutCol.style.left        = '';
+      aboutCol.style.right       = '';
+      aboutCol.style.overflowY   = '';
 
       // Restore the current project's thumbnail — about view replaced it with Full Face
       if (typeof window.__restoreCurrentThumb === 'function') {
@@ -515,6 +590,15 @@ revealEls.forEach(el => revealObserver.observe(el));
       transitionFromAbout();
     }
   }, { passive: true });
+
+  // Mobile about link in project list — tap to open about view
+  const aboutMobileLink = document.getElementById('aboutMobileLink');
+  if (aboutMobileLink) {
+    aboutMobileLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      transitionToAbout();
+    });
+  }
 
   // If arriving via index.html#about (e.g. from a project page "About" link), trigger immediately
   if (window.__gotoAbout) {

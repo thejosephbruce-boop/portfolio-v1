@@ -138,6 +138,25 @@ ul {
   opacity: 0;
 }
 
+/* Film grain overlay — sits above thumbnails, masked to letter shapes */
+.logo-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mask-image: url('download.png');
+  -webkit-mask-image: url('download.png');
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  opacity: 0.30;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ─────────────────────────────────────────
    Project List — scrolling right column
 ───────────────────────────────────────── */
@@ -192,6 +211,21 @@ ul {
   font-size: clamp(1.3rem, 3vw, 2.2rem);
   font-weight: 400;
   line-height: 1.15;
+}
+
+.project--featured a {
+  opacity: 1 !important;
+}
+
+/* About link visible on mobile only */
+.project--about-link {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .project--about-link {
+    display: block;
+  }
 }
 
 /* ─────────────────────────────────────────
@@ -262,7 +296,7 @@ ul {
 }
 
 .about-contact {
-  padding: 0 var(--pad);
+  padding: 2rem var(--pad) 0;
 }
 
 .about-footer {
@@ -371,16 +405,38 @@ ul {
   }
 
   .logo-panel {
-    position: relative;
-    top: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     height: auto;
-    padding: 3rem var(--pad) 2.5rem;
+    z-index: 50;
+    background: var(--bg);
+    padding: 2rem var(--pad) 1.5rem;
+    border-bottom: 1px solid var(--border);
   }
 
   .project-list {
     border-left: none;
-    border-top: 1px solid var(--border);
-    padding-top: 2rem;
+    border-top: none;
+    /* padding-top set dynamically by JS to match logo panel height */
+  }
+
+  #mobileThumbOverlay {
+    display: none;
+  }
+
+  /* About view: logo sits at top, content scrolls below */
+  .about-view {
+    grid-template-columns: 1fr;
+  }
+
+  .about-logo-col {
+    display: none;
+  }
+
+  .about-col {
+    border-right: none;
   }
 }
 
@@ -388,6 +444,13 @@ ul {
   .contact-links {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  /* About view: keep contact links in a row along the bottom */
+  .about-col .contact-links {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
   }
 
   .footer {
@@ -415,6 +478,18 @@ ul {
 .logo-panel.is-expanded .full-bleed {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Film grain on full-bleed project preview */
+.full-bleed::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.30;
+  mix-blend-mode: overlay;
+  pointer-events: none;
 }
 
 .logo-panel.is-expanded .logo-reveal {
@@ -462,6 +537,42 @@ ul {
 
 .about-bio-link:hover {
   opacity: 0.6;
+}
+
+/* ─────────────────────────────────────────
+   Mobile full-thumb overlay (first tap preview)
+───────────────────────────────────────── */
+#mobileThumbOverlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #mobileThumbOverlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  #mobileThumbOverlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.30;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  #mobileThumbOverlay.is-visible {
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

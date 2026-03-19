@@ -287,6 +287,61 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
+
+    // Overscroll down at the bottom → return to the about view
+    (function () {
+      let atBottomSince = null;
+      let leaving       = false;
+      let touchStartY   = 0;
+
+      window.addEventListener('scroll', () => {
+        const atBottom =
+          window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
+        if (atBottom && atBottomSince === null) {
+          atBottomSince = Date.now();
+        } else if (!atBottom) {
+          atBottomSince = null;
+        }
+      }, { passive: true });
+
+      function returnToAbout() {
+        if (leaving) return;
+        leaving = true;
+        document.body.style.pointerEvents = 'none';
+        document.body.style.transition    = 'opacity 0.4s ease';
+        document.body.style.opacity       = '0';
+        setTimeout(() => {
+          window.location.href = 'index.html#about';
+        }, 420);
+      }
+
+      window.addEventListener('wheel', (e) => {
+        if (leaving) return;
+        if (e.deltaY > 0) {
+          const atBottom =
+            window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
+          if (atBottom && atBottomSince !== null && Date.now() - atBottomSince > 300) {
+            returnToAbout();
+          }
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (leaving) return;
+        const dy = e.touches[0].clientY - touchStartY;
+        if (dy < -40) {
+          const atBottom =
+            window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
+          if (atBottom && atBottomSince !== null && Date.now() - atBottomSince > 300) {
+            returnToAbout();
+          }
+        }
+      }, { passive: true });
+    }());
   </script>
 
 </body>
