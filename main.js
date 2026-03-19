@@ -246,8 +246,8 @@ window.scrollTo(0, 0);
         const href     = link.getAttribute('href');
         if (!url) return; // no thumb → let browser handle naturally
 
-        // Second click on the already-expanded project → navigate (or stay for coming-soon)
-        if (logoPanel.classList.contains('is-expanded') && expandedProject === p) {
+        // Full-bleed already open → single click navigates directly
+        if (logoPanel.classList.contains('is-expanded')) {
           if (href === '#') { e.preventDefault(); return; } // coming-soon — stay on page
           sessionStorage.setItem('jbFullBleedBg',   "url('" + url + "')");
           sessionStorage.setItem('jbFullBleedPos',  position);
@@ -536,6 +536,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (returning) return;
     returning = true;
 
+    // Strip thumbnails and collapse any full-bleed so the logo reads
+    // as its plain black self before we FLIP it back to the splash
+    const thumbA      = document.getElementById('logoThumbA');
+    const thumbB      = document.getElementById('logoThumbB');
+    const logoPanelEl = document.getElementById('logoPanel');
+    if (thumbA) { thumbA.style.transition = 'opacity 0.15s'; thumbA.style.opacity = '0'; }
+    if (thumbB) { thumbB.style.transition = 'opacity 0.15s'; thumbB.style.opacity = '0'; }
+    if (logoPanelEl) logoPanelEl.classList.remove('is-expanded');
+
     // Where the logo currently lives in the portfolio layout
     const fromRect = logoReveal.getBoundingClientRect();
 
@@ -602,15 +611,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     setTimeout(() => { window.location.reload(); }, 1400);
   }
 
-  // Desktop: wheel-up at the very top within 1500 ms of arriving there
+  // Desktop: wheel-up at the very top, but only after momentum from the first
+  // scroll has died down (>300 ms) and within a 2 s window
   window.addEventListener('wheel', (e) => {
     if (returning) return;
-    if (e.deltaY < 0 && window.scrollY === 0 && arrivedAtTopTime !== null && Date.now() - arrivedAtTopTime < 1500) {
-      returnToSplash();
+    if (e.deltaY < 0 && window.scrollY <= 1 && arrivedAtTopTime !== null) {
+      const elapsed = Date.now() - arrivedAtTopTime;
+      if (elapsed > 300 && elapsed < 2000) returnToSplash();
     }
   }, { passive: true });
 
-  // Mobile: pull down (finger moves down = overscroll upward) within 1500 ms
+  // Mobile: pull down (finger moves down = overscroll upward) within 2 s
   window.addEventListener('touchstart', (e) => {
     topTouchY = e.touches[0].clientY;
   }, { passive: true });
@@ -618,8 +629,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   window.addEventListener('touchmove', (e) => {
     if (returning) return;
     const dy = e.touches[0].clientY - topTouchY;
-    if (dy > 40 && window.scrollY === 0 && arrivedAtTopTime !== null && Date.now() - arrivedAtTopTime < 1500) {
-      returnToSplash();
+    if (dy > 40 && window.scrollY <= 1 && arrivedAtTopTime !== null) {
+      const elapsed = Date.now() - arrivedAtTopTime;
+      if (elapsed > 300 && elapsed < 2000) returnToSplash();
     }
   }, { passive: true });
 
