@@ -109,6 +109,14 @@ window.scrollTo(0, 0);
   // Trigger only on first scroll
   window.addEventListener('scroll', reveal, { once: true, passive: true });
 
+  // Mobile: tapping the logo lockup also triggers the reveal
+  if (splashLogo && window.matchMedia('(pointer: coarse)').matches) {
+    splashLogo.addEventListener('touchend', (e) => {
+      e.preventDefault(); // prevent the ghost click that follows touchend
+      reveal();
+    }, { once: true, passive: false });
+  }
+
 }());
 
 // ─────────────────────────────────────────
@@ -700,13 +708,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       'transform:translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')',
     ].join(';');
 
-    // Tagline sits below the logo, matching the real .splash-content gap (1.75 rem ≈ 28 px)
-    const taglineTop = r ? r.bottom + 28 : finalTop + targetWidth * 0.28 + 28;
+    // Tagline sits below the logo, matching the real .splash-content gap (1.75 rem ≈ 28 px).
+    // Top is set after DOM insertion so we can read the image's actual rendered height —
+    // using r.bottom directly caused occasional overlap when download.png's aspect ratio
+    // differed slightly from the original #splashLogo element's rendered height.
     const taglineEl  = document.createElement('p');
     taglineEl.textContent = 'Executive Creative Director & Creative Partner';
     taglineEl.style.cssText = [
       'position:absolute', 'left:50%',
-      'top:' + taglineTop + 'px',
       'transform:translateX(-50%)',
       'font-family:"Cormorant Garamond",Georgia,serif',
       'font-size:clamp(0.9rem,1.4vw,1.2rem)',
@@ -718,6 +727,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     splashEl.appendChild(imgEl);
     splashEl.appendChild(taglineEl);
     document.body.appendChild(splashEl);
+
+    // Position the tagline from the image's actual rendered bottom (not a precalculated estimate)
+    function placeTagline() {
+      const h = imgEl.offsetHeight;
+      taglineEl.style.top = (finalTop + (h > 0 ? h : targetWidth * 0.28) + 28) + 'px';
+    }
+    if (imgEl.complete && imgEl.naturalHeight > 0) {
+      placeTagline(); // already cached — offsetHeight is available synchronously
+    } else {
+      imgEl.addEventListener('load', placeTagline, { once: true });
+    }
 
     // ── FLIP: one frame to paint at the portfolio position, then animate ──
     // translate(0,0) scale(1) lands the image at (finalLeft, finalTop) —
