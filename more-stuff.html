@@ -112,9 +112,7 @@
 
     /* ── CONTENT SECTIONS ────────────────────── */
     .content-wrap {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 2rem var(--pad) 6rem;
+      padding: 2rem 0 6rem;
     }
 
     .story {
@@ -183,7 +181,7 @@
     .story-media-grid {
       margin-top: 2rem;
       display: grid;
-      gap: 3px;
+      gap: 0;
     }
 
     .story-media-grid.cols-2 {
@@ -192,6 +190,10 @@
 
     .story-media-grid.cols-3 {
       grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .story-media-grid.cols-4 {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
     .story-media-grid img {
@@ -232,8 +234,8 @@
     .closing a:hover { opacity: 0.5; }
 
     /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 500px) {
-      .story-media-grid.cols-3 {
+    @media (max-width: 600px) {
+      .story-media-grid.cols-4 {
         grid-template-columns: 1fr 1fr;
       }
     }
@@ -250,231 +252,85 @@
   <!-- Page header -->
   <header class="page-header">
     <h1 class="page-title">More Stuff</h1>
-    <p class="page-intro">A few other interesting things I've been involved in that are not directly connected to my day job.</p>
+    <p class="page-intro">As is customary on portfolio websites, here are a few other creative things I've been involved in beyond my day job.</p>
+    <p class="page-intro" style="margin-top:1.25rem;">Starting an 'agency within an agency' called Night Shop. Running a successful campaign to save the Ministry of Sound nightclub from closure and helping launch the charity C.A.L.M in London. Squatting all over Paris and getting picked up by It's Nice That and creating gold jewelry that was picked up by the national press. Starting an events company that's turned into a global wine business. Becoming Creative Director of a giant 3-meter-squared window on Hanbury Street and being the course director for The Kennedys; a 5-month creative crash course at W+K London, open to anyone trying to get into the creative industry.</p>
   </header>
 
-  <!-- Stories -->
+  <!-- Images -->
   <div class="content-wrap">
-
-    <!-- Night Shop -->
-    <div class="story">
-      <p class="story-label">Agency Within an Agency</p>
-      <h2>Night Shop</h2>
-      <p>At BMB, me and my creative partner started an 'agency within an agency' called Night Shop. We were young and foolish and thought it would be fun to work all night on our own briefs and pitch for our own pieces of business.</p>
-      <p>Amongst many other things, Night Shop ran a successful campaign to save the Ministry of Sound nightclub from closure and helped launch the charity C.A.L.M in London.</p>
-      <div class="story-media">
-        <img
-          src="Night%20Shop/Screen-Shot-2014-12-17-at-5.37.34-PM_1222.png"
-          alt="Night Shop — Save Our Club"
-          loading="lazy"
-        />
-        <img
-          src="Night%20Shop/Screen-Shot-2014-12-17-at-5.37.47-PM_1226.png"
-          alt="Night Shop"
-          loading="lazy"
-        />
-      </div>
+    <div class="story-media-grid cols-4">
+      <img src="Bubble%20Bros/BB%20images/IYFvTmBg.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/PHOTO-2026-03-17-11-05-24.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="WK%20WINDOWS/Spooky-bills-image-1-1200x959.jpg" alt="W+K Shop Window" loading="lazy" />
+      <img src="Squatting%20/nice%20that%20squatting.png" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/1500908337-prosecco-van.png" alt="Bubble Bros Prosecco Van" loading="lazy" />
+      <img src="The%20kennedys/9ba75094-866e-458d-a62c-4a2063dc6727.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/Ramadan_IG-02.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
+      <img src="CALM/CALM-Social-Banner.jpg" alt="C.A.L.M" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/Ja-D9sfQ.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/unnamed.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="WK%20WINDOWS/Ramadan_IG-01.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
+      <img src="Squatting%20/514986365c3e3c04830020ed.webp" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/09JSOiMg.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/0.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/664298_08558a67240b44faad230745dac4fe6f~mv2.avif" alt="W+K Shop Window" loading="lazy" />
+      <img src="HATTON/8d8b9065-9ead-4de3-b6b3-473dbba7e096-620x372.avif" alt="Hatton Garden Heist Necklace" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/BB_MAY_24_SALISBURY_RECIPES_BTS-8_web.webp" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/Screenshot%202023-03-29%20at%2014.30.26.png" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/Air%20Max%20Day%20Window%20230324.avif" alt="W+K Shop Window — Air Max Day" loading="lazy" />
+      <img src="Squatting%20/5149863a5c3e3c0483002128.webp" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/JmbUIQ3g.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/PHOTO-2026-03-22-09-27-10.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/Ramadan_IG-03a.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
+      <img src="Night%20Shop/Screen-Shot-2014-12-17-at-5.37.34-PM_1222.png" alt="Night Shop" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/M_M6USVg.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/PHOTO-2026-03-22-09-27-26.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/Ramadan_IG-04-1.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
+      <img src="CALM/KHB0232_bSilence_ASHER_448x240_o-1.jpg" alt="C.A.L.M campaign" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/Negroni_copy.webp" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/PHOTO-2026-03-22-09-28-44.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/Ramadan_IG-05-1.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
+      <img src="Squatting%20/514986415c3e3c08890004a4.webp" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/OdlD_S3Q.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/PHOTO-2026-03-22-09-30-25%202.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/Spooky-bills-image-2-1536x1233.jpg" alt="W+K Shop Window — Halloween" loading="lazy" />
+      <img src="HATTON/Screenshot%202026-03-19%20at%2009.07.45.png" alt="Hatton Garden Heist Necklace — press" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/SIZbzwpg.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/PHOTO-2026-03-22-09-30-25.jpg" alt="The Kennedys" loading="lazy" />
+      <img src="WK%20WINDOWS/unnamed.png" alt="W+K Shop Window — Air Max Day" loading="lazy" />
+      <img src="Squatting%20/514986485c3e3c7aec0069f3.webp" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/XggzH3bA.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="The%20kennedys/Screenshot%202026-03-22%20at%2009.30.47.png" alt="The Kennedys" loading="lazy" />
+      <img src="W%2BK%20windows/WINDOW-XMAS-WK.jpg" alt="W+K Shop Window — Christmas" loading="lazy" />
+      <img src="CALM/KHB0232_b_Silence_KAYVAN_448x240-2_o.jpg" alt="C.A.L.M campaign" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/pH3G-KuA.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Night%20Shop/Screen-Shot-2014-12-17-at-5.37.47-PM_1226.png" alt="Night Shop" loading="lazy" />
+      <img src="W%2BK%20windows/ff13b1d7-5954-4059-962e-d6d111db282d.jpg" alt="W+K Shop Window" loading="lazy" />
+      <img src="Squatting%20/514986495c3e3c0483002215.webp" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/rFvN0n4w.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="HATTON/Screenshot%202026-03-19%20at%2009.08.01.png" alt="Hatton Garden Heist Necklace — press" loading="lazy" />
+      <img src="W%2BK%20windows/ronny-hero.jpg" alt="W+K Shop Window" loading="lazy" />
+      <img src="Squatting%20/5149864c5c3e3c0483002216.webp" alt="Squatting in Paris" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/xBaK1oPQ.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/Screenshot%202024-02-20%20at%2016.46.47.png" alt="Bubble Bros" loading="lazy" />
+      <img src="W%2BK%20windows/window6.jpg" alt="W+K Shop Window" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/2F8ypOqw.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/-iKUsDvw.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/PXL_20250320_103120551.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/_Yk1FWrQ.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/PHOTO-2024-02-22-10-22-42.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/ndrw-iRg.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/7xni6IYA.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/straight_4_330835-168630080610432.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/pi_o7ugw.jpg" alt="Bubble Bros" loading="lazy" />
+      <img src="Bubble%20Bros/BB%20images/yA2RXMzw.jpg" alt="Bubble Bros" loading="lazy" />
     </div>
-
-    <!-- C.A.L.M -->
-    <div class="story">
-      <p class="story-label">Charity</p>
-      <h2>C.A.L.M</h2>
-      <p>The Campaign Against Living Miserably is a suicide prevention phone-line, support network and information hub that was founded in Merseyside in the early 2000s. Its primary function was to respond to the skyrocketing male suicide rates in that area of Liverpool at the time.</p>
-      <p>In 2010, C.A.L.M turned its attention to London. This is where I got involved. I helped launch the charity in the city and was responsible for a number of marketing campaigns and fundraising initiatives. I even ran the 2012 London Marathon in a pair of pants to raise money to keep the phone lines open.</p>
-      <p>Suicide is the single biggest killer of men under 45 in the UK. Almost 80% of all suicide is male and 1 in 4 men in this country have admitted to having suicidal thoughts. If you'd like to support C.A.L.M and the amazing work they now do for men all around the UK, please <a href="https://www.thecalmzone.net/" target="_blank" rel="noopener">visit their website</a>.</p>
-      <div class="story-media">
-        <img
-          src="CALM/CALM-Social-Banner.jpg"
-          alt="C.A.L.M"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-2">
-        <img
-          src="CALM/KHB0232_bSilence_ASHER_448x240_o-1.jpg"
-          alt="C.A.L.M campaign"
-          loading="lazy"
-        />
-        <img
-          src="CALM/KHB0232_b_Silence_KAYVAN_448x240-2_o.jpg"
-          alt="C.A.L.M campaign"
-          loading="lazy"
-        />
-      </div>
-    </div>
-
-    <!-- Squatting in Paris -->
-    <div class="story">
-      <p class="story-label">Photography</p>
-      <h2>Squatting in Paris</h2>
-      <p>I've always enjoyed photography and, particularly, simple ideas repeated ad nauseam. In 2013 I went to Paris to see if I could document myself squatting in as many iconic locations as possible. 'Squatting in Paris' was born.</p>
-      <div class="story-media">
-        <img
-          src="Squatting%20/nice%20that%20squatting.png"
-          alt="Squatting in Paris"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-3">
-        <img src="Squatting%20/514986365c3e3c04830020ed.webp" alt="Squatting in Paris" loading="lazy" />
-        <img src="Squatting%20/5149863a5c3e3c0483002128.webp" alt="Squatting in Paris" loading="lazy" />
-        <img src="Squatting%20/514986415c3e3c08890004a4.webp" alt="Squatting in Paris" loading="lazy" />
-        <img src="Squatting%20/514986485c3e3c7aec0069f3.webp" alt="Squatting in Paris" loading="lazy" />
-        <img src="Squatting%20/514986495c3e3c0483002215.webp" alt="Squatting in Paris" loading="lazy" />
-        <img src="Squatting%20/5149864c5c3e3c0483002216.webp" alt="Squatting in Paris" loading="lazy" />
-      </div>
-    </div>
-
-    <!-- Hatton Garden -->
-    <div class="story">
-      <p class="story-label">Jewellery</p>
-      <h2>Hatton Garden Heist Necklace</h2>
-      <p>Do you remember the Hatton Garden Heist? It captured the imagination of the British public — the large man-sized hole that was drilled into the vault was on the front cover of every newspaper and magazine for weeks.</p>
-      <p>I decided to go to Hatton Garden to have a poke around and found a jeweller who was willing to help me design and make a piece of gold jewellery to commemorate the robbery, and the aforementioned hole. My Hatton Heist Necklace ended up making the news and I had to lay low for a while.</p>
-      <div class="story-media">
-        <img
-          src="HATTON/8d8b9065-9ead-4de3-b6b3-473dbba7e096-620x372.avif"
-          alt="Hatton Garden Heist Necklace"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-2">
-        <img
-          src="HATTON/Screenshot%202026-03-19%20at%2009.07.45.png"
-          alt="Hatton Garden Heist Necklace — press"
-          loading="lazy"
-        />
-        <img
-          src="HATTON/Screenshot%202026-03-19%20at%2009.08.01.png"
-          alt="Hatton Garden Heist Necklace — press"
-          loading="lazy"
-        />
-      </div>
-    </div>
-
-    <!-- Bubble Bros -->
-    <div class="story">
-      <p class="story-label">Side Hustle</p>
-      <h2>Bubble Bros Ltd</h2>
-      <p>In 2015 I decided to start a side hustle. I opened a small mobile bar business called Bubble Bros Ltd. The business was responsible for the first ever 'Prosecco Van' and appeared in national newspapers and on Good Morning Britain.</p>
-      <p>Bubble Bros Ltd grew so quickly that, for a while, it became my main hustle. The business now has mobile bars as far afield as New York, Cayman Islands and UAE. We also have our own on-tap sparkling wine product that can be found in bars and restaurants all over the UK. Find out more at <a href="https://bubblebros.co.uk/" target="_blank" rel="noopener">bubblebros.co.uk</a>.</p>
-      <div class="story-media">
-        <img
-          src="Bubble%20Bros/1500908337-prosecco-van.png"
-          alt="Bubble Bros Prosecco Van"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-2">
-        <img
-          src="Bubble%20Bros/Screenshot%202024-02-20%20at%2016.46.47.png"
-          alt="Bubble Bros"
-          loading="lazy"
-        />
-        <img
-          src="Bubble%20Bros/PHOTO-2024-02-22-10-22-42.jpg"
-          alt="Bubble Bros"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-2">
-        <img src="Bubble%20Bros/BB%20images/-iKUsDvw.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/09JSOiMg.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/7xni6IYA.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/BB_MAY_24_SALISBURY_RECIPES_BTS-8_web.webp" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/IYFvTmBg.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/Ja-D9sfQ.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/JmbUIQ3g.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/M_M6USVg.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/Negroni_copy.webp" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/OdlD_S3Q.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/SIZbzwpg.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/XggzH3bA.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/pH3G-KuA.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/rFvN0n4w.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/straight_4_330835-168630080610432.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/xBaK1oPQ.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/2F8ypOqw.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/PXL_20250320_103120551.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/_Yk1FWrQ.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/ndrw-iRg.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/pi_o7ugw.jpg" alt="Bubble Bros" loading="lazy" />
-        <img src="Bubble%20Bros/BB%20images/yA2RXMzw.jpg" alt="Bubble Bros" loading="lazy" />
-      </div>
-    </div>
-
-    <!-- W+K Shop Window -->
-    <div class="story">
-      <p class="story-label">W+K London</p>
-      <h2>Shop Window</h2>
-      <p>W+K has the best shop window in London — a 3m × 3m piece of glass that looks out onto sunny Hanbury Street. The window has a footfall of thousands; scores of tourists, fashionistas and Jack the Ripper enthusiasts pass in front of it every single day.</p>
-      <p>As of August 2022, I've been the Creative Director of this window, working with an amazing team to bring brilliant installations to life — from giant Cost of Living utility bills for Halloween, to light installations for Ramadan, exploding balloons for Air Max day, and a working photocopier for Christmas.</p>
-      <div class="story-media">
-        <img
-          src="WK%20WINDOWS/Spooky-bills-image-1-1200x959.jpg"
-          alt="W+K Shop Window — Halloween Cost of Living bills"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-2">
-        <img src="WK%20WINDOWS/Ramadan_IG-01.jpg" alt="W+K Shop Window — Ramadan installation" loading="lazy" />
-        <img src="WK%20WINDOWS/unnamed.png" alt="W+K Shop Window — Air Max Day" loading="lazy" />
-        <img src="W%2BK%20windows/664298_08558a67240b44faad230745dac4fe6f~mv2.avif" alt="W+K Shop Window" loading="lazy" />
-        <img src="W%2BK%20windows/Air%20Max%20Day%20Window%20230324.avif" alt="W+K Shop Window — Air Max Day" loading="lazy" />
-        <img src="W%2BK%20windows/Ramadan_IG-02.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
-        <img src="W%2BK%20windows/Ramadan_IG-03a.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
-        <img src="W%2BK%20windows/Ramadan_IG-04-1.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
-        <img src="W%2BK%20windows/Ramadan_IG-05-1.jpg" alt="W+K Shop Window — Ramadan" loading="lazy" />
-        <img src="W%2BK%20windows/Spooky-bills-image-2-1536x1233.jpg" alt="W+K Shop Window — Halloween" loading="lazy" />
-        <img src="W%2BK%20windows/WINDOW-XMAS-WK.jpg" alt="W+K Shop Window — Christmas" loading="lazy" />
-        <img src="W%2BK%20windows/ff13b1d7-5954-4059-962e-d6d111db282d.jpg" alt="W+K Shop Window" loading="lazy" />
-        <img src="W%2BK%20windows/ronny-hero.jpg" alt="W+K Shop Window" loading="lazy" />
-        <img src="W%2BK%20windows/window6.jpg" alt="W+K Shop Window" loading="lazy" />
-      </div>
-    </div>
-
-    <!-- The Kennedys -->
-    <div class="story">
-      <p class="story-label">Education</p>
-      <h2>The Kennedys</h2>
-      <p>The Kennedys is a 5-month creative course open to anyone trying to get into the creative industry. The selection process is geared up to provide a doorway for people who wouldn't normally see creative advertising as an option — the course is not open to anyone who has attended an ad school or already worked in an advertising agency, so we get an incredible mix of brilliant young people from many different backgrounds.</p>
-      <p>We take these 8 innocent, malleable minds and turn them into sharp, well-oiled thinking machines. 2024 was my second year as Course Director. Find out more at <a href="https://thekennedyslondon.com/" target="_blank" rel="noopener">thekennedyslondon.com</a>.</p>
-      <div class="story-media">
-        <img
-          src="The%20kennedys/PHOTO-2026-03-17-11-05-24.jpg"
-          alt="The Kennedys 2024"
-          loading="lazy"
-        />
-      </div>
-      <div class="story-media-grid cols-2">
-        <img
-          src="The%20kennedys/9ba75094-866e-458d-a62c-4a2063dc6727.jpg"
-          alt="The Kennedys 2024"
-          loading="lazy"
-        />
-        <img
-          src="The%20kennedys/unnamed.jpg"
-          alt="The Kennedys 2024"
-          loading="lazy"
-        />
-        <img src="The%20kennedys/0.jpg" alt="The Kennedys 2024" loading="lazy" />
-        <img src="The%20kennedys/Screenshot%202023-03-29%20at%2014.30.26.png" alt="The Kennedys 2024" loading="lazy" />
-        <img src="The%20kennedys/PHOTO-2026-03-22-09-27-10.jpg" alt="The Kennedys" loading="lazy" />
-        <img src="The%20kennedys/PHOTO-2026-03-22-09-27-26.jpg" alt="The Kennedys" loading="lazy" />
-        <img src="The%20kennedys/PHOTO-2026-03-22-09-28-44.jpg" alt="The Kennedys" loading="lazy" />
-        <img src="The%20kennedys/PHOTO-2026-03-22-09-30-25%202.jpg" alt="The Kennedys" loading="lazy" />
-        <img src="The%20kennedys/PHOTO-2026-03-22-09-30-25.jpg" alt="The Kennedys" loading="lazy" />
-        <img src="The%20kennedys/Screenshot%202026-03-22%20at%2009.30.47.png" alt="The Kennedys" loading="lazy" />
-      </div>
-    </div>
-
   </div>
 
   <!-- Closing -->
   <div class="closing">
-    <p>If you'd like to hear any more of my boring stories, drop me a line.</p>
-    <a href="mailto:thejosephbruce@gmail.com">thejosephbruce@gmail.com</a>
+    <p>If you'd like to hear any more of my boring stories, click contact. I have many.</p>
+    <a href="mailto:thejosephbruce@gmail.com">Contact</a>
   </div>
 
   <script>

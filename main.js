@@ -713,7 +713,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     // using r.bottom directly caused occasional overlap when download.png's aspect ratio
     // differed slightly from the original #splashLogo element's rendered height.
     const taglineEl  = document.createElement('p');
-    taglineEl.textContent = 'Executive Creative Director & Creative Partner';
+    taglineEl.textContent = 'Executive Creative Director.';
     taglineEl.style.cssText = [
       'position:absolute', 'left:50%',
       'transform:translateX(-50%)',
