@@ -442,6 +442,12 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (!inEnd || !endView) return;
     inEnd = false;
     endView.classList.remove('is-visible');
+    // On mobile: reset about column scroll so the user can swipe down to exit
+    if (window.innerWidth <= 768 && aboutCol) {
+      aboutCol.scrollTop = 0;
+      aboutColAtBottom = false;
+      endAtBottomSince = null;
+    }
   }
 
   function transitionToAbout() {
@@ -695,10 +701,14 @@ revealEls.forEach(el => revealObserver.observe(el));
     // Require 600ms dwell before allowing forward navigation
     if (inAbout && dy < -40) {
       if (!inAboutSince || Date.now() - inAboutSince < 600) return;
-      const onRightSide = aboutTouchX > window.innerWidth * 0.55;
-      if (onRightSide) {
-        transitionToEnd();
-        return;
+      // Right-side shortcut only on desktop — on mobile the layout is single-column
+      // so touching the right half of the screen is still inside the about content
+      if (window.innerWidth > 768) {
+        const onRightSide = aboutTouchX > window.innerWidth * 0.55;
+        if (onRightSide) {
+          transitionToEnd();
+          return;
+        }
       }
       checkAboutColOverflow();
       if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 300) {
@@ -708,7 +718,10 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
 
     // About view: swipe down → back to portfolio
+    // On mobile: only dismiss if the about content is scrolled back to the very top,
+    // so the user can freely scroll up through the about text without accidentally exiting
     if (inAbout && dy > 40) {
+      if (window.innerWidth <= 768 && aboutCol && aboutCol.scrollTop > 5) return;
       transitionFromAbout();
       return;
     }

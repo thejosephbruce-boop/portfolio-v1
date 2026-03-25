@@ -454,6 +454,16 @@ ul {
   .about-col {
     border-right: none;
   }
+
+  /* End view: scale logo and icons for small screens */
+  .end-logo {
+    width: clamp(200px, 72vw, 420px);
+  }
+
+  .end-icon {
+    width: clamp(44px, 10vw, 64px);
+    height: clamp(44px, 10vw, 64px);
+  }
 }
 
 @media (max-width: 600px) {
