@@ -529,6 +529,11 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (!inAbout) return;
     inAbout = false;
 
+    // Reset about col scroll so swipe-down-to-dismiss works on next visit
+    if (aboutCol) aboutCol.scrollTop = 0;
+    aboutColAtBottom = false;
+    endAtBottomSince = null;
+
     // Close end view if it was open
     if (inEnd) transitionFromEnd();
 
@@ -698,20 +703,19 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (inEnd) return;
 
     // About view: swipe up → end view
-    // Require 600ms dwell before allowing forward navigation
+    // Mobile uses shorter dwell guards — native scroll reaches the bottom in one
+    // gesture and users expect the next swipe to advance, not a separate action.
     if (inAbout && dy < -40) {
-      if (!inAboutSince || Date.now() - inAboutSince < 600) return;
+      const timeGuard = window.innerWidth <= 768 ? 300 : 600;
+      if (!inAboutSince || Date.now() - inAboutSince < timeGuard) return;
       // Right-side shortcut only on desktop — on mobile the layout is single-column
-      // so touching the right half of the screen is still inside the about content
       if (window.innerWidth > 768) {
         const onRightSide = aboutTouchX > window.innerWidth * 0.55;
-        if (onRightSide) {
-          transitionToEnd();
-          return;
-        }
+        if (onRightSide) { transitionToEnd(); return; }
       }
       checkAboutColOverflow();
-      if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 300) {
+      const bottomDwell = window.innerWidth <= 768 ? 0 : 300;
+      if (aboutColAtBottom && endAtBottomSince !== null && Date.now() - endAtBottomSince >= bottomDwell) {
         transitionToEnd();
       }
       return;
