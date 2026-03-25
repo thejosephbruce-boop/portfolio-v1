@@ -409,14 +409,45 @@ revealEls.forEach(el => revealObserver.observe(el));
 
   const FULL_FACE = "Full face.jpg";
 
-  let inAbout       = false;
-  let faceExpanded  = false;
-  let atBottomSince = null;
-  let aboutTouchY   = 0;
+  const END_IMAGES = [
+    "site end headers/end image 4.png",
+    "site end headers/end image 5.png",
+    "site end headers/end image 6.png",
+    "site end headers/end image 7.webp",
+  ];
+
+  const endView = document.getElementById('endView');
+
+  let inAbout          = false;
+  let inAboutSince     = null;
+  let inEnd            = false;
+  let faceExpanded     = false;
+  let atBottomSince    = null;
+  let aboutTouchY      = 0;
+  let aboutColAtBottom = false;
+  let endAtBottomSince = null;
+
+  function pickEndImage() {
+    return END_IMAGES[Math.floor(Math.random() * END_IMAGES.length)];
+  }
+
+  function transitionToEnd() {
+    if (inEnd || !endView) return;
+    inEnd = true;
+    endView.style.backgroundImage = "url('" + pickEndImage() + "')";
+    endView.classList.add('is-visible');
+  }
+
+  function transitionFromEnd() {
+    if (!inEnd || !endView) return;
+    inEnd = false;
+    endView.classList.remove('is-visible');
+  }
 
   function transitionToAbout() {
     if (inAbout) return;
     inAbout = true;
+    inAboutSince = Date.now();
     atBottomSince = null;
     faceExpanded = false;
 
@@ -478,12 +509,22 @@ revealEls.forEach(el => revealObserver.observe(el));
     setTimeout(() => {
       aboutCol.style.transition = 'opacity 0.5s ease';
       aboutCol.style.opacity    = '1';
+      // Reset end-view tracking and check if content fits without scrolling
+      endAtBottomSince = null;
+      aboutColAtBottom = false;
+      if (aboutCol.scrollHeight <= aboutCol.clientHeight + 5) {
+        aboutColAtBottom = true;
+        endAtBottomSince = Date.now();
+      }
     }, 400);
   }
 
   function transitionFromAbout() {
     if (!inAbout) return;
     inAbout = false;
+
+    // Close end view if it was open
+    if (inEnd) transitionFromEnd();
 
     // Collapse full-face full-bleed if it was open
     if (faceExpanded) collapseFace();
@@ -525,6 +566,28 @@ revealEls.forEach(el => revealObserver.observe(el));
         window.__restoreCurrentThumb();
       }
     }, 800);
+  }
+
+  // If aboutCol content fits without scrolling, treat as already at bottom
+  function checkAboutColOverflow() {
+    if (!aboutCol) return;
+    if (aboutCol.scrollHeight <= aboutCol.clientHeight + 5) {
+      aboutColAtBottom = true;
+      if (endAtBottomSince === null) endAtBottomSince = Date.now();
+    }
+  }
+
+  // Track when aboutCol is scrolled to its bottom (triggers end view)
+  if (aboutCol) {
+    aboutCol.addEventListener('scroll', () => {
+      const atBottom = aboutCol.scrollTop + aboutCol.clientHeight >= aboutCol.scrollHeight - 5;
+      if (atBottom && endAtBottomSince === null) {
+        endAtBottomSince = Date.now();
+      } else if (!atBottom) {
+        endAtBottomSince = null;
+      }
+      aboutColAtBottom = atBottom;
+    }, { passive: true });
   }
 
   // Full Face / Less Face button toggle
@@ -569,35 +632,93 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
   }, { passive: true });
 
-  // Desktop: wheel down at bottom (after 300ms dwell) → about
-  //          wheel up while in about → back to portfolio
+  // Desktop: wheel down at bottom → about → end view
+  //          wheel up: end view → about → portfolio
   window.addEventListener('wheel', (e) => {
+    // End view: scroll up → back to about
+    if (inEnd && e.deltaY < 0) {
+      transitionFromEnd();
+      return;
+    }
+    if (inEnd) return;
+
+    // About view: scroll down → end view
+    // Require 600ms dwell in about before allowing forward navigation
+    // (prevents scroll momentum from skipping the about view entirely)
+    if (inAbout && e.deltaY > 0) {
+      if (!inAboutSince || Date.now() - inAboutSince < 600) return;
+      const onRightSide = e.clientX > window.innerWidth * 0.55;
+      if (onRightSide) {
+        transitionToEnd();
+        return;
+      }
+      checkAboutColOverflow();
+      if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 300) {
+        transitionToEnd();
+      }
+      return;
+    }
+
+    // About view: scroll up → back to portfolio
+    if (inAbout && e.deltaY < 0) {
+      transitionFromAbout();
+      return;
+    }
+
+    // Portfolio: scroll down at bottom → about view
     if (!inAbout && e.deltaY > 0) {
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
       if (atBottom && atBottomSince && Date.now() - atBottomSince > 300) {
         transitionToAbout();
       }
     }
-    if (inAbout && e.deltaY < 0) {
-      transitionFromAbout();
-    }
   }, { passive: true });
 
   // Mobile: swipe up at bottom → about; swipe down in about → back
+  let aboutTouchX = 0;
   window.addEventListener('touchstart', (e) => {
     aboutTouchY = e.touches[0].clientY;
+    aboutTouchX = e.touches[0].clientX;
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
     const dy = e.touches[0].clientY - aboutTouchY;
+
+    // End view: swipe down → back to about
+    if (inEnd && dy > 40) {
+      transitionFromEnd();
+      return;
+    }
+    if (inEnd) return;
+
+    // About view: swipe up → end view
+    // Require 600ms dwell before allowing forward navigation
+    if (inAbout && dy < -40) {
+      if (!inAboutSince || Date.now() - inAboutSince < 600) return;
+      const onRightSide = aboutTouchX > window.innerWidth * 0.55;
+      if (onRightSide) {
+        transitionToEnd();
+        return;
+      }
+      checkAboutColOverflow();
+      if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 300) {
+        transitionToEnd();
+      }
+      return;
+    }
+
+    // About view: swipe down → back to portfolio
+    if (inAbout && dy > 40) {
+      transitionFromAbout();
+      return;
+    }
+
+    // Portfolio: swipe up at bottom → about view
     if (!inAbout) {
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
       if (atBottom && atBottomSince && Date.now() - atBottomSince > 300 && dy < -40) {
         transitionToAbout();
       }
-    }
-    if (inAbout && dy > 40) {
-      transitionFromAbout();
     }
   }, { passive: true });
 
