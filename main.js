@@ -794,11 +794,17 @@ revealEls.forEach(el => revealObserver.observe(el));
       return;
     }
 
-    // Portfolio: swipe up at bottom → about view
+    // Portfolio: swipe up at bottom
+    // Mobile → skip about view and go straight to end view
+    // Desktop → go to about view first
     if (!inAbout) {
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
       if (atBottom && atBottomSince && Date.now() - atBottomSince > 300 && dy < -40) {
-        transitionToAbout();
+        if (window.innerWidth <= 768) {
+          transitionToEnd();
+        } else {
+          transitionToAbout();
+        }
       }
     }
   }, { passive: true });
