@@ -415,6 +415,7 @@ revealEls.forEach(el => revealObserver.observe(el));
   const thumbAEl    = document.getElementById('logoThumbA');
   const thumbBEl    = document.getElementById('logoThumbB');
   const fullFaceBtn = document.getElementById('fullFaceBtn');
+  const contactBtn  = document.getElementById('contactBtn');
   if (!logoPanelEl || !aboutView) return;
 
   const FULL_FACE = "Full face.jpg";
@@ -693,6 +694,15 @@ revealEls.forEach(el => revealObserver.observe(el));
     fullBleedEl.addEventListener('click', () => {
       if (!inAbout || !faceExpanded) return;
       collapseFace();
+    });
+  }
+
+  // Contact button — jump straight to the end view
+  if (contactBtn) {
+    contactBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!inAbout) return;
+      transitionToEnd();
     });
   }
 
