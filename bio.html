@@ -73,6 +73,20 @@
       transition: opacity 0.2s;
     }
     .nav-label:hover { opacity: 1; }
+    .nav-back {
+      font-size: 0.7rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.55;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 1; }
+    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
     .nav-forward {
       font-size: 0.7rem;
       letter-spacing: 0.09em;
@@ -240,7 +254,8 @@
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
-<a href="index.html#projects" class="nav-forward">Projects</a>
+    <a href="index.html#about" class="nav-back">About</a>
+    <a href="index.html#projects" class="nav-forward">Projects</a>
   </nav>
 
   <!-- Page header -->
