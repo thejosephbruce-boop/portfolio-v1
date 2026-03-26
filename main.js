@@ -240,6 +240,8 @@ window.scrollTo(0, 0);
   projects.forEach(p => {
     p.addEventListener('mouseenter', () => {
       activateProject(p);
+      // About entry: always show face through the mask — never update the full-bleed
+      if (p.id === 'aboutMobileLink') return;
       if (logoPanel && logoPanel.classList.contains('is-expanded') && p.dataset.thumb) {
         const newBg  = "url('" + p.dataset.thumb + "')";
         const newPos = p.dataset.thumbPosition || 'center';
@@ -282,6 +284,14 @@ window.scrollTo(0, 0);
         const position = p.dataset.thumbPosition || 'center';
         const href     = link.getAttribute('href');
         if (!url) return; // no thumb → let browser handle naturally
+
+        // About entry — trigger about view, never expand to full-bleed
+        if (p.id === 'aboutMobileLink') {
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof window.__triggerAbout === 'function') window.__triggerAbout();
+          return;
+        }
 
         // ── Mobile: double-tap to navigate ──────────────────────────
         if (window.innerWidth <= 768) {
@@ -500,6 +510,9 @@ revealEls.forEach(el => revealObserver.observe(el));
       endAtBottomSince = null;
     }
   }
+
+  // Expose so the thumbnail IIFE can trigger the about view from the project list
+  window.__triggerAbout = function () { transitionToAbout(); };
 
   function transitionToAbout() {
     if (inAbout) return;
@@ -789,15 +802,6 @@ revealEls.forEach(el => revealObserver.observe(el));
       }
     }
   }, { passive: true });
-
-  // Mobile about link in project list — tap to open about view
-  const aboutMobileLink = document.getElementById('aboutMobileLink');
-  if (aboutMobileLink) {
-    aboutMobileLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      transitionToAbout();
-    });
-  }
 
   // If arriving via index.html#about (e.g. from a project page "About" link), trigger immediately
   if (window.__gotoAbout) {
