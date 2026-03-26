@@ -435,13 +435,64 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (inEnd || !endView) return;
     inEnd = true;
     endView.style.backgroundImage = "url('" + pickEndImage() + "')";
+
+    // ── FLIP: slide the end logo from the about-logo's screen position ──
+    // into its natural centred position, so it feels like the same lockup
+    // travelling into the full-bleed frame rather than a new one appearing.
+    const aboutLogoEl = document.getElementById('logoReveal');
+    const endLogoEl   = endView.querySelector('.end-logo');
+    const endIconsEl  = endView.querySelector('.end-icons');
+
+    if (aboutLogoEl && endLogoEl) {
+      const from   = aboutLogoEl.getBoundingClientRect();
+      const logoW  = endLogoEl.offsetWidth || from.width;
+      const dx     = (from.left + from.width  / 2) - (window.innerWidth  / 2);
+      const dy     = (from.top  + from.height / 2) - (window.innerHeight / 2);
+      const sc     = from.width / logoW;
+
+      // Place end logo at the about logo's current screen position (no transition yet)
+      endLogoEl.style.transition = 'none';
+      endLogoEl.style.transform  = 'translate(' + dx + 'px,' + dy + 'px) scale(' + sc + ')';
+
+      // Keep icons hidden until the logo has settled
+      if (endIconsEl) { endIconsEl.style.transition = 'none'; endIconsEl.style.opacity = '0'; }
+    }
+
+    // Fade in the full-bleed background
     endView.classList.add('is-visible');
+
+    // One rAF later: animate the logo to its centred resting position
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (endLogoEl) {
+          endLogoEl.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
+          endLogoEl.style.transform  = '';
+        }
+      });
+    });
+
+    // Icons fade in once the logo has arrived
+    setTimeout(() => {
+      if (endIconsEl) {
+        endIconsEl.style.transition = 'opacity 0.4s ease';
+        endIconsEl.style.opacity    = '1';
+      }
+    }, 700);
   }
 
   function transitionFromEnd() {
     if (!inEnd || !endView) return;
     inEnd = false;
     endView.classList.remove('is-visible');
+
+    // Reset logo/icons so the FLIP is clean on the next visit
+    const endLogoEl  = endView.querySelector('.end-logo');
+    const endIconsEl = endView.querySelector('.end-icons');
+    setTimeout(() => {
+      if (endLogoEl)  { endLogoEl.style.transition  = ''; endLogoEl.style.transform  = ''; }
+      if (endIconsEl) { endIconsEl.style.transition = ''; endIconsEl.style.opacity   = ''; }
+    }, 700);
+
     // On mobile: reset about column scroll so the user can swipe down to exit
     if (window.innerWidth <= 768 && aboutCol) {
       aboutCol.scrollTop = 0;
