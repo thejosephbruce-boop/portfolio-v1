@@ -732,11 +732,6 @@ revealEls.forEach(el => revealObserver.observe(el));
     // (prevents scroll momentum from skipping the about view entirely)
     if (inAbout && e.deltaY > 0) {
       if (!inAboutSince || Date.now() - inAboutSince < 600) return;
-      const onRightSide = e.clientX > window.innerWidth * 0.55;
-      if (onRightSide) {
-        transitionToEnd();
-        return;
-      }
       checkAboutColOverflow();
       if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 300) {
         transitionToEnd();
@@ -782,11 +777,6 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (inAbout && dy < -40) {
       const timeGuard = window.innerWidth <= 768 ? 300 : 600;
       if (!inAboutSince || Date.now() - inAboutSince < timeGuard) return;
-      // Right-side shortcut only on desktop — on mobile the layout is single-column
-      if (window.innerWidth > 768) {
-        const onRightSide = aboutTouchX > window.innerWidth * 0.55;
-        if (onRightSide) { transitionToEnd(); return; }
-      }
       checkAboutColOverflow();
       const bottomDwell = window.innerWidth <= 768 ? 0 : 300;
       if (aboutColAtBottom && endAtBottomSince !== null && Date.now() - endAtBottomSince >= bottomDwell) {
