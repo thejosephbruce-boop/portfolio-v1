@@ -932,15 +932,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       imgEl.addEventListener('load', placeTagline, { once: true });
     }
 
-    // ── FLIP: one frame to paint at the portfolio position, then animate ──
-    // translate(0,0) scale(1) lands the image at (finalLeft, finalTop) —
-    // the exact pixel coordinates of the original splash logo.
+    // ── FLIP: force a reflow to commit the initial transform to the compositor,
+    // then animate on the very next frame — avoids the 2-frame "stuck" flash
+    // that the old double-rAF produced before the animation could begin.
+    splashEl.getBoundingClientRect(); // triggers reflow, commits initial state
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        imgEl.style.transition  = 'transform 0.85s cubic-bezier(0.76,0,0.24,1)';
-        imgEl.style.transform   = 'translate(0,0) scale(1)';
-        taglineEl.style.opacity = '1';
-      });
+      imgEl.style.transition  = 'transform 0.85s cubic-bezier(0.76,0,0.24,1)';
+      imgEl.style.transform   = 'translate(0,0) scale(1)';
+      taglineEl.style.opacity = '1';
     });
 
     // Collapse full-bleed / thumbnails only once the splash background has
