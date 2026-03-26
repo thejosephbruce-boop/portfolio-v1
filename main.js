@@ -117,6 +117,12 @@ window.scrollTo(0, 0);
     }, { once: true, passive: false });
   }
 
+  // Desktop: clicking the logo lockup also triggers the reveal
+  if (splashLogo && window.matchMedia('(pointer: fine)').matches) {
+    splashLogo.style.cursor = 'pointer';
+    splashLogo.addEventListener('click', reveal, { once: true });
+  }
+
 }());
 
 // ─────────────────────────────────────────
@@ -437,6 +443,7 @@ revealEls.forEach(el => revealObserver.observe(el));
   let aboutTouchY      = 0;
   let aboutColAtBottom = false;
   let endAtBottomSince = null;
+  let bottomExcess     = 0;   // accumulated wheel delta while at page bottom (hard-scroll gate)
 
   function pickEndImage() {
     return END_IMAGES[Math.floor(Math.random() * END_IMAGES.length)];
@@ -733,7 +740,7 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (inAbout && e.deltaY > 0) {
       if (!inAboutSince || Date.now() - inAboutSince < 600) return;
       checkAboutColOverflow();
-      if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 300) {
+      if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 500) {
         transitionToEnd();
       }
       return;
@@ -741,17 +748,30 @@ revealEls.forEach(el => revealObserver.observe(el));
 
     // About view: scroll up → back to portfolio
     if (inAbout && e.deltaY < 0) {
+      bottomExcess = 0;
       transitionFromAbout();
       return;
     }
 
-    // Portfolio: scroll down at bottom → about view
+    // Portfolio: hard scroll down at bottom → about view
+    // Accumulate excess wheel delta while already at the bottom — only advance
+    // once the user has deliberately scrolled past the end (>150 px total).
+    // This gives a clear soft landing before the page transitions.
     if (!inAbout && e.deltaY > 0) {
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
-      if (atBottom && atBottomSince && Date.now() - atBottomSince > 300) {
-        transitionToAbout();
+      if (atBottom && atBottomSince) {
+        bottomExcess += e.deltaY;
+        if (bottomExcess > 150 && Date.now() - atBottomSince > 300) {
+          transitionToAbout();
+          bottomExcess = 0;
+        }
+      } else {
+        bottomExcess = 0;
       }
     }
+
+    // Reset excess if the user scrolls back up through the list
+    if (!inAbout && e.deltaY < 0) bottomExcess = 0;
   }, { passive: true });
 
   // Mobile: swipe up at bottom → about; swipe down in about → back
@@ -794,12 +814,14 @@ revealEls.forEach(el => revealObserver.observe(el));
       return;
     }
 
-    // Portfolio: swipe up at bottom
+    // Portfolio: hard swipe up at bottom
     // Mobile → skip about view and go straight to end view
     // Desktop → go to about view first
+    // Require a deliberate swipe (-80 px) after dwelling at the bottom (600 ms)
+    // so a fast scroll reaching the bottom doesn't immediately advance.
     if (!inAbout) {
       const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
-      if (atBottom && atBottomSince && Date.now() - atBottomSince > 300 && dy < -40) {
+      if (atBottom && atBottomSince && Date.now() - atBottomSince > 600 && dy < -80) {
         if (window.innerWidth <= 768) {
           transitionToEnd();
         } else {
