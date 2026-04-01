@@ -444,6 +444,7 @@ revealEls.forEach(el => revealObserver.observe(el));
   let aboutColAtBottom = false;
   let endAtBottomSince = null;
   let bottomExcess     = 0;   // accumulated wheel delta while at page bottom (hard-scroll gate)
+  let endDismissedAt   = null; // guard: ignore scroll-up-from-about for a short time after leaving end
 
   function pickEndImage() {
     return END_IMAGES[Math.floor(Math.random() * END_IMAGES.length)];
@@ -730,6 +731,8 @@ revealEls.forEach(el => revealObserver.observe(el));
     // End view: scroll up → back to about
     if (inEnd && e.deltaY < 0) {
       transitionFromEnd();
+      if (!inAbout) transitionToAbout();
+      endDismissedAt = Date.now();
       return;
     }
     if (inEnd) return;
@@ -747,7 +750,9 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
 
     // About view: scroll up → back to portfolio
+    // Guard: if we just came back from the end view, ignore scroll momentum
     if (inAbout && e.deltaY < 0) {
+      if (endDismissedAt && Date.now() - endDismissedAt < 600) return;
       bottomExcess = 0;
       transitionFromAbout();
       return;
@@ -787,6 +792,8 @@ revealEls.forEach(el => revealObserver.observe(el));
     // End view: swipe down → back to about
     if (inEnd && dy > 40) {
       transitionFromEnd();
+      if (!inAbout) transitionToAbout();
+      endDismissedAt = Date.now();
       return;
     }
     if (inEnd) return;
@@ -810,6 +817,7 @@ revealEls.forEach(el => revealObserver.observe(el));
     // so the user can freely scroll up through the about text without accidentally exiting
     if (inAbout && dy > 40) {
       if (window.innerWidth <= 768 && aboutCol && aboutCol.scrollTop > 5) return;
+      if (endDismissedAt && Date.now() - endDismissedAt < 600) return;
       transitionFromAbout();
       return;
     }
@@ -982,6 +990,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     // Reload once the animation has fully settled — delay is generous so the
     // logo and tagline are completely visible before the real splash takes over
     setTimeout(() => { window.location.reload(); }, 1600);
+  }
+
+  // End-view logo: click → return to splash
+  const endLogoClickEl = document.querySelector('.end-logo');
+  if (endLogoClickEl) {
+    endLogoClickEl.style.cursor = 'pointer';
+    endLogoClickEl.addEventListener('click', returnToSplash);
   }
 
   // Desktop: wheel-up at the very top, but only after momentum from the first
