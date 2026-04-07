@@ -217,16 +217,6 @@ ul {
   opacity: 1 !important;
 }
 
-/* About link visible on mobile only */
-.project--about-link {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .project--about-link {
-    display: block;
-  }
-}
 
 /* ─────────────────────────────────────────
    Section Header
@@ -636,15 +626,17 @@ ul {
 .about-bio-link {
   display: block;
   padding: 2rem var(--pad) 1.5rem;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   color: inherit;
   text-decoration: none;
+  opacity: 0.28;
   transition: opacity 0.3s ease;
 }
 
 .about-bio-link:hover {
-  opacity: 0.6;
+  opacity: 1;
 }
 
 /* ─────────────────────────────────────────

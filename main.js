@@ -37,6 +37,16 @@ window.scrollTo(0, 0);
     return;
   }
 
+  // Coming from a project page "Contact" link — skip splash and go straight to end/contact view
+  if (window.location.hash === '#contact') {
+    splash.remove();
+    logoReveal.classList.add('is-visible');
+    if (projectList) projectList.classList.add('is-visible');
+    history.replaceState(null, '', window.location.pathname);
+    window.__gotoContact = true;
+    return;
+  }
+
   let triggered = false;
 
   function reveal() {
@@ -246,8 +256,8 @@ window.scrollTo(0, 0);
   projects.forEach(p => {
     p.addEventListener('mouseenter', () => {
       activateProject(p);
-      // About entry: always show face through the mask — never update the full-bleed
-      if (p.id === 'aboutMobileLink') return;
+      // About / Contact entries: show thumbnail through mask only — never update the full-bleed
+      if (p.id === 'aboutMobileLink' || p.id === 'contactListBtn') return;
       if (logoPanel && logoPanel.classList.contains('is-expanded') && p.dataset.thumb) {
         const newBg  = "url('" + p.dataset.thumb + "')";
         const newPos = p.dataset.thumbPosition || 'center';
@@ -296,6 +306,14 @@ window.scrollTo(0, 0);
           e.preventDefault();
           e.stopPropagation();
           if (typeof window.__triggerAbout === 'function') window.__triggerAbout();
+          return;
+        }
+
+        // Contact entry — jump straight to the end/contact view
+        if (p.id === 'contactListBtn') {
+          e.preventDefault();
+          e.stopPropagation();
+          if (typeof window.__triggerEnd === 'function') window.__triggerEnd();
           return;
         }
 
@@ -420,8 +438,9 @@ revealEls.forEach(el => revealObserver.observe(el));
   const viewBtnEl   = document.getElementById('viewProjectBtn');
   const thumbAEl    = document.getElementById('logoThumbA');
   const thumbBEl    = document.getElementById('logoThumbB');
-  const fullFaceBtn = document.getElementById('fullFaceBtn');
-  const contactBtn  = document.getElementById('contactBtn');
+  const fullFaceBtn       = document.getElementById('fullFaceBtn');
+  const backToProjectsBtn = document.getElementById('backToProjectsBtn');
+  const contactBtn        = document.getElementById('contactBtn');
   if (!logoPanelEl || !aboutView) return;
 
   const FULL_FACE = "Full face.jpg";
@@ -520,8 +539,9 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
   }
 
-  // Expose so the thumbnail IIFE can trigger the about view from the project list
+  // Expose so the thumbnail IIFE can trigger the about/end views from the project list
   window.__triggerAbout = function () { transitionToAbout(); };
+  window.__triggerEnd   = function () { transitionToEnd();   };
 
   function transitionToAbout() {
     if (inAbout) return;
@@ -705,6 +725,15 @@ revealEls.forEach(el => revealObserver.observe(el));
     });
   }
 
+  // Back To Projects button — return to the project list
+  if (backToProjectsBtn) {
+    backToProjectsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!inAbout) return;
+      transitionFromAbout();
+    });
+  }
+
   // Contact button — jump straight to the end view
   if (contactBtn) {
     contactBtn.addEventListener('click', (e) => {
@@ -843,6 +872,12 @@ revealEls.forEach(el => revealObserver.observe(el));
   if (window.__gotoAbout) {
     window.__gotoAbout = false;
     requestAnimationFrame(() => requestAnimationFrame(() => transitionToAbout()));
+  }
+
+  // If arriving via index.html#contact (e.g. from a project page "Contact" link), go straight to end view
+  if (window.__gotoContact) {
+    window.__gotoContact = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => transitionToEnd()));
   }
 
 }());

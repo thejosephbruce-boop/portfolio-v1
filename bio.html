@@ -77,7 +77,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--ink);
+      color: var(--muted);
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -91,7 +91,7 @@
       font-size: 0.7rem;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--ink);
+      color: var(--muted);
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -168,77 +168,31 @@
       opacity: 0.6;
     }
 
-    /* ── CONTACT SECTION ─────────────────────── */
-    .contact-section {
-      border-top: 1px solid var(--border);
-      padding: 3.5rem 0 0;
-    }
-
-    .contact-section .bio-label {
+    /* ── BOTTOM NAV LINKS ────────────────────── */
+    .bio-nav-link {
       display: block;
-      margin-bottom: 2rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid var(--border);
+      color: var(--ink);
+      text-decoration: none;
+      opacity: 0.28;
+      transition: opacity 0.3s ease;
     }
 
-    .contact-email {
-      display: inline-block;
+    .bio-nav-link:last-child {
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+
+    .bio-nav-link:hover {
+      opacity: 1;
+    }
+
+    .bio-nav-title {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.8rem, 4vw, 3.5rem);
-      font-weight: 300;
-      color: var(--ink);
-      text-decoration: none;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-
-    .contact-email::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--ink);
-      transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .contact-email:hover::after {
-      width: 100%;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 2.5rem;
-      padding-bottom: 3.5rem;
-    }
-
-    .contact-link {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      position: relative;
-      transition: color 0.2s;
-    }
-
-    .contact-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--ink);
-      transition: width 0.3s ease;
-    }
-
-    .contact-link:hover {
-      color: var(--ink);
-    }
-
-    .contact-link:hover::after {
-      width: 100%;
+      font-size: clamp(1.3rem, 3vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.15;
     }
 
     /* ── RESPONSIVE ──────────────────────────── */
@@ -269,9 +223,9 @@
     <div class="bio-section">
       <span class="bio-label">Beyond</span>
       <div class="bio-content">
-        <p>Joe joined Beyond as Executive Creative Director in summer 2024 and has since made Creative Partner across the wider holding company (previously The Beyond Collective). A role that has seen him build a new creative culture within his department and across the wider business too.</p>
-        <p>In May 2025, Joe helped with the <strong>restructuring, redesigning and relaunching</strong> of Beyond, taking it from four separate companies to one unified agency brand and rebuilding, <strong>bolstering the creative department in the process.</strong></p>
-        <p>In his short time at the agency, Joe brought in new clients like Find My Past, Mizkan Group and Sprite and Tabasco, as well as overseeing global projects for Yamaha Music and <strong>Jam Shed wines</strong> and creating local campaigns for Back Market, ARUK and Itsu.</p>
+        <p>Joe joined Beyond as Executive Creative Director in summer 2024 and has since made Creative Partner across the wider holding company (previously The Beyond Collective). A role that has seen him build a new creative culture in the business and improve its profile within the creative industry.</p>
+        <p>In May 2025, Joe helped with the restructuring, redesigning and relaunching of Beyond, taking it from four separate companies to one unified agency brand.</p>
+        <p>In his short time at the agency, Joe brought in new, award winning, creative talent and attracted new clients Find My Past, Mizkan Group and Sprite and Tabasco, as well as overseeing global projects for Yamaha Music and Jam Shed wines and creating local campaigns for Back Market, ARUK and Itsu.</p>
       </div>
     </div>
 
@@ -279,32 +233,37 @@
       <span class="bio-label">W+K London</span>
       <div class="bio-content">
         <p>Before joining Beyond, Joe was Creative Director on the Nike account at Wieden + Kennedy London. A position that saw him running big campaigns and establishing new creative platforms in both local and global markets.</p>
-        <p>Before his time on Nike, Joe and his creative partner Albert Pukies looked after accounts like F1, Sainsbury's and Camden Town Brewery.</p>
-        <p>Alongside his day-to-day responsibilities at W+K, Joe was Creative Director for the <strong>Hanbury St window</strong>. He also served as the Course Director for <strong>The Kennedys</strong>; a 5-month program dedicated to nurturing a steady stream of new, young creative people into the ad industry.</p>
+        <p>Before his time on Nike, Joe and his creative partner Albert Pukies, created a big Christmas campaign for Sainsbury's supermarkets, won the Converse, Camden Town Brewery and More Than accounts for the agency and built multiple campaigns for Formula 1 and Bud Light. Joe was also responsible for the agency's first creative work with McDonalds Canada.</p>
+        <p>Alongside his day-to-day responsibilities at W+K, Joe was Creative Director for the Hanbury St window. He also served as the Course Director for The Kennedys; a 5-month program dedicated to nurturing a steady stream of new, young creative people into the ad industry.</p>
       </div>
     </div>
 
     <div class="bio-section">
-      <span class="bio-label">About</span>
+      <span class="bio-label">Early Career</span>
       <div class="bio-content">
         <p>Prior to his time at W+K, Joe was Creative Director at agencies 101 and Crispin Porter and Bogusky London, where he worked on a wide variety of brands, like Paddy Power, Tango, National Art Fund, Turkish Airlines, and Milka chocolate.</p>
         <p>His first job in the industry was at BMB, where he worked on Ikea, Yorkshire Tea, Carling, Corona, Grolsch, William Hill, and Penguin Books.</p>
-        <p>Whilst at BMB, Joe helped launch the charity C.A.L.M in London, a cause that he remains very passionate about.</p>
+        <p>Whilst at BMB, Joe helped launch the charity C.A.L.M in London, a cause that he remains very close to his heart.</p>
       </div>
     </div>
 
     <div class="bio-section">
-      <span class="bio-label">Entrepreneurship</span>
+      <span class="bio-label">Side Hustle</span>
       <div class="bio-content">
-        <p>Alongside his career in advertising, Joe is a founder and director of Bubble Bros Ltd. Starting out as an events bar at major festivals like Glastonbury, Lovebox, Wireless, and Download, it has since expanded into an on-trade sparkling wine wholesaler with products available in <strong>venues across the country (and more recently, the world).</strong></p>
+        <p>Alongside his career in advertising, Joe is a founder and director of Bubble Bros Ltd. What started out as an events bar at festivals like Glastonbury, Lovebox, Wireless, and Download, has since expanded into an on-trade sparkling wine wholesale business with products available in venues across the country (and more recently, the world).</p>
       </div>
     </div>
 
-    <div class="contact-section">
-      <div class="contact-links">
-        <a href="https://www.linkedin.com/in/joe-bruce-23833426/" class="contact-link" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:thejosephbruce@gmail.com" class="contact-link">Email</a>
-      </div>
+    <div class="bio-nav">
+      <a href="index.html#projects" class="bio-nav-link">
+        <span class="bio-nav-title">Projects</span>
+      </a>
+      <a href="mailto:thejosephbruce@gmail.com" class="bio-nav-link">
+        <span class="bio-nav-title">Contact</span>
+      </a>
+      <a href="index.html#about" class="bio-nav-link">
+        <span class="bio-nav-title">About</span>
+      </a>
     </div>
 
   </div>
