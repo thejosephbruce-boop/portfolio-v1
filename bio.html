@@ -168,6 +168,48 @@
       opacity: 0.6;
     }
 
+    /* ── LINK PREVIEW ────────────────────────── */
+    .link-preview-wrap {
+      position: relative;
+      display: inline;
+    }
+
+    .link-preview {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      width: 260px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+
+    .link-preview-source {
+      display: block;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .link-preview-title {
+      display: block;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .link-preview-wrap:hover .link-preview {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── BOTTOM NAV LINKS ────────────────────── */
     .bio-nav-link {
       display: block;
@@ -223,9 +265,9 @@
     <div class="bio-section">
       <span class="bio-label">Beyond</span>
       <div class="bio-content">
-        <p>Joe joined Beyond as Executive Creative Director in summer 2024 and has since made Creative Partner across the wider holding company (previously The Beyond Collective). A role that has seen him build a new creative culture in the business and improve its profile within the creative industry.</p>
-        <p>In May 2025, Joe helped with the restructuring, redesigning and relaunching of Beyond, taking it from four separate companies to one unified agency brand.</p>
-        <p>In his short time at the agency, Joe brought in new, award winning, creative talent and attracted new clients Find My Past, Mizkan Group and Sprite and Tabasco, as well as overseeing global projects for Yamaha Music and Jam Shed wines and creating local campaigns for Back Market, ARUK and Itsu.</p>
+        <p><span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/above-beyond-appoints-ecd-wieden-kennedy/1875463" target="_blank" rel="noopener"><strong>Joe joined Beyond</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Above+Beyond appoints ECD from Wieden+Kennedy</span></span></span> as Executive Creative Director in summer 2024 and has since made Creative Partner across the wider holding company (previously The Beyond Collective). A role that has seen him build a new creative culture in the business and improve its profile within the creative industry.</p>
+        <p>In May 2025, Joe helped with the <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/beyond-collective-rebrands-agencies-single-name/1918744" target="_blank" rel="noopener"><strong>restructuring, redesigning and relaunching</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Beyond Collective rebrands agencies under single name</span></span></span> of Beyond, taking it from four separate companies to one unified agency brand.</p>
+        <p>In his short time at the agency, Joe <span class="link-preview-wrap"><a href="https://lbbonline.com/news/Beyond-Appoints-Patrick-Silla" target="_blank" rel="noopener"><strong>brought in new, award winning, creative talent</strong></a><span class="link-preview"><span class="link-preview-source">Little Black Book</span><span class="link-preview-title">Beyond appoints Patrick Silla</span></span></span> and attracted new clients Find My Past, <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/branston-pickle-owner-consolidates-media-creative-beyond/1951407" target="_blank" rel="noopener"><strong>Mizkan Group</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Branston Pickle owner consolidates media and creative at Beyond</span></span></span> and Sprite and Tabasco, as well as overseeing global projects for Yamaha Music and <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/jam-shed-celebrates-jammy-wines-first-tv-ad/1938923" target="_blank" rel="noopener"><strong>Jam Shed wines</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Jam Shed celebrates jammy wine's first TV ad</span></span></span> and creating local campaigns for Back Market, ARUK and Itsu.</p>
       </div>
     </div>
 
@@ -233,15 +275,15 @@
       <span class="bio-label">W+K London</span>
       <div class="bio-content">
         <p>Before joining Beyond, Joe was Creative Director on the Nike account at Wieden + Kennedy London. A position that saw him running big campaigns and establishing new creative platforms in both local and global markets.</p>
-        <p>Before his time on Nike, Joe and his creative partner Albert Pukies, created a big Christmas campaign for Sainsbury's supermarkets, won the Converse, Camden Town Brewery and More Than accounts for the agency and built multiple campaigns for Formula 1 and Bud Light. Joe was also responsible for the agency's first creative work with McDonalds Canada.</p>
-        <p>Alongside his day-to-day responsibilities at W+K, Joe was Creative Director for the Hanbury St window. He also served as the Course Director for The Kennedys; a 5-month program dedicated to nurturing a steady stream of new, young creative people into the ad industry.</p>
+        <p>Before his time on Nike, Joe and his creative partner Albert Pukies, created a big <span class="link-preview-wrap"><a href="https://www.theguardian.com/world/2020/nov/28/uk-supermarkets-unite-after-sainsburys-advert-prompts-racist-backlash" target="_blank" rel="noopener"><strong>Christmas campaign for Sainsbury's supermarkets</strong></a><span class="link-preview"><span class="link-preview-source">The Guardian</span><span class="link-preview-title">UK supermarkets unite after Sainsbury's advert prompts racist backlash</span></span></span>, won the Converse, Camden Town Brewery and More Than accounts for the agency and built multiple campaigns for Formula 1 and Bud Light. Joe was also responsible for the agency's first creative work with McDonalds Canada.</p>
+        <p>Alongside his day-to-day responsibilities at W+K, Joe was Creative Director for the <span class="link-preview-wrap"><a href="https://wklondon.com/culture/hanbury-st-window/" target="_blank" rel="noopener"><strong>Hanbury St window</strong></a><span class="link-preview"><span class="link-preview-source">W+K London</span><span class="link-preview-title">Hanbury St Window</span></span></span>. He also served as the Course Director for <span class="link-preview-wrap"><a href="https://wklondon.com/culture/the-kennedys/" target="_blank" rel="noopener"><strong>The Kennedys</strong></a><span class="link-preview"><span class="link-preview-source">W+K London</span><span class="link-preview-title">The Kennedys</span></span></span>; a 5-month program dedicated to nurturing a steady stream of new, young creative people into the ad industry.</p>
       </div>
     </div>
 
     <div class="bio-section">
       <span class="bio-label">Early Career</span>
       <div class="bio-content">
-        <p>Prior to his time at W+K, Joe was Creative Director at agencies 101 and Crispin Porter and Bogusky London, where he worked on a wide variety of brands, like Paddy Power, Tango, National Art Fund, Turkish Airlines, and Milka chocolate.</p>
+        <p>Prior to his time at W+K, Joe was Creative Director at <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/101-boosts-creative-team-cp-b-hire/1361167" target="_blank" rel="noopener"><strong>agencies 101</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">101 boosts creative team with CP+B hire</span></span></span> and <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/joe-bruce-kate-baker/1183978" target="_blank" rel="noopener"><strong>Crispin Porter and Bogusky London</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Joe Bruce and Kate Baker join CP+B London</span></span></span>, where he worked on a wide variety of brands, like Paddy Power, Tango, <span class="link-preview-wrap"><a href="https://www.imdb.com/title/tt8321712/" target="_blank" rel="noopener"><strong>National Art Fund</strong></a><span class="link-preview"><span class="link-preview-source">IMDB</span><span class="link-preview-title">National Art Fund</span></span></span>, Turkish Airlines, and Milka chocolate.</p>
         <p>His first job in the industry was at BMB, where he worked on Ikea, Yorkshire Tea, Carling, Corona, Grolsch, William Hill, and Penguin Books.</p>
         <p>Whilst at BMB, Joe helped launch the charity C.A.L.M in London, a cause that he remains very close to his heart.</p>
       </div>
@@ -250,7 +292,7 @@
     <div class="bio-section">
       <span class="bio-label">Side Hustle</span>
       <div class="bio-content">
-        <p>Alongside his career in advertising, Joe is a founder and director of Bubble Bros Ltd. What started out as an events bar at festivals like Glastonbury, Lovebox, Wireless, and Download, has since expanded into an on-trade sparkling wine wholesale business with products available in venues across the country (and more recently, the world).</p>
+        <p>Alongside his career in advertising, Joe is a founder and director of Bubble Bros Ltd. What started out as an events bar at festivals like Glastonbury, Lovebox, Wireless, and Download, has since expanded into an on-trade sparkling wine wholesale business with products <span class="link-preview-wrap"><a href="https://bubblebros.co.uk/pages/store-locator" target="_blank" rel="noopener"><strong>available in venues across the country (and more recently, the world)</strong></a><span class="link-preview"><span class="link-preview-source">Bubble Bros</span><span class="link-preview-title">Store locator</span></span></span>.</p>
       </div>
     </div>
 
