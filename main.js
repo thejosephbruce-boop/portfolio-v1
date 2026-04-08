@@ -463,6 +463,7 @@ revealEls.forEach(el => revealObserver.observe(el));
   let aboutColAtBottom = false;
   let endAtBottomSince = null;
   let bottomExcess     = 0;   // accumulated wheel delta while at page bottom (hard-scroll gate)
+  let upExcess         = 0;   // accumulated upward wheel delta while in about (prevents accidental dismiss)
   let endDismissedAt   = null; // guard: ignore scroll-up-from-about for a short time after leaving end
 
   function pickEndImage() {
@@ -626,6 +627,7 @@ revealEls.forEach(el => revealObserver.observe(el));
     if (aboutCol) aboutCol.scrollTop = 0;
     aboutColAtBottom = false;
     endAtBottomSince = null;
+    upExcess = 0;
 
     // Close end view if it was open
     if (inEnd) transitionFromEnd();
@@ -779,13 +781,21 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
 
     // About view: scroll up → back to portfolio
-    // Guard: if we just came back from the end view, ignore scroll momentum
+    // Require deliberate upward scrolling (>300 px accumulated) so a stray
+    // wheel tick or momentum doesn't accidentally dismiss the about view.
     if (inAbout && e.deltaY < 0) {
       if (endDismissedAt && Date.now() - endDismissedAt < 600) return;
-      bottomExcess = 0;
-      transitionFromAbout();
+      upExcess += Math.abs(e.deltaY);
+      if (upExcess > 600) {
+        upExcess = 0;
+        bottomExcess = 0;
+        transitionFromAbout();
+      }
       return;
     }
+
+    // Reset upward accumulator whenever the user isn't scrolling up in about
+    if (inAbout && e.deltaY > 0) upExcess = 0;
 
     // Portfolio: hard scroll down at bottom → about view
     // Accumulate excess wheel delta while already at the bottom — only advance
