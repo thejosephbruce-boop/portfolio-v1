@@ -457,6 +457,7 @@ revealEls.forEach(el => revealObserver.observe(el));
   let inAbout          = false;
   let inAboutSince     = null;
   let inEnd            = false;
+  let endEnteredFromAbout = false; // true when end view reached via about; false = direct from project list
   let faceExpanded     = false;
   let atBottomSince    = null;
   let aboutTouchY      = 0;
@@ -473,6 +474,7 @@ revealEls.forEach(el => revealObserver.observe(el));
   function transitionToEnd() {
     if (inEnd || !endView) return;
     inEnd = true;
+    endEnteredFromAbout = inAbout; // remember so dismiss knows where to return
     endView.style.backgroundImage = "url('" + pickEndImage() + "')";
 
     // ── FLIP: slide the end logo from the about-logo's screen position ──
@@ -737,10 +739,11 @@ revealEls.forEach(el => revealObserver.observe(el));
   }
 
   // Contact button — jump straight to the end view
+  // No inAbout guard: the CSS pointer-events:none on .about-view already prevents
+  // this firing when the view is inactive, so it's safe to always fire transitionToEnd().
   if (contactBtn) {
     contactBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (!inAbout) return;
       transitionToEnd();
     });
   }
@@ -759,10 +762,10 @@ revealEls.forEach(el => revealObserver.observe(el));
   // Desktop: wheel down at bottom → about → end view
   //          wheel up: end view → about → portfolio
   window.addEventListener('wheel', (e) => {
-    // End view: scroll up → back to about
+    // End view: scroll up → back to about (if entered from about) or back to project list
     if (inEnd && e.deltaY < 0) {
       transitionFromEnd();
-      if (!inAbout) transitionToAbout();
+      if (endEnteredFromAbout && !inAbout) transitionToAbout();
       endDismissedAt = Date.now();
       return;
     }
@@ -833,10 +836,10 @@ revealEls.forEach(el => revealObserver.observe(el));
   window.addEventListener('touchmove', (e) => {
     const dy = e.touches[0].clientY - aboutTouchY;
 
-    // End view: swipe down → back to about
+    // End view: swipe down → back to about (if entered from about) or back to project list
     if (inEnd && dy > 40) {
       transitionFromEnd();
-      if (!inAbout) transitionToAbout();
+      if (endEnteredFromAbout && !inAbout) transitionToAbout();
       endDismissedAt = Date.now();
       return;
     }
