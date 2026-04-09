@@ -74,14 +74,19 @@ window.scrollTo(0, 0);
 
   function cycleIdleGif() {
     if (!document.getElementById('splash')) return;
-    // Fade out briefly, swap image, fade back in
+    // Fade out, hold dark for 3 s, then fade in the next gif
     idleThumb.style.transition = 'opacity 0.35s ease';
     idleThumb.style.opacity    = '0';
     setTimeout(() => {
       if (!document.getElementById('splash')) return;
       idleGifIndex = (idleGifIndex + 1) % IDLE_GIFS.length;
-      showIdleGif(idleGifIndex);
-      idleCycleTimer = setTimeout(cycleIdleGif, 3000);
+      idleThumb.style.backgroundImage = "url('" + IDLE_GIFS[idleGifIndex] + "')";
+      // 3 s dark pause before fading the next gif in
+      idleCycleTimer = setTimeout(() => {
+        if (!document.getElementById('splash')) return;
+        showIdleGif(idleGifIndex);
+        idleCycleTimer = setTimeout(cycleIdleGif, 3000);
+      }, 3000);
     }, 380);
   }
 
