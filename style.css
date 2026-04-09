@@ -59,10 +59,34 @@ ul {
   gap: 1.75rem;
 }
 
+/* Wrapper gives the idle thumb an anchor to position against */
+.splash-logo-wrap {
+  position: relative;
+  display: inline-block;
+  width: clamp(280px, 42vw, 680px);
+}
+
 .splash-logo {
   display: block;
-  width: clamp(280px, 42vw, 680px);
+  width: 100%;
   height: auto;
+}
+
+/* Idle thumbnail — fades in through the letter mask after 6 s of inactivity */
+.splash-idle-thumb {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  mask-image: url('download.png');
+  -webkit-mask-image: url('download.png');
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
 }
 
 .splash-tagline {

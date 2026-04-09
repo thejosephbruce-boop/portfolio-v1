@@ -49,9 +49,38 @@ window.scrollTo(0, 0);
 
   let triggered = false;
 
+  // ── Idle thumbnail ────────────────────────────────────────────────────────
+  // After 6 s of no interaction, fade the F1 gif in through the logo mask.
+  // Cleared if the user interacts (scroll / click / touch) before it fires.
+  const idleThumb = document.getElementById('splashIdleThumb');
+  let idleTimer = null;
+
+  function startIdleTimer() {
+    idleTimer = setTimeout(() => {
+      if (idleThumb && document.getElementById('splash')) {
+        idleThumb.style.opacity = '1';
+      }
+    }, 6000);
+  }
+
+  function resetIdleTimer() {
+    clearTimeout(idleTimer);
+    startIdleTimer();
+  }
+
+  startIdleTimer();
+  window.addEventListener('mousemove',  resetIdleTimer, { passive: true });
+  window.addEventListener('touchstart', resetIdleTimer, { passive: true });
+  // ─────────────────────────────────────────────────────────────────────────
+
   function reveal() {
     if (triggered) return;
     triggered = true;
+
+    // Kill idle timer and fade out the gif immediately so it doesn't
+    // ghost through the logo during the FLIP animation
+    clearTimeout(idleTimer);
+    if (idleThumb) { idleThumb.style.transition = 'opacity 0.2s ease'; idleThumb.style.opacity = '0'; }
 
     // Capture scroll position immediately, then animate back to top.
     // We delay the animation ~500ms so it starts just as the splash background
