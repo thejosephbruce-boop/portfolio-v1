@@ -49,21 +49,54 @@ window.scrollTo(0, 0);
 
   let triggered = false;
 
-  // ── Idle thumbnail ────────────────────────────────────────────────────────
-  // After 6 s of no interaction, fade the F1 gif in through the logo mask.
-  // Cleared if the user interacts (scroll / click / touch) before it fires.
+  // ── Idle thumbnail cycle ──────────────────────────────────────────────────
+  // After 6 s of no interaction, cycle through gifs through the logo mask.
+  // Each gif shows for 3 s then crossfades to the next, looping forever.
+  // Once cycling has started, mouse movement no longer resets — only a real
+  // dismissal (scroll / click) clears it via reveal().
+  const IDLE_GIFS = [
+    'BARBER.gif',
+    'F1 Edge Thumb gif.gif',
+    'fly africa thumb gif.gif',
+  ];
   const idleThumb = document.getElementById('splashIdleThumb');
-  let idleTimer = null;
+  let idleTimer      = null;
+  let idleCycleTimer = null;
+  let idleGifIndex   = 0;
+  let idleRunning    = false;
+
+  function showIdleGif(index) {
+    if (!idleThumb || !document.getElementById('splash')) return;
+    idleThumb.style.backgroundImage = "url('" + IDLE_GIFS[index] + "')";
+    idleThumb.style.transition      = 'opacity 0.7s ease';
+    idleThumb.style.opacity         = '1';
+  }
+
+  function cycleIdleGif() {
+    if (!document.getElementById('splash')) return;
+    // Fade out briefly, swap image, fade back in
+    idleThumb.style.transition = 'opacity 0.35s ease';
+    idleThumb.style.opacity    = '0';
+    setTimeout(() => {
+      if (!document.getElementById('splash')) return;
+      idleGifIndex = (idleGifIndex + 1) % IDLE_GIFS.length;
+      showIdleGif(idleGifIndex);
+      idleCycleTimer = setTimeout(cycleIdleGif, 3000);
+    }, 380);
+  }
 
   function startIdleTimer() {
     idleTimer = setTimeout(() => {
-      if (idleThumb && document.getElementById('splash')) {
-        idleThumb.style.opacity = '1';
-      }
+      if (!idleThumb || !document.getElementById('splash')) return;
+      idleRunning  = true;
+      idleGifIndex = 0;
+      showIdleGif(0);
+      idleCycleTimer = setTimeout(cycleIdleGif, 3000);
     }, 6000);
   }
 
   function resetIdleTimer() {
+    if (idleRunning) return; // already cycling — leave it alone
     clearTimeout(idleTimer);
     startIdleTimer();
   }
@@ -77,9 +110,10 @@ window.scrollTo(0, 0);
     if (triggered) return;
     triggered = true;
 
-    // Kill idle timer and fade out the gif immediately so it doesn't
-    // ghost through the logo during the FLIP animation
+    // Kill idle cycle and fade out immediately so it doesn't ghost
+    // through the logo during the FLIP animation
     clearTimeout(idleTimer);
+    clearTimeout(idleCycleTimer);
     if (idleThumb) { idleThumb.style.transition = 'opacity 0.2s ease'; idleThumb.style.opacity = '0'; }
 
     // Capture scroll position immediately, then animate back to top.
