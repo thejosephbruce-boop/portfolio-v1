@@ -781,12 +781,17 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
 
     // About view: scroll up → back to portfolio
-    // Require deliberate upward scrolling (>300 px accumulated) so a stray
-    // wheel tick or momentum doesn't accidentally dismiss the about view.
+    // Mirrors the project-list behaviour: aboutCol content must reach its very
+    // top first, then continued upward scrolling triggers the dismiss — the
+    // same "hit the boundary then keep going" resistance the project list uses.
     if (inAbout && e.deltaY < 0) {
       if (endDismissedAt && Date.now() - endDismissedAt < 600) return;
+      if (aboutCol && aboutCol.scrollTop > 5) {
+        upExcess = 0; // still content above — let the column scroll naturally
+        return;
+      }
       upExcess += Math.abs(e.deltaY);
-      if (upExcess > 600) {
+      if (upExcess > 150) {
         upExcess = 0;
         bottomExcess = 0;
         transitionFromAbout();
