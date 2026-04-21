@@ -78,8 +78,8 @@ ul {
   inset: 0;
   background-size: cover;
   background-position: center;
-  mask-image: url('download.png');
-  -webkit-mask-image: url('download.png');
+  mask-image: url('NARROW CAC CENTRERD FILES/NARROW JOE BRUCE.png');
+  -webkit-mask-image: url('NARROW CAC CENTRERD FILES/NARROW JOE BRUCE.png');
   mask-size: 100% 100%;
   -webkit-mask-size: 100% 100%;
   mask-repeat: no-repeat;
@@ -116,15 +116,118 @@ ul {
   top: 0;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0;
   padding: var(--pad) clamp(8px, 1vw, 20px);
 }
 
-/* Container sized by the invisible img */
+.logo-nav-btn {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: clamp(240px, 93%, 640px);
+  aspect-ratio: 1016 / 256;
+  background: url('NARROW CAC CENTRED.png') no-repeat 0% 0% / 100% 300%;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.nav-btn-letters {
+  position: absolute;
+  inset: 0;
+  background: url('NARROW CAC CENTRED.png') no-repeat 0% 0% / 100% 300%;
+  mix-blend-mode: multiply;
+}
+
+.logo-reveal.about-mode .nav-btn-letters {
+  background-position: 0% 50%;
+}
+
+.nav-btn-thumb {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  mask-image: url('NARROW CAC CENTRED.png');
+  -webkit-mask-image: url('NARROW CAC CENTRED.png');
+  mask-size: 100% 300%;
+  -webkit-mask-size: 100% 300%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  opacity: 0;
+  transition: none;
+  mix-blend-mode: normal;
+}
+
+#navAboutBtn .nav-btn-thumb {
+  mask-position: 0% 50%;
+  -webkit-mask-position: 0% 50%;
+}
+
+#navContactBtn .nav-btn-thumb {
+  mask-position: 0% 100%;
+  -webkit-mask-position: 0% 100%;
+}
+
+.logo-nav-btn:hover .nav-btn-thumb {
+  opacity: 1;
+}
+
+.logo-reveal.is-visible ~ .logo-nav-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.logo-nav-btn:hover {
+  opacity: 0.85;
+}
+
+.logo-nav-img {
+  display: none;
+}
+
+.logo-panel.is-expanded .logo-nav-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* CREATIVE nav button: top third of combined image; only shown in about mode */
+.logo-nav-btn--creative {
+  display: none;
+  background-position: 0% 0%;
+}
+
+.logo-panel.about-active .logo-nav-btn--creative {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ABOUT button: middle third */
+#navAboutBtn {
+  background-position: 0% 50%;
+}
+
+/* CONTACT button: bottom third */
+#navContactBtn {
+  background-position: 0% 100%;
+}
+
+/* In about mode the logo-reveal IS the ABOUT display — hide the redundant ABOUT button */
+.logo-reveal.about-mode ~ #navAboutBtn {
+  display: none;
+}
+
+/* Container — aspect ratio matches one third of the combined CAC image */
 .logo-reveal {
   position: relative;
   width: clamp(240px, 93%, 640px);
+  aspect-ratio: 1016 / 256;
   opacity: 0;
   transition: opacity 0.45s ease;
 }
@@ -133,14 +236,9 @@ ul {
   opacity: 1;
 }
 
-/* Invisible sizer: establishes natural PNG aspect ratio */
+/* Sizer no longer needed — aspect-ratio on .logo-reveal handles sizing */
 .logo-sizer {
-  display: block;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
+  display: none;
 }
 
 /* Thumbnail layers — masked to show only through letter shapes */
@@ -149,13 +247,20 @@ ul {
   inset: 0;
   background-size: cover;
   background-position: center;
-  mask-image: url('download.png');
-  -webkit-mask-image: url('download.png');
-  mask-size: 100% 100%;
-  -webkit-mask-size: 100% 100%;
+  mask-image: url('NARROW CAC CENTRED.png');
+  -webkit-mask-image: url('NARROW CAC CENTRED.png');
+  mask-size: 100% 300%;
+  -webkit-mask-size: 100% 300%;
+  mask-position: 0% 0%;
+  -webkit-mask-position: 0% 0%;
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
   transition: opacity 0.5s ease;
+}
+
+.logo-reveal.about-mode .logo-thumb {
+  mask-position: 0% 50%;
+  -webkit-mask-position: 0% 50%;
 }
 
 .logo-thumb--b {
@@ -169,16 +274,23 @@ ul {
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
-  mask-image: url('download.png');
-  -webkit-mask-image: url('download.png');
-  mask-size: 100% 100%;
-  -webkit-mask-size: 100% 100%;
+  mask-image: url('NARROW CAC CENTRED.png');
+  -webkit-mask-image: url('NARROW CAC CENTRED.png');
+  mask-size: 100% 300%;
+  -webkit-mask-size: 100% 300%;
+  mask-position: 0% 0%;
+  -webkit-mask-position: 0% 0%;
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
   opacity: 0.30;
   mix-blend-mode: overlay;
   pointer-events: none;
   z-index: 1;
+}
+
+.logo-reveal.about-mode::after {
+  mask-position: 0% 50%;
+  -webkit-mask-position: 0% 50%;
 }
 
 /* ─────────────────────────────────────────

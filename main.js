@@ -227,19 +227,23 @@ window.scrollTo(0, 0);
 // Logo thumbnail reveal — hover + scroll crossfade + full-bleed click
 // ─────────────────────────────────────────
 (function () {
-  const thumbA      = document.getElementById('logoThumbA');
-  const thumbB      = document.getElementById('logoThumbB');
-  const projects    = Array.from(document.querySelectorAll('.project'));
-  const logoPanel   = document.getElementById('logoPanel');
-  const fullBleed   = document.getElementById('fullBleed');
-  const viewBtn     = document.getElementById('viewProjectBtn');
+  const thumbA         = document.getElementById('logoThumbA');
+  const thumbB         = document.getElementById('logoThumbB');
+  const projects       = Array.from(document.querySelectorAll('.project'));
+  const logoPanel      = document.getElementById('logoPanel');
+  const fullBleed      = document.getElementById('fullBleed');
+  const logoReveal     = document.getElementById('logoReveal');
+  const navAboutThumb    = document.querySelector('#navAboutBtn .nav-btn-thumb');
+  const navContactThumb  = document.querySelector('#navContactBtn .nav-btn-thumb');
+  const navCreativeThumb = document.querySelector('#navCreativeBtn .nav-btn-thumb');
 
   if (!thumbA || !thumbB || !projects.length) return;
 
-  let activeLayer     = 'a';
-  let currentProject  = null;
-  let expandedProject = null;
+  let activeLayer      = 'a';
+  let currentProject   = null;
+  let expandedProject  = null;
   let mobileLastTapped = null;
+  let lastExpandedAt   = 0;
 
   function setThumb(url, position) {
     const next    = activeLayer === 'a' ? thumbB : thumbA;
@@ -256,31 +260,38 @@ window.scrollTo(0, 0);
     currentProject = project;
     const url      = project.dataset.thumb;
     const position = project.dataset.thumbPosition;
-    if (url) setThumb(url, position);
+    if (url) {
+      setThumb(url, position);
+      if (navAboutThumb)    { navAboutThumb.style.backgroundImage    = "url('" + url + "')"; navAboutThumb.style.backgroundPosition    = position || 'center'; }
+      if (navContactThumb)  { navContactThumb.style.backgroundImage  = "url('" + url + "')"; navContactThumb.style.backgroundPosition  = position || 'center'; }
+      if (navCreativeThumb) { navCreativeThumb.style.backgroundImage = "url('" + url + "')"; navCreativeThumb.style.backgroundPosition = position || 'center'; }
+    }
     projects.forEach(p => p.classList.toggle('is-active', p === project));
   }
 
-  // Update the view-project button for a given project (handles coming-soon labels)
-  function updateViewBtn(project) {
-    if (!viewBtn) return;
-    const label = project && project.dataset.label;
-    if (label) {
-      viewBtn.textContent = label;
-      // Only disable the button for coming-soon projects (no real page)
-      const link = project && project.querySelector('a');
-      const href = link && link.getAttribute('href');
-      if (href === '#') {
-        viewBtn.style.pointerEvents = 'none';
-        viewBtn.style.opacity       = '1';
-      } else {
-        viewBtn.style.pointerEvents = '';
-        viewBtn.style.opacity       = '';
-      }
-    } else {
-      viewBtn.textContent         = 'View project';
-      viewBtn.style.pointerEvents = '';
-      viewBtn.style.opacity       = '';
+  function expandFullBleed(project) {
+    const url      = project.dataset.thumb;
+    const position = project.dataset.thumbPosition || 'center';
+    const link     = project.querySelector('a');
+    const href     = link ? link.getAttribute('href') : '#';
+    if (!url) return;
+    const bgValue = "url('" + url + "')";
+    fullBleed.style.backgroundImage    = bgValue;
+    fullBleed.style.backgroundPosition = position;
+    logoPanel.classList.add('is-expanded');
+    expandedProject = project;
+    lastExpandedAt  = Date.now();
+    if (href !== '#') {
+      sessionStorage.setItem('jbFullBleedBg',   bgValue);
+      sessionStorage.setItem('jbFullBleedPos',  position);
+      sessionStorage.setItem('jbFullBleedHref', href);
     }
+  }
+
+  function collapseFullBleed() {
+    logoPanel.classList.remove('is-expanded');
+    expandedProject  = null;
+    mobileLastTapped = null;
   }
 
   // Set first project as initial state
@@ -288,12 +299,15 @@ window.scrollTo(0, 0);
   if (firstWithThumb) {
     thumbA.style.backgroundImage    = "url('" + firstWithThumb.dataset.thumb + "')";
     thumbA.style.backgroundPosition = firstWithThumb.dataset.thumbPosition || 'center';
+    if (navAboutThumb)    { navAboutThumb.style.backgroundImage    = "url('" + firstWithThumb.dataset.thumb + "')"; navAboutThumb.style.backgroundPosition    = firstWithThumb.dataset.thumbPosition || 'center'; }
+    if (navContactThumb)  { navContactThumb.style.backgroundImage  = "url('" + firstWithThumb.dataset.thumb + "')"; navContactThumb.style.backgroundPosition  = firstWithThumb.dataset.thumbPosition || 'center'; }
+    if (navCreativeThumb) { navCreativeThumb.style.backgroundImage = "url('" + firstWithThumb.dataset.thumb + "')"; navCreativeThumb.style.backgroundPosition = firstWithThumb.dataset.thumbPosition || 'center'; }
   }
   activateProject(projects[0]);
 
   // Restore full-bleed state after back-navigation from a project page.
   // Only restore when genuinely returning via #projects — on a plain refresh, clear it.
-  if (fullBleed && viewBtn && logoPanel) {
+  if (fullBleed && logoPanel) {
     if (!window.__restoreFullBleed) {
       sessionStorage.removeItem('jbFullBleedBg');
       sessionStorage.removeItem('jbFullBleedPos');
@@ -306,25 +320,21 @@ window.scrollTo(0, 0);
     if (savedBg) {
       fullBleed.style.backgroundImage    = savedBg;
       fullBleed.style.backgroundPosition = savedPos || 'center';
-      if (savedHref) viewBtn.href = savedHref;
       logoPanel.classList.add('is-expanded');
-      // Restore expandedProject ref and button state
-      const restoredProject = projects.find(p => {
+      expandedProject = projects.find(p => {
         const a = p.querySelector('a');
         return a && a.getAttribute('href') === savedHref;
-      });
-      if (restoredProject) {
-        expandedProject = restoredProject;
-        updateViewBtn(restoredProject);
-      }
+      }) || null;
     }
   }
 
   // Hover: activate project + keep full-bleed in sync if already expanded
+  // After 1s of hover, auto-expand the full-bleed (same as a first click)
+  let hoverTimer = null;
+
   projects.forEach(p => {
     p.addEventListener('mouseenter', () => {
       activateProject(p);
-      // About / Contact entries: show thumbnail through mask only — never update the full-bleed
       if (p.id === 'aboutMobileLink' || p.id === 'contactListBtn') return;
       if (logoPanel && logoPanel.classList.contains('is-expanded') && p.dataset.thumb) {
         const newBg  = "url('" + p.dataset.thumb + "')";
@@ -332,17 +342,29 @@ window.scrollTo(0, 0);
         if (fullBleed) {
           fullBleed.style.backgroundImage    = newBg;
           fullBleed.style.backgroundPosition = newPos;
-          sessionStorage.setItem('jbFullBleedBg',  newBg);
-          sessionStorage.setItem('jbFullBleedPos', newPos);
         }
         const link = p.querySelector('a');
-        if (link && viewBtn) {
-          const href = link.getAttribute('href');
-          viewBtn.href = href;
+        const href = link ? link.getAttribute('href') : null;
+        if (href && href !== '#') {
+          sessionStorage.setItem('jbFullBleedBg',   newBg);
+          sessionStorage.setItem('jbFullBleedPos',  newPos);
           sessionStorage.setItem('jbFullBleedHref', href);
         }
-        updateViewBtn(p);
       }
+      // Start hover-expand timer (desktop only, skip if already expanded for this project)
+      if (window.innerWidth > 768 && p.dataset.thumb) {
+        clearTimeout(hoverTimer);
+        hoverTimer = setTimeout(() => {
+          if (!logoPanel.classList.contains('is-expanded') || expandedProject !== p) {
+            activateProject(p);
+            expandFullBleed(p);
+          }
+        }, 1000);
+      }
+    });
+
+    p.addEventListener('mouseleave', () => {
+      clearTimeout(hoverTimer);
     });
   });
 
@@ -358,8 +380,48 @@ window.scrollTo(0, 0);
   }, { threshold: 0.3 });
   projects.forEach(p => observer.observe(p));
 
-  // Click project title → expand to full-bleed, save state for back-navigation
-  if (logoPanel && fullBleed && viewBtn) {
+  // Nav button hover: switch thumbnail mask to ABOUT or CONTACT letters
+  // When hovering a nav button, hide the CREATIVE thumbs so only one word
+  // carries the image at a time. mouseleave restores the active layer.
+  [document.getElementById('navAboutBtn'), document.getElementById('navContactBtn'), document.getElementById('navCreativeBtn')].forEach(btn => {
+    if (!btn) return;
+    btn.addEventListener('mouseenter', () => {
+      thumbA.style.transition = 'none';
+      thumbB.style.transition = 'none';
+      thumbA.style.opacity = '0';
+      thumbB.style.opacity = '0';
+    });
+    btn.addEventListener('mouseleave', () => {
+      const active = activeLayer === 'a' ? thumbA : thumbB;
+      active.style.opacity = '1';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        thumbA.style.transition = '';
+        thumbB.style.transition = '';
+      }));
+    });
+  });
+
+  // CREATIVE button click → expand full-bleed for project 01
+  if (logoReveal) {
+    logoReveal.style.cursor = 'pointer';
+    logoReveal.addEventListener('click', () => {
+      const first = projects.find(p => p.dataset.thumb);
+      if (first) expandFullBleed(first);
+    });
+  }
+
+  // Full-bleed mouseenter → collapse back to CREATIVE / ABOUT / CONTACT
+  // Guard: ignore if expand just happened (cursor was already on left panel)
+  if (fullBleed) {
+    fullBleed.addEventListener('mouseenter', () => {
+      if (logoPanel && logoPanel.classList.contains('is-expanded') && Date.now() - lastExpandedAt > 400) {
+        collapseFullBleed();
+      }
+    });
+  }
+
+  // Click project title → expand to full-bleed (first click), navigate (second click)
+  if (logoPanel && fullBleed) {
     projects.forEach(p => {
       const link = p.querySelector('a');
       if (!link) return;
@@ -387,23 +449,16 @@ window.scrollTo(0, 0);
 
         // ── Mobile: double-tap to navigate ──────────────────────────
         if (window.innerWidth <= 768) {
-          if (href === '#') { e.preventDefault(); return; } // coming-soon or about
+          if (href === '#') { e.preventDefault(); return; }
           if (mobileLastTapped !== p) {
-            // First tap: fill logo panel with full thumb
             e.preventDefault();
             activateProject(p);
             mobileLastTapped = p;
-            fullBleed.style.backgroundImage    = "url('" + url + "')";
-            fullBleed.style.backgroundPosition = position || 'center';
-            viewBtn.href = href;
-            logoPanel.classList.add('is-expanded');
-            expandedProject = p;
-            updateViewBtn(p);
+            expandFullBleed(p);
             return;
           }
           // Second tap of same project: navigate
-          mobileLastTapped = null;
-          logoPanel.classList.remove('is-expanded');
+          collapseFullBleed();
           sessionStorage.setItem('jbFullBleedBg',   "url('" + url + "')");
           sessionStorage.setItem('jbFullBleedPos',  position);
           sessionStorage.setItem('jbFullBleedHref', href);
@@ -411,51 +466,27 @@ window.scrollTo(0, 0);
         }
 
         // ── Desktop: full-bleed expand then navigate ─────────────────
-        // Full-bleed already open → single click navigates directly
-        if (logoPanel.classList.contains('is-expanded')) {
-          if (href === '#') { e.preventDefault(); return; } // coming-soon — stay on page
+        // Full-bleed already open for THIS project → navigate
+        if (logoPanel.classList.contains('is-expanded') && expandedProject === p) {
+          if (href === '#') { e.preventDefault(); return; }
           sessionStorage.setItem('jbFullBleedBg',   "url('" + url + "')");
           sessionStorage.setItem('jbFullBleedPos',  position);
           sessionStorage.setItem('jbFullBleedHref', href);
-          return; // let the browser navigate
+          return; // let browser navigate
         }
 
-        // First click → expand full-bleed
+        // First click (or different project) → expand full-bleed
         e.preventDefault();
-        const bgValue = "url('" + url + "')";
-        fullBleed.style.backgroundImage    = bgValue;
-        fullBleed.style.backgroundPosition = position;
-        viewBtn.href = href;
-        logoPanel.classList.add('is-expanded');
-        expandedProject = p;
-        updateViewBtn(p);
-        // Coming-soon projects don't need sessionStorage (no page to return from)
-        if (href !== '#') {
-          sessionStorage.setItem('jbFullBleedBg',   bgValue);
-          sessionStorage.setItem('jbFullBleedPos',  position);
-          sessionStorage.setItem('jbFullBleedHref', href);
-        }
+        activateProject(p);
+        expandFullBleed(p);
       });
     });
-
-    // "View project" clicked — save final state then let browser navigate
-    viewBtn.addEventListener('click', () => {
-      sessionStorage.setItem('jbFullBleedBg',   fullBleed.style.backgroundImage);
-      sessionStorage.setItem('jbFullBleedPos',  fullBleed.style.backgroundPosition);
-      sessionStorage.setItem('jbFullBleedHref', viewBtn.href);
-    });
-
-    // Full-bleed only collapses when the about-view opens (see about IIFE below)
-    // — NOT on mouseenter, so clicking a project keeps the full-bleed persistent
   }
 
-  // Mobile: collapse full-thumb in logo panel when user scrolls
+  // Mobile: collapse full-thumb when user scrolls
   window.addEventListener('scroll', () => {
     if (window.innerWidth > 768) return;
-    if (mobileLastTapped && logoPanel) {
-      logoPanel.classList.remove('is-expanded');
-      mobileLastTapped = null;
-    }
+    if (mobileLastTapped && logoPanel) collapseFullBleed();
   }, { passive: true });
 
   // Allow other IIFEs to restore the current thumbnail after they've
@@ -611,8 +642,16 @@ revealEls.forEach(el => revealObserver.observe(el));
   }
 
   // Expose so the thumbnail IIFE can trigger the about/end views from the project list
-  window.__triggerAbout = function () { transitionToAbout(); };
-  window.__triggerEnd   = function () { transitionToEnd();   };
+  window.__triggerAbout    = function () { transitionToAbout(); };
+  window.__triggerEnd      = function () { transitionToEnd();   };
+  window.__triggerFromAbout = function () { transitionFromAbout(); };
+
+  const navAboutBtn   = document.getElementById('navAboutBtn');
+  const navContactBtn = document.getElementById('navContactBtn');
+  const navCreativeBtn = document.getElementById('navCreativeBtn');
+  if (navAboutBtn)    navAboutBtn.addEventListener('click',   () => transitionToAbout());
+  if (navContactBtn)  navContactBtn.addEventListener('click', () => transitionToEnd());
+  if (navCreativeBtn) navCreativeBtn.addEventListener('click', () => transitionFromAbout());
 
   function transitionToAbout() {
     if (inAbout) return;
@@ -627,7 +666,11 @@ revealEls.forEach(el => revealObserver.observe(el));
     sessionStorage.removeItem('jbFullBleedPos');
     sessionStorage.removeItem('jbFullBleedHref');
 
-    // Show Full Face image through the logo letter mask
+    // Show Full Face image through the logo letter mask, switching to ABOUT logo shape
+    const sizerEl   = logoPanelEl.querySelector('.logo-sizer');
+    const thumbEls  = logoPanelEl.querySelectorAll('.logo-thumb');
+    logoReveal.classList.add('about-mode');
+    logoPanelEl.classList.add('about-active');
     if (thumbAEl && thumbBEl) {
       thumbAEl.style.backgroundImage    = "url('" + FULL_FACE + "')";
       thumbAEl.style.backgroundPosition = 'center top';
@@ -737,7 +780,11 @@ revealEls.forEach(el => revealObserver.observe(el));
       aboutCol.style.right       = '';
       aboutCol.style.overflowY   = '';
 
-      // Restore the current project's thumbnail — about view replaced it with Full Face
+      // Restore CREATIVE logo shape and current project thumbnail
+      const sizerEl2  = logoPanelEl.querySelector('.logo-sizer');
+      const thumbEls2 = logoPanelEl.querySelectorAll('.logo-thumb');
+      logoReveal.classList.remove('about-mode');
+      logoPanelEl.classList.remove('about-active');
       if (typeof window.__restoreCurrentThumb === 'function') {
         window.__restoreCurrentThumb();
       }
@@ -838,6 +885,9 @@ revealEls.forEach(el => revealObserver.observe(el));
       return;
     }
     if (inEnd) return;
+
+    // In about view, ignore wheel events over the right (logo/nav) panel
+    if (inAbout && logoPanelEl && logoPanelEl.contains(e.target)) return;
 
     // About view: scroll down → end view
     // Require 600ms dwell in about before allowing forward navigation
@@ -1045,7 +1095,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     ].join(';');
 
     const imgEl = document.createElement('img');
-    imgEl.src = 'download.png';
+    imgEl.src = 'NARROW CAC CENTRERD FILES/NARROW JOE BRUCE.png';
     imgEl.alt = 'Joe Bruce';
     // No transition yet — prevents the browser firing an unwanted animation
     // from the element's default (identity) state to the initial inverted position
@@ -1060,7 +1110,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     // Tagline sits below the logo, matching the real .splash-content gap (1.75 rem ≈ 28 px).
     // Top is set after DOM insertion so we can read the image's actual rendered height —
-    // using r.bottom directly caused occasional overlap when download.png's aspect ratio
+    // using r.bottom directly caused occasional overlap when the logo's aspect ratio
     // differed slightly from the original #splashLogo element's rendered height.
     const taglineEl  = document.createElement('p');
     taglineEl.textContent = 'Executive Creative Director.';
