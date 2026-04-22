@@ -12,26 +12,46 @@ window.scrollTo(0, 0);
 (function () {
   const splash      = document.getElementById('splash');
   const splashLogo  = document.getElementById('splashLogo');
-  const tagline     = document.getElementById('splashTagline');
-  const logoReveal  = document.getElementById('logoReveal');
   const projectList = document.querySelector('.project-list');
+  const logoPanel   = document.getElementById('logoPanel');
   if (!splash) return;
+
+  // Pick a random full-bleed image for the splash background
+  const SPLASH_IMAGES = [
+    "site end headers/end image 4.png",
+    "site end headers/end image 5.png",
+    "site end headers/end image 6.png",
+    "site end headers/end image 7.webp",
+  ];
+  const savedSplashImg = sessionStorage.getItem('jbReturnSplashImg');
+  sessionStorage.removeItem('jbReturnSplashImg');
+  const splashImg = savedSplashImg || SPLASH_IMAGES[Math.floor(Math.random() * SPLASH_IMAGES.length)];
+  splash.style.backgroundImage = "url('" + splashImg + "')";
+  window.__splashImage = splashImg;
+
+  function showInstant(list) {
+    if (!list) return;
+    list.style.transition = 'none';
+    list.classList.add('is-visible');
+    requestAnimationFrame(() => requestAnimationFrame(() => { list.style.transition = ''; }));
+  }
 
   // Coming back from a project page — skip splash, go straight to the list
   if (window.location.hash === '#projects') {
     splash.remove();
-    logoReveal.classList.add('is-visible');
-    if (projectList) projectList.classList.add('is-visible');
+    showInstant(projectList);
+    if (logoPanel) logoPanel.classList.add('project-mode');
     history.replaceState(null, '', window.location.pathname);
     window.__restoreFullBleed = true;
+    window.__restoreLastProject = true;
     return;
   }
 
   // Coming from a project page "About" link — skip splash and go straight to about view
   if (window.location.hash === '#about') {
     splash.remove();
-    logoReveal.classList.add('is-visible');
-    if (projectList) projectList.classList.add('is-visible');
+    showInstant(projectList);
+    if (logoPanel) logoPanel.classList.add('project-mode');
     history.replaceState(null, '', window.location.pathname);
     window.__gotoAbout = true;
     return;
@@ -40,8 +60,8 @@ window.scrollTo(0, 0);
   // Coming from a project page "Contact" link — skip splash and go straight to end/contact view
   if (window.location.hash === '#contact') {
     splash.remove();
-    logoReveal.classList.add('is-visible');
-    if (projectList) projectList.classList.add('is-visible');
+    showInstant(projectList);
+    if (logoPanel) logoPanel.classList.add('project-mode');
     history.replaceState(null, '', window.location.pathname);
     window.__gotoContact = true;
     return;
@@ -49,153 +69,41 @@ window.scrollTo(0, 0);
 
   let triggered = false;
 
-  // ── Idle thumbnail cycle ──────────────────────────────────────────────────
-  // After 6 s of no interaction, cycle through gifs through the logo mask.
-  // Each gif shows for 3 s then crossfades to the next, looping forever.
-  // Once cycling has started, mouse movement no longer resets — only a real
-  // dismissal (scroll / click) clears it via reveal().
-  const IDLE_GIFS = [
-    'BARBER.gif',
-    'F1 Edge Thumb gif.gif',
-    'fly africa thumb gif.gif',
-  ];
-  const idleThumb = document.getElementById('splashIdleThumb');
-  let idleTimer      = null;
-  let idleCycleTimer = null;
-  let idleGifIndex   = 0;
-  let idleRunning    = false;
-
-  function showIdleGif(index) {
-    if (!idleThumb || !document.getElementById('splash')) return;
-    idleThumb.style.backgroundImage = "url('" + IDLE_GIFS[index] + "')";
-    idleThumb.style.transition      = 'opacity 0.7s ease';
-    idleThumb.style.opacity         = '1';
-  }
-
-  function cycleIdleGif() {
-    if (!document.getElementById('splash')) return;
-    // Fade out, hold dark for 3 s, then fade in the next gif
-    idleThumb.style.transition = 'opacity 0.35s ease';
-    idleThumb.style.opacity    = '0';
-    setTimeout(() => {
-      if (!document.getElementById('splash')) return;
-      idleGifIndex = (idleGifIndex + 1) % IDLE_GIFS.length;
-      idleThumb.style.backgroundImage = "url('" + IDLE_GIFS[idleGifIndex] + "')";
-      // 3 s dark pause before fading the next gif in
-      idleCycleTimer = setTimeout(() => {
-        if (!document.getElementById('splash')) return;
-        showIdleGif(idleGifIndex);
-        idleCycleTimer = setTimeout(cycleIdleGif, 3000);
-      }, 3000);
-    }, 380);
-  }
-
-  function startIdleTimer() {
-    idleTimer = setTimeout(() => {
-      if (!idleThumb || !document.getElementById('splash')) return;
-      idleRunning  = true;
-      idleGifIndex = 0;
-      showIdleGif(0);
-      idleCycleTimer = setTimeout(cycleIdleGif, 3000);
-    }, 6000);
-  }
-
-  function resetIdleTimer() {
-    if (idleRunning) return; // already cycling — leave it alone
-    clearTimeout(idleTimer);
-    startIdleTimer();
-  }
-
-  startIdleTimer();
-  window.addEventListener('mousemove',  resetIdleTimer, { passive: true });
-  window.addEventListener('touchstart', resetIdleTimer, { passive: true });
-  // ─────────────────────────────────────────────────────────────────────────
-
   function reveal() {
     if (triggered) return;
     triggered = true;
 
-    // Kill idle cycle and fade out immediately so it doesn't ghost
-    // through the logo during the FLIP animation
-    clearTimeout(idleTimer);
-    clearTimeout(idleCycleTimer);
-    if (idleThumb) { idleThumb.style.transition = 'opacity 0.2s ease'; idleThumb.style.opacity = '0'; }
+    // Fade out splash
+    splash.style.opacity = '0';
+    setTimeout(() => splash.remove(), 650);
 
-    // Capture scroll position immediately, then animate back to top.
-    // We delay the animation ~500ms so it starts just as the splash background
-    // begins turning transparent — the user sees the list glide up to project 01
-    // as the splash fades, rather than a hidden snap.
-    const scrollStart = window.scrollY;
-    if (scrollStart > 0) {
-      setTimeout(() => {
-        const duration  = 750;
-        const startTime = performance.now();
-        function scrollStep(now) {
-          const t    = Math.min((now - startTime) / duration, 1);
-          const ease = 1 - Math.pow(1 - t, 3); // cubic ease-out
-          window.scrollTo(0, scrollStart * (1 - ease));
-          if (t < 1) requestAnimationFrame(scrollStep);
-        }
-        requestAnimationFrame(scrollStep);
-      }, 500);
-    }
+    // Slide project list in from the right
+    if (projectList) projectList.classList.add('is-visible');
 
-    // 1. Fade out tagline immediately
-    tagline.style.opacity = '0';
+    // Enter project mode — shows full thumbnail, hides logo/nav overlay
+    if (logoPanel) logoPanel.classList.add('project-mode');
 
-    // 2. After tagline fades, FLIP the logo from splash position to portfolio position
-    setTimeout(() => {
-      const from = splashLogo.getBoundingClientRect();
-      const to   = logoReveal.getBoundingClientRect();
-
-      // Store the splash logo's exact position so returnToSplash() can land
-      // the logo at precisely the right spot (it is above-centre due to the tagline)
-      window.__splashLogoRect = {
-        left: from.left, top: from.top,
-        width: from.width, height: from.height,
-        bottom: from.bottom,
-      };
-
-      const dx    = (to.left + to.width  / 2) - (from.left + from.width  / 2);
-      const dy    = (to.top  + to.height / 2) - (from.top  + from.height / 2);
-      const scale = to.width / from.width;
-
-      // Move splash logo to portfolio logo position
-      splashLogo.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
-      splashLogo.style.transform  = 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scale + ')';
-
-      // Fade out splash background
-      splash.style.transition      = 'background-color 0.7s 0.2s ease';
-      splash.style.backgroundColor = 'transparent';
-
-      // Fade out splash logo once it arrives, and hand off to the masked logo-reveal
-      setTimeout(() => {
-        splashLogo.style.transition += ', opacity 0.3s ease';
-        splashLogo.style.opacity     = '0';
-        logoReveal.classList.add('is-visible');
-        if (projectList) projectList.classList.add('is-visible');
-      }, 480);
-
-      // Remove splash from DOM once transition is complete
-      setTimeout(() => {
-        splash.remove();
-      }, 1100);
-
-    }, 300);
+    // Guard hover events during the slide so the cursor can't accidentally
+    // activate a project mid-list before the user has seen the landing state
+    window.__transitionGuard = true;
+    setTimeout(() => { window.__transitionGuard = false; }, 800);
   }
 
-  // Trigger only on first scroll
+  // Trigger on first scroll
   window.addEventListener('scroll', reveal, { once: true, passive: true });
 
-  // Mobile: tapping the logo lockup also triggers the reveal
-  if (splashLogo && window.matchMedia('(pointer: coarse)').matches) {
-    splashLogo.addEventListener('touchend', (e) => {
-      e.preventDefault(); // prevent the ghost click that follows touchend
-      reveal();
-    }, { once: true, passive: false });
+  // Mobile: swipe up on the splash to reveal
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    let splashTouchStartY = 0;
+    splash.addEventListener('touchstart', (e) => {
+      splashTouchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    splash.addEventListener('touchmove', (e) => {
+      if (splashTouchStartY - e.touches[0].clientY > 50) reveal();
+    }, { passive: true });
   }
 
-  // Desktop: clicking the logo lockup also triggers the reveal
+  // Desktop: clicking the logo triggers the reveal
   if (splashLogo && window.matchMedia('(pointer: fine)').matches) {
     splashLogo.style.cursor = 'pointer';
     splashLogo.addEventListener('click', reveal, { once: true });
@@ -239,11 +147,14 @@ window.scrollTo(0, 0);
 
   if (!thumbA || !thumbB || !projects.length) return;
 
-  let activeLayer      = 'a';
-  let currentProject   = null;
-  let expandedProject  = null;
-  let mobileLastTapped = null;
-  let lastExpandedAt   = 0;
+  let activeLayer          = 'a';
+  let currentProject       = null;
+  let expandedProject      = null;
+  let mobileLastTapped     = null;
+  let lastExpandedAt       = 0;
+  let mobilePendingProject = null;
+
+  function isMobile() { return window.matchMedia('(pointer: coarse)').matches; }
 
   function setThumb(url, position) {
     const next    = activeLayer === 'a' ? thumbB : thumbA;
@@ -262,6 +173,10 @@ window.scrollTo(0, 0);
     const position = project.dataset.thumbPosition;
     if (url) {
       setThumb(url, position);
+      if (fullBleed) {
+        fullBleed.style.backgroundImage    = "url('" + url + "')";
+        fullBleed.style.backgroundPosition = position || 'center';
+      }
       if (navAboutThumb)    { navAboutThumb.style.backgroundImage    = "url('" + url + "')"; navAboutThumb.style.backgroundPosition    = position || 'center'; }
       if (navContactThumb)  { navContactThumb.style.backgroundImage  = "url('" + url + "')"; navContactThumb.style.backgroundPosition  = position || 'center'; }
       if (navCreativeThumb) { navCreativeThumb.style.backgroundImage = "url('" + url + "')"; navCreativeThumb.style.backgroundPosition = position || 'center'; }
@@ -299,6 +214,10 @@ window.scrollTo(0, 0);
   if (firstWithThumb) {
     thumbA.style.backgroundImage    = "url('" + firstWithThumb.dataset.thumb + "')";
     thumbA.style.backgroundPosition = firstWithThumb.dataset.thumbPosition || 'center';
+    if (fullBleed) {
+      fullBleed.style.backgroundImage    = "url('" + firstWithThumb.dataset.thumb + "')";
+      fullBleed.style.backgroundPosition = firstWithThumb.dataset.thumbPosition || 'center';
+    }
     if (navAboutThumb)    { navAboutThumb.style.backgroundImage    = "url('" + firstWithThumb.dataset.thumb + "')"; navAboutThumb.style.backgroundPosition    = firstWithThumb.dataset.thumbPosition || 'center'; }
     if (navContactThumb)  { navContactThumb.style.backgroundImage  = "url('" + firstWithThumb.dataset.thumb + "')"; navContactThumb.style.backgroundPosition  = firstWithThumb.dataset.thumbPosition || 'center'; }
     if (navCreativeThumb) { navCreativeThumb.style.backgroundImage = "url('" + firstWithThumb.dataset.thumb + "')"; navCreativeThumb.style.backgroundPosition = firstWithThumb.dataset.thumbPosition || 'center'; }
@@ -307,64 +226,31 @@ window.scrollTo(0, 0);
 
   // Restore full-bleed state after back-navigation from a project page.
   // Only restore when genuinely returning via #projects — on a plain refresh, clear it.
-  if (fullBleed && logoPanel) {
+  if (fullBleed) {
     if (!window.__restoreFullBleed) {
       sessionStorage.removeItem('jbFullBleedBg');
       sessionStorage.removeItem('jbFullBleedPos');
       sessionStorage.removeItem('jbFullBleedHref');
     }
+    if (!window.__restoreLastProject) {
+      sessionStorage.removeItem('jbLastProjectHref');
+    }
     window.__restoreFullBleed = false;
-    const savedBg   = sessionStorage.getItem('jbFullBleedBg');
-    const savedPos  = sessionStorage.getItem('jbFullBleedPos');
-    const savedHref = sessionStorage.getItem('jbFullBleedHref');
+    const savedBg  = sessionStorage.getItem('jbFullBleedBg');
+    const savedPos = sessionStorage.getItem('jbFullBleedPos');
     if (savedBg) {
       fullBleed.style.backgroundImage    = savedBg;
       fullBleed.style.backgroundPosition = savedPos || 'center';
-      logoPanel.classList.add('is-expanded');
-      expandedProject = projects.find(p => {
-        const a = p.querySelector('a');
-        return a && a.getAttribute('href') === savedHref;
-      }) || null;
     }
   }
 
-  // Hover: activate project + keep full-bleed in sync if already expanded
-  // After 1s of hover, auto-expand the full-bleed (same as a first click)
-  let hoverTimer = null;
-
+  // Hover: activate project (updates thumbnail + fullBleed)
+  // Guard: ignore events during the slide-in transition so the cursor
+  // can't accidentally skip past project 01 on landing
   projects.forEach(p => {
     p.addEventListener('mouseenter', () => {
+      if (window.__transitionGuard) return;
       activateProject(p);
-      if (p.id === 'aboutMobileLink' || p.id === 'contactListBtn') return;
-      if (logoPanel && logoPanel.classList.contains('is-expanded') && p.dataset.thumb) {
-        const newBg  = "url('" + p.dataset.thumb + "')";
-        const newPos = p.dataset.thumbPosition || 'center';
-        if (fullBleed) {
-          fullBleed.style.backgroundImage    = newBg;
-          fullBleed.style.backgroundPosition = newPos;
-        }
-        const link = p.querySelector('a');
-        const href = link ? link.getAttribute('href') : null;
-        if (href && href !== '#') {
-          sessionStorage.setItem('jbFullBleedBg',   newBg);
-          sessionStorage.setItem('jbFullBleedPos',  newPos);
-          sessionStorage.setItem('jbFullBleedHref', href);
-        }
-      }
-      // Start hover-expand timer (desktop only, skip if already expanded for this project)
-      if (window.innerWidth > 768 && p.dataset.thumb) {
-        clearTimeout(hoverTimer);
-        hoverTimer = setTimeout(() => {
-          if (!logoPanel.classList.contains('is-expanded') || expandedProject !== p) {
-            activateProject(p);
-            expandFullBleed(p);
-          }
-        }, 1000);
-      }
-    });
-
-    p.addEventListener('mouseleave', () => {
-      clearTimeout(hoverTimer);
     });
   });
 
@@ -376,7 +262,10 @@ window.scrollTo(0, 0);
       else visibleSet.delete(e.target);
     });
     const top = projects.find(p => visibleSet.has(p));
-    if (top) activateProject(top);
+    if (top) {
+      activateProject(top);
+      if (mobilePendingProject && mobilePendingProject !== top) mobilePendingProject = null;
+    }
   }, { threshold: 0.3 });
   projects.forEach(p => observer.observe(p));
 
@@ -401,99 +290,71 @@ window.scrollTo(0, 0);
     });
   });
 
-  // CREATIVE button click → expand full-bleed for project 01
-  if (logoReveal) {
-    logoReveal.style.cursor = 'pointer';
-    logoReveal.addEventListener('click', () => {
-      const first = projects.find(p => p.dataset.thumb);
-      if (first) expandFullBleed(first);
-    });
-  }
+  // Project navigation: desktop single-click; mobile double-tap
+  projects.forEach(p => {
+    const link = p.querySelector('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
 
-  // Full-bleed mouseenter → collapse back to CREATIVE / ABOUT / CONTACT
-  // Guard: ignore if expand just happened (cursor was already on left panel)
-  if (fullBleed) {
-    fullBleed.addEventListener('mouseenter', () => {
-      if (logoPanel && logoPanel.classList.contains('is-expanded') && Date.now() - lastExpandedAt > 400) {
-        collapseFullBleed();
+    // Desktop: single click navigates
+    link.addEventListener('click', (e) => {
+      if (p.id === 'aboutMobileLink') {
+        e.preventDefault();
+        if (typeof window.__triggerAbout === 'function') window.__triggerAbout();
+        return;
+      }
+      if (p.id === 'contactListBtn') {
+        e.preventDefault();
+        if (typeof window.__triggerEnd === 'function') window.__triggerEnd();
+        return;
+      }
+      if (p.dataset.thumb && href && href !== '#') {
+        const position = p.dataset.thumbPosition || 'center';
+        sessionStorage.setItem('jbLastProjectHref', href);
+        sessionStorage.setItem('jbFullBleedBg',   "url('" + p.dataset.thumb + "')");
+        sessionStorage.setItem('jbFullBleedPos',  position);
+        sessionStorage.setItem('jbFullBleedHref', href);
       }
     });
-  }
 
-  // Click project title → expand to full-bleed (first click), navigate (second click)
-  if (logoPanel && fullBleed) {
-    projects.forEach(p => {
-      const link = p.querySelector('a');
-      if (!link) return;
-      link.addEventListener('click', (e) => {
-        const url      = p.dataset.thumb;
-        const position = p.dataset.thumbPosition || 'center';
-        const href     = link.getAttribute('href');
-        if (!url) return; // no thumb → let browser handle naturally
+    // Mobile: first tap shows thumbnail in top panel, second tap navigates
+    link.addEventListener('touchend', (e) => {
+      if (!isMobile()) return;
 
-        // About entry — trigger about view, never expand to full-bleed
-        if (p.id === 'aboutMobileLink') {
-          e.preventDefault();
-          e.stopPropagation();
-          if (typeof window.__triggerAbout === 'function') window.__triggerAbout();
-          return;
-        }
-
-        // Contact entry — jump straight to the end/contact view
-        if (p.id === 'contactListBtn') {
-          e.preventDefault();
-          e.stopPropagation();
-          if (typeof window.__triggerEnd === 'function') window.__triggerEnd();
-          return;
-        }
-
-        // ── Mobile: double-tap to navigate ──────────────────────────
-        if (window.innerWidth <= 768) {
-          if (href === '#') { e.preventDefault(); return; }
-          if (mobileLastTapped !== p) {
-            e.preventDefault();
-            activateProject(p);
-            mobileLastTapped = p;
-            expandFullBleed(p);
-            return;
-          }
-          // Second tap of same project: navigate
-          collapseFullBleed();
-          sessionStorage.setItem('jbFullBleedBg',   "url('" + url + "')");
-          sessionStorage.setItem('jbFullBleedPos',  position);
-          sessionStorage.setItem('jbFullBleedHref', href);
-          return; // let browser navigate
-        }
-
-        // ── Desktop: full-bleed expand then navigate ─────────────────
-        // Full-bleed already open for THIS project → navigate
-        if (logoPanel.classList.contains('is-expanded') && expandedProject === p) {
-          if (href === '#') { e.preventDefault(); return; }
-          sessionStorage.setItem('jbFullBleedBg',   "url('" + url + "')");
-          sessionStorage.setItem('jbFullBleedPos',  position);
-          sessionStorage.setItem('jbFullBleedHref', href);
-          return; // let browser navigate
-        }
-
-        // First click (or different project) → expand full-bleed
+      if (p.id === 'aboutMobileLink') {
         e.preventDefault();
+        if (typeof window.__triggerAbout === 'function') window.__triggerAbout();
+        return;
+      }
+      if (p.id === 'contactListBtn') {
+        e.preventDefault();
+        if (typeof window.__triggerEnd === 'function') window.__triggerEnd();
+        return;
+      }
+
+      if (!href || href === '#') return;
+      e.preventDefault();
+
+      if (mobilePendingProject === p) {
+        // Second tap — navigate
+        const position = p.dataset.thumbPosition || 'center';
+        sessionStorage.setItem('jbLastProjectHref', href);
+        if (p.dataset.thumb) {
+          sessionStorage.setItem('jbFullBleedBg',   "url('" + p.dataset.thumb + "')");
+          sessionStorage.setItem('jbFullBleedPos',  position);
+          sessionStorage.setItem('jbFullBleedHref', href);
+        }
+        window.location.href = href;
+      } else {
+        // First tap — activate thumbnail in top panel
+        mobilePendingProject = p;
         activateProject(p);
-        expandFullBleed(p);
-      });
-    });
-  }
+      }
+    }, { passive: false });
+  });
 
-  // Mobile: collapse full-thumb when user scrolls
-  window.addEventListener('scroll', () => {
-    if (window.innerWidth > 768) return;
-    if (mobileLastTapped && logoPanel) collapseFullBleed();
-  }, { passive: true });
 
-  // Allow other IIFEs to restore the current thumbnail after they've
-  // temporarily overridden it (e.g. the Full Face / about view).
-  // transitionToAbout() always leaves thumbA showing Full Face at opacity 1,
-  // thumbB at opacity 0 — so we crossfade by loading the project image into
-  // thumbB and fading it in while thumbA (Full Face) fades out.
+  // Restore the current project thumbnail after the about view exits
   window.__restoreCurrentThumb = function () {
     if (!currentProject || !currentProject.dataset.thumb) return;
     const url = currentProject.dataset.thumb;
@@ -503,7 +364,32 @@ window.scrollTo(0, 0);
     thumbB.style.opacity            = '1';
     thumbA.style.opacity            = '0';
     activeLayer = 'b';
+    if (fullBleed) {
+      fullBleed.style.backgroundImage    = "url('" + url + "')";
+      fullBleed.style.backgroundPosition = pos || 'center';
+    }
   };
+
+  // On return from a project page: scroll to the last-viewed project
+  if (window.__restoreLastProject) {
+    window.__restoreLastProject = false;
+    const lastHref = sessionStorage.getItem('jbLastProjectHref');
+    if (lastHref) {
+      const lastProject = projects.find(p => {
+        const a = p.querySelector('a');
+        return a && a.getAttribute('href') === lastHref;
+      });
+      if (lastProject) {
+        requestAnimationFrame(() => {
+          const logoPanelEl = document.getElementById('logoPanel');
+          const panelH      = logoPanelEl ? logoPanelEl.getBoundingClientRect().height : 0;
+          const top         = lastProject.getBoundingClientRect().top + window.scrollY - panelH - 16;
+          window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
+          activateProject(lastProject);
+        });
+      }
+    }
+  }
 
 }());
 
@@ -534,15 +420,13 @@ revealEls.forEach(el => revealObserver.observe(el));
   const aboutView   = document.getElementById('aboutView');
   const aboutCol    = document.getElementById('aboutCol');
   const fullBleedEl = document.getElementById('fullBleed');
-  const viewBtnEl   = document.getElementById('viewProjectBtn');
-  const thumbAEl    = document.getElementById('logoThumbA');
-  const thumbBEl    = document.getElementById('logoThumbB');
-  const fullFaceBtn       = document.getElementById('fullFaceBtn');
-  const backToProjectsBtn = document.getElementById('backToProjectsBtn');
-  const contactBtn        = document.getElementById('contactBtn');
+  const contactFromAboutBtn = document.getElementById('contactFromAboutBtn');
+  const logoReveal          = document.getElementById('logoReveal');
+  const timelineBtn         = document.getElementById('timelineBtn');
+  const aboutTimeline       = document.getElementById('aboutTimeline');
+  const fullBioBtn          = document.getElementById('fullBioBtn');
+  const aboutBioDropdown    = document.getElementById('aboutBioDropdown');
   if (!logoPanelEl || !aboutView) return;
-
-  const FULL_FACE = "Full face.jpg";
 
   const END_IMAGES = [
     "site end headers/end image 4.png",
@@ -556,95 +440,41 @@ revealEls.forEach(el => revealObserver.observe(el));
   let inAbout          = false;
   let inAboutSince     = null;
   let inEnd            = false;
-  let endEnteredFromAbout = false; // true when end view reached via about; false = direct from project list
-  let faceExpanded     = false;
+  let endEnteredFromAbout = false;
   let atBottomSince    = null;
   let aboutTouchY      = 0;
-  let aboutColAtBottom = false;
-  let endAtBottomSince = null;
   let bottomExcess     = 0;   // accumulated wheel delta while at page bottom (hard-scroll gate)
   let upExcess         = 0;   // accumulated upward wheel delta while in about (prevents accidental dismiss)
   let endDismissedAt   = null; // guard: ignore scroll-up-from-about for a short time after leaving end
 
   function pickEndImage() {
-    return END_IMAGES[Math.floor(Math.random() * END_IMAGES.length)];
+    const pool = window.__splashImage
+      ? END_IMAGES.filter(img => img !== window.__splashImage)
+      : END_IMAGES;
+    return pool[Math.floor(Math.random() * pool.length)];
   }
 
   function transitionToEnd() {
     if (inEnd || !endView) return;
     inEnd = true;
-    endEnteredFromAbout = inAbout; // remember so dismiss knows where to return
+    endEnteredFromAbout = inAbout;
     endView.style.backgroundImage = "url('" + pickEndImage() + "')";
-
-    // ── FLIP: slide the end logo from the about-logo's screen position ──
-    // into its natural centred position, so it feels like the same lockup
-    // travelling into the full-bleed frame rather than a new one appearing.
-    const aboutLogoEl = document.getElementById('logoReveal');
-    const endLogoEl   = endView.querySelector('.end-logo');
-    const endIconsEl  = endView.querySelector('.end-icons');
-
-    if (aboutLogoEl && endLogoEl) {
-      const from   = aboutLogoEl.getBoundingClientRect();
-      const logoW  = endLogoEl.offsetWidth || from.width;
-      const dx     = (from.left + from.width  / 2) - (window.innerWidth  / 2);
-      const dy     = (from.top  + from.height / 2) - (window.innerHeight / 2);
-      const sc     = from.width / logoW;
-
-      // Place end logo at the about logo's current screen position (no transition yet)
-      endLogoEl.style.transition = 'none';
-      endLogoEl.style.transform  = 'translate(' + dx + 'px,' + dy + 'px) scale(' + sc + ')';
-
-      // Keep icons hidden until the logo has settled
-      if (endIconsEl) { endIconsEl.style.transition = 'none'; endIconsEl.style.opacity = '0'; }
-    }
-
-    // Fade in the full-bleed background
     endView.classList.add('is-visible');
-
-    // One rAF later: animate the logo to its centred resting position
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (endLogoEl) {
-          endLogoEl.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
-          endLogoEl.style.transform  = '';
-        }
-      });
-    });
-
-    // Icons fade in once the logo has arrived
-    setTimeout(() => {
-      if (endIconsEl) {
-        endIconsEl.style.transition = 'opacity 0.4s ease';
-        endIconsEl.style.opacity    = '1';
-      }
-    }, 700);
   }
 
   function transitionFromEnd() {
     if (!inEnd || !endView) return;
     inEnd = false;
     endView.classList.remove('is-visible');
-
-    // Reset logo/icons so the FLIP is clean on the next visit
-    const endLogoEl  = endView.querySelector('.end-logo');
-    const endIconsEl = endView.querySelector('.end-icons');
-    setTimeout(() => {
-      if (endLogoEl)  { endLogoEl.style.transition  = ''; endLogoEl.style.transform  = ''; }
-      if (endIconsEl) { endIconsEl.style.transition = ''; endIconsEl.style.opacity   = ''; }
-    }, 700);
-
-    // On mobile: reset about column scroll so the user can swipe down to exit
-    if (window.innerWidth <= 768 && aboutCol) {
-      aboutCol.scrollTop = 0;
-      aboutColAtBottom = false;
-      endAtBottomSince = null;
-    }
+    if (window.innerWidth <= 768 && aboutCol) aboutCol.scrollTop = 0;
   }
 
   // Expose so the thumbnail IIFE can trigger the about/end views from the project list
   window.__triggerAbout    = function () { transitionToAbout(); };
   window.__triggerEnd      = function () { transitionToEnd();   };
   window.__triggerFromAbout = function () { transitionFromAbout(); };
+
+  const aboutMobileThumb = document.getElementById('aboutMobileThumb');
 
   const navAboutBtn   = document.getElementById('navAboutBtn');
   const navContactBtn = document.getElementById('navContactBtn');
@@ -658,208 +488,112 @@ revealEls.forEach(el => revealObserver.observe(el));
     inAbout = true;
     inAboutSince = Date.now();
     atBottomSince = null;
-    faceExpanded = false;
 
-    // Collapse any active project full-bleed and clear its persisted state
-    logoPanelEl.classList.remove('is-expanded');
     sessionStorage.removeItem('jbFullBleedBg');
     sessionStorage.removeItem('jbFullBleedPos');
     sessionStorage.removeItem('jbFullBleedHref');
 
-    // Show Full Face image through the logo letter mask, switching to ABOUT logo shape
-    const sizerEl   = logoPanelEl.querySelector('.logo-sizer');
-    const thumbEls  = logoPanelEl.querySelectorAll('.logo-thumb');
-    logoReveal.classList.add('about-mode');
-    logoPanelEl.classList.add('about-active');
-    if (thumbAEl && thumbBEl) {
-      thumbAEl.style.backgroundImage    = "url('" + FULL_FACE + "')";
-      thumbAEl.style.backgroundPosition = 'center top';
-      thumbAEl.style.opacity            = '1';
-      thumbBEl.style.opacity            = '0';
+    // Mobile about thumbnail — same image as the desktop about column
+    if (aboutMobileThumb) {
+      aboutMobileThumb.style.backgroundImage    = "url('About head 1.jpg')";
+      aboutMobileThumb.style.backgroundPosition = 'center';
     }
 
-    const rect    = logoPanelEl.getBoundingClientRect();
-    const targetX = window.innerWidth - rect.width - rect.left;
-
-    // Instantly show about-view background — hides the grid collapsing behind it
-    aboutView.style.transition  = 'none';
-    aboutView.style.opacity     = '1';
+    // Show about-view instantly — covers the portfolio layout behind it
+    aboutView.style.transition    = 'none';
+    aboutView.style.opacity       = '1';
     aboutView.style.pointerEvents = 'auto';
-    aboutCol.style.opacity      = '0';
+    aboutCol.style.opacity        = '0';
 
-    const isMobile = window.innerWidth <= 768;
-
-    // Pull logo panel out of the grid and fix it at its current position
-    logoPanelEl.style.position  = 'fixed';
-    logoPanelEl.style.left      = rect.left + 'px';
-    logoPanelEl.style.top       = '0';
-    logoPanelEl.style.width     = rect.width + 'px';
-    logoPanelEl.style.height    = isMobile ? 'auto' : '100vh';
-    logoPanelEl.style.zIndex    = '150';
-
-    // On mobile: pin about text to the space below the logo panel
-    if (isMobile) {
-      requestAnimationFrame(() => {
-        const panelH = logoPanelEl.getBoundingClientRect().height;
-        aboutCol.style.position  = 'absolute';
-        aboutCol.style.top       = panelH + 'px';
-        aboutCol.style.bottom    = '0';
-        aboutCol.style.left      = '0';
-        aboutCol.style.right     = '0';
-        aboutCol.style.overflowY = 'auto';
-      });
-    }
-
-    // Slide logo to the right column (desktop only — on mobile targetX is 0)
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        logoPanelEl.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
-        logoPanelEl.style.transform  = 'translateX(' + targetX + 'px)';
-      });
-    });
-
-    // Fade in about text once logo is on its way
+    // Fade in the about text
     setTimeout(() => {
       aboutCol.style.transition = 'opacity 0.5s ease';
       aboutCol.style.opacity    = '1';
-      // Reset end-view tracking and check if content fits without scrolling
-      endAtBottomSince = null;
-      aboutColAtBottom = false;
-      if (aboutCol.scrollHeight <= aboutCol.clientHeight + 5) {
-        aboutColAtBottom = true;
-        endAtBottomSince = Date.now();
-      }
-    }, 400);
+    }, 100);
   }
 
   function transitionFromAbout() {
     if (!inAbout) return;
     inAbout = false;
 
-    // Reset about col scroll so swipe-down-to-dismiss works on next visit
+    // Reset about col scroll and collapse timeline so it's fresh on next visit
     if (aboutCol) aboutCol.scrollTop = 0;
-    aboutColAtBottom = false;
-    endAtBottomSince = null;
+    if (aboutTimeline) { aboutTimeline.classList.remove('is-open'); }
+    if (timelineBtn) { timelineBtn.querySelector('h2').textContent = 'Timeline'; }
+    if (aboutBioDropdown) { aboutBioDropdown.classList.remove('is-open'); }
+    if (fullBioBtn) { fullBioBtn.querySelector('h2').textContent = 'Full Bio'; }
     upExcess = 0;
 
-    // Close end view if it was open
     if (inEnd) transitionFromEnd();
 
-    // Collapse full-face full-bleed if it was open
-    if (faceExpanded) collapseFace();
-
-    // Fade out about text
+    // Fade out about text then hide the view
     aboutCol.style.transition = 'opacity 0.3s ease';
     aboutCol.style.opacity    = '0';
 
-    // Slide logo back to the left
-    logoPanelEl.style.transition = 'transform 0.75s cubic-bezier(0.76, 0, 0.24, 1)';
-    logoPanelEl.style.transform  = '';
-
-    // Once logo returns, reset everything and restore the project thumbnail
     setTimeout(() => {
       aboutView.style.transition    = 'none';
       aboutView.style.opacity       = '0';
       aboutView.style.pointerEvents = 'none';
-
-      logoPanelEl.style.position   = '';
-      logoPanelEl.style.left       = '';
-      logoPanelEl.style.top        = '';
-      logoPanelEl.style.width      = '';
-      logoPanelEl.style.height     = '';
-      logoPanelEl.style.zIndex     = '';
-      logoPanelEl.style.transition = '';
-      logoPanelEl.style.transform  = '';
-
-      aboutCol.style.transition  = '';
-      aboutCol.style.opacity     = '0';
-      aboutCol.style.position    = '';
-      aboutCol.style.top         = '';
-      aboutCol.style.bottom      = '';
-      aboutCol.style.left        = '';
-      aboutCol.style.right       = '';
-      aboutCol.style.overflowY   = '';
-
-      // Restore CREATIVE logo shape and current project thumbnail
-      const sizerEl2  = logoPanelEl.querySelector('.logo-sizer');
-      const thumbEls2 = logoPanelEl.querySelectorAll('.logo-thumb');
-      logoReveal.classList.remove('about-mode');
-      logoPanelEl.classList.remove('about-active');
+      aboutCol.style.transition     = '';
+      aboutCol.style.opacity        = '0';
       if (typeof window.__restoreCurrentThumb === 'function') {
         window.__restoreCurrentThumb();
       }
-    }, 800);
+    }, 350);
   }
 
-  // If aboutCol content fits without scrolling, treat as already at bottom
-  function checkAboutColOverflow() {
-    if (!aboutCol) return;
-    if (aboutCol.scrollHeight <= aboutCol.clientHeight + 5) {
-      aboutColAtBottom = true;
-      if (endAtBottomSince === null) endAtBottomSince = Date.now();
-    }
-  }
-
-  // Track when aboutCol is scrolled to its bottom (triggers end view)
-  if (aboutCol) {
-    aboutCol.addEventListener('scroll', () => {
-      const atBottom = aboutCol.scrollTop + aboutCol.clientHeight >= aboutCol.scrollHeight - 5;
-      if (atBottom && endAtBottomSince === null) {
-        endAtBottomSince = Date.now();
-      } else if (!atBottom) {
-        endAtBottomSince = null;
-      }
-      aboutColAtBottom = atBottom;
-    }, { passive: true });
-  }
-
-  // Full Face / Less Face button toggle
-  function expandFace() {
-    fullBleedEl.style.backgroundImage    = "url('" + FULL_FACE + "')";
-    fullBleedEl.style.backgroundPosition = 'center top';
-    if (viewBtnEl) { viewBtnEl.style.opacity = '0'; viewBtnEl.style.pointerEvents = 'none'; }
-    logoPanelEl.classList.add('is-expanded');
-    if (fullFaceBtn) fullFaceBtn.querySelector('h2').textContent = 'Less Face';
-    faceExpanded = true;
-  }
-
-  function collapseFace() {
-    logoPanelEl.classList.remove('is-expanded');
-    if (viewBtnEl) { viewBtnEl.style.opacity = ''; viewBtnEl.style.pointerEvents = ''; }
-    if (fullFaceBtn) fullFaceBtn.querySelector('h2').textContent = 'Full Face';
-    faceExpanded = false;
-  }
-
-  if (fullFaceBtn && fullBleedEl) {
-    fullFaceBtn.addEventListener('click', (e) => {
+  // Contact button — go to end/contact view
+  if (contactFromAboutBtn) {
+    contactFromAboutBtn.addEventListener('click', (e) => {
       e.preventDefault();
       if (!inAbout) return;
-      faceExpanded ? collapseFace() : expandFace();
-    });
-
-    // Clicking the photo also collapses it
-    fullBleedEl.addEventListener('click', () => {
-      if (!inAbout || !faceExpanded) return;
-      collapseFace();
+      transitionToEnd();
     });
   }
 
-  // Back To Projects button — return to the project list
-  if (backToProjectsBtn) {
-    backToProjectsBtn.addEventListener('click', (e) => {
+  // End-view corner nav buttons
+  const endToCreativeBtn = document.getElementById('endToCreativeBtn');
+  const endToAboutBtn    = document.getElementById('endToAboutBtn');
+  if (endToCreativeBtn) {
+    endToCreativeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      transitionFromEnd();
+      if (inAbout) transitionFromAbout();
+    });
+  }
+  if (endToAboutBtn) {
+    endToAboutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      transitionFromEnd();
+      if (!inAbout) transitionToAbout();
+    });
+  }
+
+  // Projects button — return to project list
+  const projectsFromAboutBtn = document.getElementById('projectsFromAboutBtn');
+  if (projectsFromAboutBtn) {
+    projectsFromAboutBtn.addEventListener('click', (e) => {
       e.preventDefault();
       if (!inAbout) return;
       transitionFromAbout();
     });
   }
 
-  // Contact button — jump straight to the end view
-  // No inAbout guard: the CSS pointer-events:none on .about-view already prevents
-  // this firing when the view is inactive, so it's safe to always fire transitionToEnd().
-  if (contactBtn) {
-    contactBtn.addEventListener('click', (e) => {
+  // Timeline toggle — expand/collapse the career date list
+  if (timelineBtn && aboutTimeline) {
+    timelineBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      transitionToEnd();
+      const open = aboutTimeline.classList.toggle('is-open');
+      timelineBtn.querySelector('h2').textContent = open ? 'Close Timeline' : 'Timeline';
+    });
+  }
+
+  // Full Bio toggle — expand/collapse the full bio text
+  if (fullBioBtn && aboutBioDropdown) {
+    fullBioBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const open = aboutBioDropdown.classList.toggle('is-open');
+      fullBioBtn.querySelector('h2').textContent = open ? 'Close Bio' : 'Full Bio';
     });
   }
 
@@ -889,17 +623,8 @@ revealEls.forEach(el => revealObserver.observe(el));
     // In about view, ignore wheel events over the right (logo/nav) panel
     if (inAbout && logoPanelEl && logoPanelEl.contains(e.target)) return;
 
-    // About view: scroll down → end view
-    // Require 600ms dwell in about before allowing forward navigation
-    // (prevents scroll momentum from skipping the about view entirely)
-    if (inAbout && e.deltaY > 0) {
-      if (!inAboutSince || Date.now() - inAboutSince < 600) return;
-      checkAboutColOverflow();
-      if (aboutColAtBottom && endAtBottomSince && Date.now() - endAtBottomSince > 500) {
-        transitionToEnd();
-      }
-      return;
-    }
+    // About view: scroll down → blocked (only Contact button triggers end view)
+    if (inAbout && e.deltaY > 0) return;
 
     // About view: scroll up → back to portfolio
     // Mirrors the project-list behaviour: aboutCol content must reach its very
@@ -963,19 +688,8 @@ revealEls.forEach(el => revealObserver.observe(el));
     }
     if (inEnd) return;
 
-    // About view: swipe up → end view
-    // Mobile uses shorter dwell guards — native scroll reaches the bottom in one
-    // gesture and users expect the next swipe to advance, not a separate action.
-    if (inAbout && dy < -40) {
-      const timeGuard = window.innerWidth <= 768 ? 300 : 600;
-      if (!inAboutSince || Date.now() - inAboutSince < timeGuard) return;
-      checkAboutColOverflow();
-      const bottomDwell = window.innerWidth <= 768 ? 0 : 300;
-      if (aboutColAtBottom && endAtBottomSince !== null && Date.now() - endAtBottomSince >= bottomDwell) {
-        transitionToEnd();
-      }
-      return;
-    }
+    // About view: swipe up → blocked (only Contact button triggers end view)
+    if (inAbout && dy < -40) return;
 
     // About view: swipe down → back to portfolio
     // On mobile: only dismiss if the about content is scrolled back to the very top,
@@ -1060,114 +774,66 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (returning) return;
     returning = true;
 
-    // ── Measure first, before any DOM changes ────────────────────────
-    const fromRect    = logoReveal.getBoundingClientRect();
+    const projectList = document.querySelector('.project-list');
     const logoPanelEl = document.getElementById('logoPanel');
-    const thumbA      = document.getElementById('logoThumbA');
-    const thumbB      = document.getElementById('logoThumbB');
 
-    // ── Work out the landing position ────────────────────────────────
-    // Use the exact rect captured when the original splash played —
-    // the logo is above-centre (flex-column with tagline below), so
-    // window.innerHeight/2 would be wrong and cause a jump on reload.
-    const r           = window.__splashLogoRect;
-    const targetWidth = r ? r.width : Math.min(Math.max(280, window.innerWidth * 0.42), 680);
-    const finalLeft   = r ? r.left  : (window.innerWidth - targetWidth) / 2;
-    const finalTop    = r ? r.top   : (window.innerHeight - targetWidth * 0.28) / 2;
-    const finalCX     = finalLeft + targetWidth / 2;
-    const finalCY     = finalTop  + (r ? r.height / 2 : targetWidth * 0.14);
+    // Reverse of the intro: slide the project list back out to the right
+    if (projectList) projectList.classList.remove('is-visible');
+    if (logoPanelEl) logoPanelEl.classList.remove('project-mode');
 
-    const fromCX = fromRect.left + fromRect.width  / 2;
-    const fromCY = fromRect.top  + fromRect.height / 2;
-    const dx     = fromCX - finalCX;
-    const dy     = fromCY - finalCY;
-    const scale  = fromRect.width / targetWidth;
+    // Build a matching splash overlay and fade it in simultaneously
+    const SPLASH_IMAGES = [
+      "site end headers/end image 4.png",
+      "site end headers/end image 5.png",
+      "site end headers/end image 6.png",
+      "site end headers/end image 7.webp",
+    ];
+    const bgImg = SPLASH_IMAGES[Math.floor(Math.random() * SPLASH_IMAGES.length)];
+    sessionStorage.setItem('jbReturnSplashImg', bgImg);
 
-    // Hide the portfolio logo so it doesn't show through the overlay
-    logoReveal.style.opacity = '0';
-
-    // ── Build the splash overlay ──────────────────────────────────────
-    // Elements are absolutely positioned to land at pixel-perfect splash coords
     const splashEl = document.createElement('div');
     splashEl.style.cssText = [
       'position:fixed', 'inset:0', 'z-index:500',
-      'background-color:#f8f8f6', 'pointer-events:none',
+      'background-color:#111',
+      'background-image:url("' + bgImg + '")',
+      'background-size:cover', 'background-position:center',
+      'display:flex', 'align-items:center', 'justify-content:center',
+      'opacity:0', 'transition:opacity 0.6s ease',
     ].join(';');
+
+    const overlayEl = document.createElement('div');
+    overlayEl.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:0';
+
+    const contentEl = document.createElement('div');
+    contentEl.style.cssText = 'position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.75rem';
 
     const imgEl = document.createElement('img');
     imgEl.src = 'NARROW CAC CENTRERD FILES/NARROW JOE BRUCE.png';
     imgEl.alt = 'Joe Bruce';
-    // No transition yet — prevents the browser firing an unwanted animation
-    // from the element's default (identity) state to the initial inverted position
-    imgEl.style.cssText = [
-      'position:absolute',
-      'left:' + finalLeft + 'px',
-      'top:'  + finalTop  + 'px',
-      'width:' + targetWidth + 'px',
-      'height:auto',
-      'transform:translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')',
-    ].join(';');
+    imgEl.style.cssText = 'display:block;width:clamp(280px,42vw,680px);height:auto;filter:invert(1)';
 
-    // Tagline sits below the logo, matching the real .splash-content gap (1.75 rem ≈ 28 px).
-    // Top is set after DOM insertion so we can read the image's actual rendered height —
-    // using r.bottom directly caused occasional overlap when the logo's aspect ratio
-    // differed slightly from the original #splashLogo element's rendered height.
-    const taglineEl  = document.createElement('p');
-    taglineEl.textContent = 'Executive Creative Director.';
+    const taglineEl = document.createElement('p');
+    taglineEl.textContent = 'Writer & Executive Creative Director.';
     taglineEl.style.cssText = [
-      'position:absolute', 'left:50%',
-      'transform:translateX(-50%)',
       'font-family:"Cormorant Garamond",Georgia,serif',
       'font-size:clamp(0.9rem,1.4vw,1.2rem)',
       'font-weight:300', 'letter-spacing:0.08em',
-      'color:#888888', 'white-space:nowrap',
-      'opacity:0', 'transition:opacity 0.4s ease 0.6s',
+      'color:rgba(255,255,255,0.8)', 'text-align:center',
     ].join(';');
 
-    splashEl.appendChild(imgEl);
-    splashEl.appendChild(taglineEl);
+    contentEl.appendChild(imgEl);
+    contentEl.appendChild(taglineEl);
+    splashEl.appendChild(overlayEl);
+    splashEl.appendChild(contentEl);
     document.body.appendChild(splashEl);
 
-    // Position the tagline from the image's actual rendered bottom (not a precalculated estimate)
-    function placeTagline() {
-      const h = imgEl.offsetHeight;
-      taglineEl.style.top = (finalTop + (h > 0 ? h : targetWidth * 0.28) + 28) + 'px';
-    }
-    if (imgEl.complete && imgEl.naturalHeight > 0) {
-      placeTagline(); // already cached — offsetHeight is available synchronously
-    } else {
-      imgEl.addEventListener('load', placeTagline, { once: true });
-    }
+    // Fade splash in
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      splashEl.style.opacity = '1';
+    }));
 
-    // ── FLIP: force a reflow to commit the initial transform to the compositor,
-    // then animate on the very next frame — avoids the 2-frame "stuck" flash
-    // that the old double-rAF produced before the animation could begin.
-    splashEl.getBoundingClientRect(); // triggers reflow, commits initial state
-    requestAnimationFrame(() => {
-      imgEl.style.transition  = 'transform 0.85s cubic-bezier(0.76,0,0.24,1)';
-      imgEl.style.transform   = 'translate(0,0) scale(1)';
-      taglineEl.style.opacity = '1';
-    });
-
-    // Collapse full-bleed / thumbnails only once the splash background has
-    // faded in enough to cover the panel — avoids a jarring pop when
-    // the full-bleed image disappears underneath
-    setTimeout(() => {
-      if (thumbA) { thumbA.style.transition = 'opacity 0.15s'; thumbA.style.opacity = '0'; }
-      if (thumbB) { thumbB.style.transition = 'opacity 0.15s'; thumbB.style.opacity = '0'; }
-      if (logoPanelEl) logoPanelEl.classList.remove('is-expanded');
-    }, 350);
-
-    // Reload once the animation has fully settled — delay is generous so the
-    // logo and tagline are completely visible before the real splash takes over
-    setTimeout(() => { window.location.reload(); }, 1600);
-  }
-
-  // End-view logo: click → return to splash
-  const endLogoClickEl = document.querySelector('.end-logo');
-  if (endLogoClickEl) {
-    endLogoClickEl.style.cursor = 'pointer';
-    endLogoClickEl.addEventListener('click', returnToSplash);
+    // Reload once both animations have settled
+    setTimeout(() => { window.location.reload(); }, 1000);
   }
 
   // Desktop: wheel-up at the very top, but only after momentum from the first

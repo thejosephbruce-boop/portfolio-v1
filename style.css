@@ -48,8 +48,19 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
   pointer-events: auto;
+  transition: opacity 0.6s ease;
+}
+
+.splash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
 }
 
 .splash-content {
@@ -57,6 +68,8 @@ ul {
   flex-direction: column;
   align-items: center;
   gap: 1.75rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Wrapper gives the idle thumb an anchor to position against */
@@ -70,6 +83,7 @@ ul {
   display: block;
   width: 100%;
   height: auto;
+  filter: invert(1);
 }
 
 /* Idle thumbnail — fades in through the letter mask after 6 s of inactivity */
@@ -94,9 +108,19 @@ ul {
   font-size: clamp(0.9rem, 1.4vw, 1.2rem);
   font-weight: 300;
   letter-spacing: 0.08em;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.8);
   text-align: center;
   transition: opacity 0.35s ease;
+}
+
+@media (max-width: 768px) {
+  .splash-logo-wrap {
+    width: 78vw;
+  }
+
+  .splash-tagline {
+    font-size: 1rem;
+  }
 }
 
 /* ─────────────────────────────────────────
@@ -106,6 +130,7 @@ ul {
   display: grid;
   grid-template-columns: 45fr 55fr;
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 /* ─────────────────────────────────────────
@@ -299,12 +324,12 @@ ul {
 .project-list {
   border-left: 1px solid var(--border);
   padding: 3rem var(--pad) 120px;
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  transform: translateX(100%);
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .project-list.is-visible {
-  opacity: 1;
+  transform: translateX(0);
 }
 
 .project {
@@ -404,7 +429,9 @@ ul {
 }
 
 .about-logo-col {
-  /* Empty placeholder — logo panel slides here during transition */
+  background-image: url('About head 1.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
 .about-content {
@@ -544,6 +571,10 @@ ul {
   transform: translateY(0);
 }
 
+.about-mobile-thumb {
+  display: none;
+}
+
 /* ─────────────────────────────────────────
    Responsive
 ───────────────────────────────────────── */
@@ -552,26 +583,29 @@ ul {
     grid-template-columns: 1fr;
   }
 
+  /* Mobile logo panel: pure thumbnail strip — no nav, no padding */
   .logo-panel {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: auto;
+    height: min(56vw, 42vh);
     z-index: 50;
+    padding: 0;
+    border-bottom: none;
     background: var(--bg);
-    padding: 2rem var(--pad) 1.5rem;
-    border-bottom: 1px solid var(--border);
+  }
+
+  /* Hide all nav / logo elements inside — mobile panel is thumbnail-only */
+  .logo-panel .logo-reveal,
+  .logo-panel .logo-nav-btn {
+    display: none !important;
   }
 
   .project-list {
     border-left: none;
     border-top: none;
     /* padding-top set dynamically by JS to match logo panel height */
-  }
-
-  #mobileThumbOverlay {
-    display: none;
   }
 
   /* About view: logo sits at top, content scrolls below */
@@ -585,6 +619,20 @@ ul {
 
   .about-col {
     border-right: none;
+  }
+
+  /* About page thumbnail strip — mirrors the project panel */
+  .about-mobile-thumb {
+    display: block;
+    width: calc(100% + 2 * var(--pad));
+    margin-left: calc(-1 * var(--pad));
+    margin-right: calc(-1 * var(--pad));
+    margin-top: calc(-1 * var(--pad));
+    height: min(56vw, 42vh);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--bg);
+    flex-shrink: 0;
   }
 
   /* End view: scale logo and icons for small screens */
@@ -639,6 +687,32 @@ ul {
   pointer-events: auto;
 }
 
+.end-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+}
+
+.end-nav-btn {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.end-nav-btn:hover {
+  color: #fff;
+}
+
 .end-content {
   display: flex;
   flex-direction: column;
@@ -646,12 +720,6 @@ ul {
   gap: 0;
   position: relative;
   z-index: 1;
-}
-
-.end-logo {
-  width: clamp(240px, 45vw, 560px);
-  height: auto;
-  filter: invert(1);
 }
 
 .end-icons {
@@ -713,6 +781,17 @@ ul {
   pointer-events: auto;
 }
 
+/* Project mode — always show thumbnail, hide logo/nav overlay */
+.logo-panel.project-mode .full-bleed {
+  opacity: 1;
+}
+
+.logo-panel.project-mode .logo-reveal,
+.logo-panel.project-mode .logo-nav-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Film grain on full-bleed project preview */
 .full-bleed::after {
   content: '';
@@ -759,6 +838,94 @@ ul {
 /* ─────────────────────────────────────────
    Full Bio link in about-view
 ───────────────────────────────────────── */
+.about-timeline {
+  max-height: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: max-height 0.5s ease;
+  padding: 0 var(--pad);
+}
+
+.about-timeline.is-open {
+  max-height: 800px;
+}
+
+.about-bio-dropdown {
+  max-height: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: max-height 0.8s ease;
+  padding: 0 var(--pad);
+}
+
+.about-bio-dropdown.is-open {
+  max-height: 3000px;
+}
+
+.about-bio-section {
+  margin-top: 1.5rem;
+}
+
+.about-bio-section-label {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+
+.about-bio-dropdown .about-body {
+  margin-top: 0.75rem;
+}
+
+.about-bio-dropdown .about-body a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link-preview-wrap {
+  position: relative;
+  display: inline;
+}
+
+.link-preview {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 240px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 0.75rem 0.9rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 200;
+}
+
+.link-preview-source {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.link-preview-title {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.link-preview-wrap:hover .link-preview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .about-bio-link {
   display: block;
   padding: 2rem var(--pad) 1.5rem;
@@ -775,40 +942,9 @@ ul {
   opacity: 1;
 }
 
-/* ─────────────────────────────────────────
-   Mobile full-thumb overlay (first tap preview)
-───────────────────────────────────────── */
+/* #mobileThumbOverlay — unused, kept for potential future use */
 #mobileThumbOverlay {
   display: none;
-}
-
-@media (max-width: 768px) {
-  #mobileThumbOverlay {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 55;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-  }
-
-  #mobileThumbOverlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    opacity: 0.30;
-    mix-blend-mode: overlay;
-    pointer-events: none;
-  }
-
-  #mobileThumbOverlay.is-visible {
-    opacity: 1;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
