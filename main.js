@@ -354,6 +354,24 @@ window.scrollTo(0, 0);
   });
 
 
+  // Mobile: tap the thumbnail strip to navigate to the active project
+  logoPanel.addEventListener('touchend', (e) => {
+    if (!isMobile()) return;
+    const target = mobilePendingProject || currentProject;
+    if (!target) return;
+    const href = target.querySelector('a')?.getAttribute('href');
+    if (!href || href === '#') return;
+    e.preventDefault();
+    const position = target.dataset.thumbPosition || 'center';
+    sessionStorage.setItem('jbLastProjectHref', href);
+    if (target.dataset.thumb) {
+      sessionStorage.setItem('jbFullBleedBg',   "url('" + target.dataset.thumb + "')");
+      sessionStorage.setItem('jbFullBleedPos',  position);
+      sessionStorage.setItem('jbFullBleedHref', href);
+    }
+    window.location.href = href;
+  }, { passive: false });
+
   // Restore the current project thumbnail after the about view exits
   window.__restoreCurrentThumb = function () {
     if (!currentProject || !currentProject.dataset.thumb) return;
