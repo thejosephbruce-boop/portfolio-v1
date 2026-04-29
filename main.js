@@ -18,7 +18,6 @@ window.scrollTo(0, 0);
 
   // Pick a random full-bleed image for the splash background
   const SPLASH_IMAGES = [
-    "site end headers/end image 4.png",
     "site end headers/end image 5.png",
     "site end headers/end image 6.png",
     "site end headers/end image 7.webp",
@@ -447,7 +446,6 @@ revealEls.forEach(el => revealObserver.observe(el));
   if (!logoPanelEl || !aboutView) return;
 
   const END_IMAGES = [
-    "site end headers/end image 4.png",
     "site end headers/end image 5.png",
     "site end headers/end image 6.png",
     "site end headers/end image 7.webp",
@@ -801,7 +799,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     // Build a matching splash overlay and fade it in simultaneously
     const SPLASH_IMAGES = [
-      "site end headers/end image 4.png",
       "site end headers/end image 5.png",
       "site end headers/end image 6.png",
       "site end headers/end image 7.webp",
