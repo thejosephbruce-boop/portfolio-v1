@@ -19,6 +19,13 @@
   introToggle.addEventListener('click', () => introOverlay.classList.toggle('visible'));
   introOverlay.addEventListener('click', (e) => { if (e.target === introOverlay) close(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  // The nav sits above the overlay, so Work/About/Contact were being clicked
+  // and the page was scrolling — but the overlay stayed up, hiding the result.
+  // Dismiss it first, then let the link jump to its section as normal.
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.addEventListener('click', close);
+  });
 }());
 
 // Work grid fills the viewport exactly at any window size: pick the column/row

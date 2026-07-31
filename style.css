@@ -14,6 +14,12 @@
 
 html { scroll-behavior: smooth; }
 
+/* Jumping to #about / #contact would otherwise park the heading underneath
+   the fixed nav — offset the landing point by the nav's height. */
+:target,
+#about,
+#contact { scroll-margin-top: 4.5rem; }
+
 body {
   background: var(--bg);
   color: var(--ink);
