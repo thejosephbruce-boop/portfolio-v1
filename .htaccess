@@ -4,3 +4,22 @@
 RedirectMatch 301 ^/about(\.html)?$ /#about
 RedirectMatch 301 ^/more-stuff(\.html)?$ /
 RedirectMatch 301 ^/national-art-fun(\.html)?$ /national-art-fund.html
+
+# Caching. The host sends no Cache-Control, which leaves browsers to guess
+# (heuristic caching) — that served stale pages for days after a deploy.
+#
+# Filenames here aren't content-hashed (style.css stays style.css), so markup,
+# styles and behaviour must always be revalidated: "no-cache" still allows a
+# cached copy, it just forces an ETag check first, so unchanged files come back
+# as a cheap 304 rather than a full download.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|css|js)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # Media is heavy and rarely edited in place — a day of staleness is a fair
+  # trade. If you replace an image without renaming it, allow 24h to propagate.
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|mp4|webm|ico|woff2?)$">
+    Header set Cache-Control "max-age=86400"
+  </FilesMatch>
+</IfModule>
