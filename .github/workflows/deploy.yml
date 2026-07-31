@@ -27,6 +27,7 @@ jobs:
             # Build tooling and source data — kept in the repo, not published.
             build_work_pages.py
             build_sitemap.py
+            stamp_assets.py
             import_from_v1.py
             data/**
             templates/**
