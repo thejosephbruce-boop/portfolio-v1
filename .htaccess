@@ -1,1 +1,6 @@
-Redirect 301 /about /#aboutView
+# 301s for URLs that existed on the previous site but not this one.
+# Anchored so they can't swallow similarly-named pages
+# (e.g. /national-art-fun must not match /national-art-fund).
+RedirectMatch 301 ^/about(\.html)?$ /#about
+RedirectMatch 301 ^/more-stuff(\.html)?$ /
+RedirectMatch 301 ^/national-art-fun(\.html)?$ /national-art-fund.html

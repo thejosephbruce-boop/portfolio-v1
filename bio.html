@@ -2,365 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-    <meta name="google-site-verification" content="TdikAlAwt69GHviiEOdyxM7JVKc-AHozHW4YCdFsAmY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- SEO -->
   <meta name="description" content="The full story of Joe Bruce — Executive Creative Director, writer and Creative Partner. Award-winning advertising spanning W+K London, Beyond and beyond." />
   <link rel="canonical" href="https://josephbruce.com/bio.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://josephbruce.com/bio.html" />
   <meta property="og:title" content="Full Bio · Joe Bruce" />
   <meta property="og:description" content="The full story of Joe Bruce — Executive Creative Director, writer and Creative Partner. Award-winning advertising spanning W+K London, Beyond and beyond." />
-  <meta property="og:image" content="https://josephbruce.com/Full%20face.jpg" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://josephbruce.com/bio.html" />
-  <meta name="twitter:title" content="Full Bio · Joe Bruce" />
-  <meta name="twitter:description" content="The full story of Joe Bruce — Executive Creative Director, writer and Creative Partner. Award-winning advertising spanning W+K London, Beyond and beyond." />
-  <meta name="twitter:image" content="https://josephbruce.com/Full%20face.jpg" />
   <title>Full Bio · Joe Bruce</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:     #f5f3ef;
-      --ink:    #111111;
-      --muted:  #888880;
-      --border: rgba(17, 17, 17, 0.12);
-      --pad:    clamp(1.5rem, 5vw, 4rem);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ─────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem var(--pad);
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .nav.scrolled {
-      background: rgba(245, 243, 239, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-color: var(--border);
-    }
-    .nav-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-label:hover { opacity: 1; }
-    .nav-back {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-back:hover { opacity: 1; }
-    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
-    .nav-forward {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-forward:hover { opacity: 1; }
-    .nav-forward::after { content: '→'; font-size: 0.9rem; letter-spacing: 0; }
-
-    /* ── PAGE HEADER ─────────────────────────── */
-    .page-header {
-      padding: calc(5.5rem + var(--pad)) var(--pad) 4rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .page-intro {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 300;
-      line-height: 1.25;
-      color: var(--ink);
-    }
-
-    /* ── BIO SECTIONS ────────────────────────── */
-    .bio-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 var(--pad) 6rem;
-    }
-
-    .bio-section {
-      border-top: 1px solid var(--border);
-      padding: 3.5rem 0;
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 2rem;
-    }
-
-    .bio-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding-top: 0.25rem;
-    }
-
-    .bio-content h2 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      font-weight: 300;
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
-    }
-
-    .bio-content p {
-      font-size: 0.93rem;
-      line-height: 1.85;
-      color: var(--muted);
-      margin-bottom: 1.1rem;
-    }
-
-    .bio-content p:last-child {
-      margin-bottom: 0;
-    }
-
-    .bio-content a {
-      color: var(--ink);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .bio-content a:hover {
-      opacity: 0.6;
-    }
-
-    /* ── LINK PREVIEW ────────────────────────── */
-    .link-preview-wrap {
-      position: relative;
-      display: inline;
-    }
-
-    .link-preview {
-      position: absolute;
-      bottom: calc(100% + 10px);
-      left: 0;
-      width: 260px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 0.85rem 1rem;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 10;
-    }
-
-    .link-preview-source {
-      display: block;
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .link-preview-title {
-      display: block;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      color: var(--ink);
-    }
-
-    .link-preview-wrap:hover .link-preview {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── BOTTOM NAV LINKS ────────────────────── */
-    .bio-nav-link {
-      display: block;
-      padding: 1.5rem 0;
-      border-top: 1px solid var(--border);
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.28;
-      transition: opacity 0.3s ease;
-    }
-
-    .bio-nav-link:last-child {
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 4rem;
-    }
-
-    .bio-nav-link:hover {
-      opacity: 1;
-    }
-
-    .bio-nav-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.3rem, 3vw, 2.2rem);
-      font-weight: 400;
-      line-height: 1.15;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 640px) {
-      .bio-section {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav" id="nav">
-    <a href="index.html#about" class="nav-back">About</a>
-    <a href="index.html#projects" class="nav-forward">Creative</a>
+    <a href="index.html" class="nav-mark">Joe Bruce</a>
+    <div class="nav-links">
+      <a href="index.html">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
   </nav>
 
-  <!-- Page header -->
   <header class="page-header">
-    <p class="page-intro"><strong>Joe Bruce</strong>, is an established Creative with over 16 years in the advertising industry</p>
+    <h1>Joe Bruce is an established Creative with over 16 years in the advertising industry.</h1>
   </header>
 
-  <!-- Bio content -->
   <div class="bio-wrap">
 
     <div class="bio-section">
-      <span class="bio-label">Beyond</span>
+      <span class="label">Beyond</span>
       <div class="bio-content">
-        <p><span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/above-beyond-appoints-ecd-wieden-kennedy/1875463" target="_blank" rel="noopener"><strong>Joe joined Beyond</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Above+Beyond appoints ECD from Wieden+Kennedy</span></span></span> as Executive Creative Director in summer 2024 and has since made Creative Partner across the wider holding company (previously The Beyond Collective). A role that has seen him build a new creative culture in the business and improve its profile within the creative industry.</p>
-        <p>In May 2025, Joe helped with the <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/beyond-collective-rebrands-agencies-single-name/1918744" target="_blank" rel="noopener"><strong>restructuring, redesigning and relaunching</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Beyond Collective rebrands agencies under single name</span></span></span> of Beyond, taking it from four separate companies to one unified agency brand.</p>
-        <p>In his short time at the agency, Joe <span class="link-preview-wrap"><a href="https://lbbonline.com/news/Beyond-Appoints-Patrick-Silla" target="_blank" rel="noopener"><strong>brought in new, award winning, creative talent</strong></a><span class="link-preview"><span class="link-preview-source">Little Black Book</span><span class="link-preview-title">Beyond appoints Patrick Silla</span></span></span> and attracted new clients Find My Past, <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/branston-pickle-owner-consolidates-media-creative-beyond/1951407" target="_blank" rel="noopener"><strong>Mizkan Group</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Branston Pickle owner consolidates media and creative at Beyond</span></span></span> and Sprite and Tabasco, as well as overseeing global projects for Yamaha Music and <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/jam-shed-celebrates-jammy-wines-first-tv-ad/1938923" target="_blank" rel="noopener"><strong>Jam Shed wines</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Jam Shed celebrates jammy wine's first TV ad</span></span></span> and creating local campaigns for Back Market, ARUK and Itsu.</p>
+        <p><a href="https://www.campaignlive.co.uk/article/above-beyond-appoints-ecd-wieden-kennedy/1875463" target="_blank" rel="noopener"><strong>Joe joined Beyond</strong></a> as Executive Creative Director in summer 2024 and has since made Creative Partner across the wider holding company (previously The Beyond Collective). A role that has seen him build a new creative culture in the business and improve its profile within the creative industry.</p>
+        <p>In May 2025, Joe helped with the <a href="https://www.campaignlive.co.uk/article/beyond-collective-rebrands-agencies-single-name/1918744" target="_blank" rel="noopener"><strong>restructuring, redesigning and relaunching</strong></a> of Beyond, taking it from four separate companies to one unified agency brand.</p>
+        <p>In his short time at the agency, Joe <a href="https://lbbonline.com/news/Beyond-Appoints-Patrick-Silla" target="_blank" rel="noopener"><strong>brought in new, award winning, creative talent</strong></a> and attracted new clients Find My Past, <a href="https://www.campaignlive.co.uk/article/branston-pickle-owner-consolidates-media-creative-beyond/1951407" target="_blank" rel="noopener"><strong>Mizkan Group</strong></a> and Sprite and Tabasco, as well as overseeing global projects for Yamaha Music and <a href="https://www.campaignlive.co.uk/article/jam-shed-celebrates-jammy-wines-first-tv-ad/1938923" target="_blank" rel="noopener"><strong>Jam Shed wines</strong></a> and creating local campaigns for Back Market, ARUK and Itsu.</p>
       </div>
     </div>
 
     <div class="bio-section">
-      <span class="bio-label">W+K London</span>
+      <span class="label">W+K London</span>
       <div class="bio-content">
         <p>Before joining Beyond, Joe was Creative Director on the Nike account at Wieden + Kennedy London. A position that saw him running big campaigns and establishing new creative platforms in both local and global markets.</p>
-        <p>Before his time on Nike, Joe and his creative partner Albert Pukies, created a big <span class="link-preview-wrap"><a href="https://www.theguardian.com/world/2020/nov/28/uk-supermarkets-unite-after-sainsburys-advert-prompts-racist-backlash" target="_blank" rel="noopener"><strong>Christmas campaign for Sainsbury's supermarkets</strong></a><span class="link-preview"><span class="link-preview-source">The Guardian</span><span class="link-preview-title">UK supermarkets unite after Sainsbury's advert prompts racist backlash</span></span></span>, won the Converse, Camden Town Brewery and More Than accounts for the agency and built multiple campaigns for Formula 1 and Bud Light. Joe was also responsible for the agency's first creative work with McDonalds Canada and the Cannes Grand Prix winning social and influencer campaign for Nothing Beats a Londoner.</p>
-        <p>Alongside his day-to-day responsibilities at W+K, Joe was Creative Director for the <span class="link-preview-wrap"><a href="https://wklondon.com/culture/hanbury-st-window/" target="_blank" rel="noopener"><strong>Hanbury St window</strong></a><span class="link-preview"><span class="link-preview-source">W+K London</span><span class="link-preview-title">Hanbury St Window</span></span></span>. He also served as the Course Director for <span class="link-preview-wrap"><a href="https://wklondon.com/culture/the-kennedys/" target="_blank" rel="noopener"><strong>The Kennedys</strong></a><span class="link-preview"><span class="link-preview-source">W+K London</span><span class="link-preview-title">The Kennedys</span></span></span>; a 5-month program dedicated to nurturing a steady stream of new, young creative people into the ad industry.</p>
+        <p>Before his time on Nike, Joe and his creative partner Albert Pukies, created a big <a href="https://www.theguardian.com/world/2020/nov/28/uk-supermarkets-unite-after-sainsburys-advert-prompts-racist-backlash" target="_blank" rel="noopener"><strong>Christmas campaign for Sainsbury's supermarkets</strong></a>, won the Converse, Camden Town Brewery and More Than accounts for the agency and built multiple campaigns for Formula 1 and Bud Light. Joe was also responsible for the agency's first creative work with McDonalds Canada and the Cannes Grand Prix winning social and influencer campaign for Nothing Beats a Londoner.</p>
+        <p>Alongside his day-to-day responsibilities at W+K, Joe was Creative Director for the <a href="https://wklondon.com/culture/hanbury-st-window/" target="_blank" rel="noopener"><strong>Hanbury St window</strong></a>. He also served as the Course Director for <a href="kennedys.html"><strong>The Kennedys</strong></a>; a 5-month program dedicated to nurturing a steady stream of new, young creative people into the ad industry.</p>
       </div>
     </div>
 
     <div class="bio-section">
-      <span class="bio-label">Early Career</span>
+      <span class="label">Early Career</span>
       <div class="bio-content">
-        <p>Prior to his time at W+K, Joe was Creative Director at <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/101-boosts-creative-team-cp-b-hire/1361167" target="_blank" rel="noopener"><strong>agencies 101</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">101 boosts creative team with CP+B hire</span></span></span> and <span class="link-preview-wrap"><a href="https://www.campaignlive.co.uk/article/joe-bruce-kate-baker/1183978" target="_blank" rel="noopener"><strong>Crispin Porter and Bogusky London</strong></a><span class="link-preview"><span class="link-preview-source">Campaign Live</span><span class="link-preview-title">Joe Bruce and Kate Baker join CP+B London</span></span></span>, where he worked on a wide variety of brands, like Paddy Power, Tango, <span class="link-preview-wrap"><a href="https://www.imdb.com/title/tt8321712/" target="_blank" rel="noopener"><strong>National Art Fund</strong></a><span class="link-preview"><span class="link-preview-source">IMDB</span><span class="link-preview-title">National Art Fund</span></span></span>, Turkish Airlines, and Milka chocolate.</p>
-        <p>His first job in the industry was at BMB, where he worked on Ikea, Yorkshire Tea, Carling, Corona, Grolsch, William Hill, and Penguin Books.</p>
+        <p>Prior to his time at W+K, Joe was Creative Director at <a href="https://www.campaignlive.co.uk/article/101-boosts-creative-team-cp-b-hire/1361167" target="_blank" rel="noopener"><strong>agencies 101</strong></a> and <a href="https://www.campaignlive.co.uk/article/joe-bruce-kate-baker/1183978" target="_blank" rel="noopener"><strong>Crispin Porter and Bogusky London</strong></a>, where he worked on a wide variety of brands, like Paddy Power, Tango, <a href="https://www.imdb.com/title/tt8321712/" target="_blank" rel="noopener"><strong>National Art Fund</strong></a>, <a href="turkish-airlines-fly-africa.html"><strong>Turkish Airlines</strong></a>, and Milka chocolate.</p>
+        <p>His first job in the industry was at BMB, where he worked on Ikea, Yorkshire Tea, Carling, Corona, <a href="grolsch-beer.html"><strong>Grolsch</strong></a>, William Hill, and Penguin Books.</p>
         <p>Whilst at BMB, Joe helped launch the charity C.A.L.M in London, a cause that he remains very close to his heart.</p>
       </div>
     </div>
 
     <div class="bio-section">
-      <span class="bio-label">Side Hustle</span>
+      <span class="label">Side Hustle</span>
       <div class="bio-content">
-        <p>Alongside his career in advertising, Joe is a founder and director of Bubble Bros Ltd. Bubble Bros started out as an events bar at festivals like Glastonbury, Lovebox, Wireless, and Download, has since expanded into an on-trade sparkling wine wholesale business with products <span class="link-preview-wrap"><a href="https://bubblebros.co.uk/pages/store-locator" target="_blank" rel="noopener"><strong>available in venues across the country (and more recently, the world)</strong></a><span class="link-preview"><span class="link-preview-source">Bubble Bros</span><span class="link-preview-title">Store locator</span></span></span>.</p>
+        <p>Alongside his career in advertising, Joe is a founder and director of Bubble Bros Ltd. Bubble Bros started out as an events bar at festivals like Glastonbury, Lovebox, Wireless, and Download, has since expanded into an on-trade sparkling wine wholesale business with products <a href="https://bubblebros.co.uk/pages/store-locator" target="_blank" rel="noopener"><strong>available in venues across the country (and more recently, the world)</strong></a>.</p>
       </div>
     </div>
 
+    <div class="bio-section">
+      <span class="label">Mentoring</span>
+      <div class="bio-content">
+        <a class="bio-media" href="kennedys.html">
+          <img src="assets/thumbs/kennedys.gif" alt="The Kennedys" loading="lazy" />
+        </a>
+      </div>
+    </div>
 
   </div>
 
-  <script>
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+  <a class="back-link" href="index.html">← Back to Joe Bruce</a>
 
-    // Overscroll down at the bottom → return to the about view
-    (function () {
-      let atBottomSince = null;
-      let leaving       = false;
-      let touchStartY   = 0;
-
-      window.addEventListener('scroll', () => {
-        const atBottom =
-          window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
-        if (atBottom && atBottomSince === null) {
-          atBottomSince = Date.now();
-        } else if (!atBottom) {
-          atBottomSince = null;
-        }
-      }, { passive: true });
-
-      function returnToAbout() {
-        if (leaving) return;
-        leaving = true;
-        document.body.style.pointerEvents = 'none';
-        document.body.style.transition    = 'opacity 0.4s ease';
-        document.body.style.opacity       = '0';
-        setTimeout(() => {
-          window.location.href = 'index.html#about';
-        }, 420);
-      }
-
-      window.addEventListener('wheel', (e) => {
-        if (leaving) return;
-        if (e.deltaY > 0) {
-          const atBottom =
-            window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
-          if (atBottom && atBottomSince !== null && Date.now() - atBottomSince > 300) {
-            returnToAbout();
-          }
-        }
-      }, { passive: true });
-
-      window.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-
-      window.addEventListener('touchmove', (e) => {
-        if (leaving) return;
-        const dy = e.touches[0].clientY - touchStartY;
-        if (dy < -40) {
-          const atBottom =
-            window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 5;
-          if (atBottom && atBottomSince !== null && Date.now() - atBottomSince > 300) {
-            returnToAbout();
-          }
-        }
-      }, { passive: true });
-    }());
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>

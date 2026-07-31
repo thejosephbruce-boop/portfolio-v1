@@ -23,7 +23,10 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            .DS_Store
-            josephbruce-qr.png
-            server-qr.png
-            inject-seo.py
+            **/.DS_Store
+            # Build tooling and source data — kept in the repo, not published.
+            build_work_pages.py
+            build_sitemap.py
+            import_from_v1.py
+            data/**
+            templates/**

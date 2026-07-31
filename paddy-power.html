@@ -2,411 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-    <meta name="google-site-verification" content="TdikAlAwt69GHviiEOdyxM7JVKc-AHozHW4YCdFsAmY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- SEO -->
-  <meta name="description" content="Paddy Power 2012–2015 — award-winning creative work by Joe Bruce, Creative Director at Wieden+Kennedy London." />
+  <meta name="description" content="At Crispin Porter + Bogusky I spent three years working on the Paddy Power account, both as a writer and a creative director. We produced loads of great…" />
   <link rel="canonical" href="https://josephbruce.com/paddy-power.html" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://josephbruce.com/paddy-power.html" />
-  <meta property="og:title" content="Paddy Power · Joe Bruce" />
-  <meta property="og:description" content="Paddy Power 2012–2015 — award-winning creative work by Joe Bruce, Creative Director at Wieden+Kennedy London." />
-  <meta property="og:image" content="https://josephbruce.com/Paddy%20Power%20thumb.png" />
+  <meta property="og:title" content="Paddy Power 2012–2015 · Joe Bruce" />
+  <meta property="og:description" content="At Crispin Porter + Bogusky I spent three years working on the Paddy Power account, both as a writer and a creative director. We produced loads of great…" />
+  <meta property="og:image" content="assets/thumbs/paddy-power.jpg" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://josephbruce.com/paddy-power.html" />
-  <meta name="twitter:title" content="Paddy Power · Joe Bruce" />
-  <meta name="twitter:description" content="Paddy Power 2012–2015 — award-winning creative work by Joe Bruce, Creative Director at Wieden+Kennedy London." />
-  <meta name="twitter:image" content="https://josephbruce.com/Paddy%20Power%20thumb.png" />
-  <title>Paddy Power · Joe Bruce</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:     #f5f3ef;
-      --ink:    #111111;
-      --muted:  #888880;
-      --border: rgba(17, 17, 17, 0.12);
-      --pad:    clamp(1.5rem, 5vw, 4rem);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ─────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem var(--pad);
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .nav.scrolled {
-      background: rgba(245, 243, 239, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-color: var(--border);
-    }
-    .nav-back {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-back:hover { opacity: 1; }
-    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
-    .nav-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-label:hover { opacity: 1; }
-
-    /* ── PROJECT HEADER ──────────────────────── */
-    .project-header {
-      padding: calc(5.5rem + var(--pad)) var(--pad) 4.5rem;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .project-client {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .project-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2.6rem, 6vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1.06;
-      margin-bottom: 2rem;
-    }
-    .project-brief {
-      font-size: 0.93rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 580px;
-      margin: 0 auto;
-    }
-
-    /* ── MEDIA BLOCKS ────────────────────────── */
-    .media-full {
-      width: 100%;
-      line-height: 0;
-      margin-bottom: 3px;
-    }
-    .media-full img {
-      width: 100%;
-      display: block;
-    }
-
-    /* Contained (narrower) block for square social cut */
-    .media-contained {
-      padding: 0 var(--pad);
-      margin-bottom: 3px;
-    }
-    .media-contained .video-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    /* ── VIDEO PLAYER ────────────────────────── */
-    .video-wrap {
-      position: relative;
-      background: #0d0d0d;
-      cursor: pointer;
-      line-height: 0;
-    }
-    .video-wrap video {
-      width: 100%;
-      display: block;
-    }
-    /* Custom play overlay — visible until first play */
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.22);
-      transition: opacity 0.35s;
-    }
-    .video-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .play-btn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 1px solid rgba(245, 243, 239, 0.55);
-      background: rgba(245, 243, 239, 0.1);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s, background 0.25s;
-    }
-    .video-wrap:hover .play-btn {
-      transform: scale(1.08);
-      background: rgba(245, 243, 239, 0.2);
-    }
-    .play-btn::after {
-      content: '';
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 9px 0 9px 17px;
-      border-color: transparent transparent transparent rgba(245, 243, 239, 0.9);
-      margin-left: 4px;
-    }
-
-    /* ── VIMEO EMBED ─────────────────────────── */
-    .vimeo-wrap {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0d0d0d;
-      line-height: 0;
-    }
-    .vimeo-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-
-    /* ── NEXT PROJECT ────────────────────────── */
-    .next-project {
-      border-top: 1px solid var(--border);
-      padding: 3.5rem var(--pad) 4rem;
-      text-align: center;
-    }
-    .next-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.9rem;
-    }
-    .next-link {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      text-decoration: none;
-      transition: opacity 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .next-link:hover { opacity: 0.45; }
-    .next-link::after { content: '→'; font-style: normal; }
-
-    /* ── VIDEO POSTER (click to play) ───────── */
-    .video-poster-wrap {
-      position: relative;
-      padding-bottom: 56.25%;
-      overflow: hidden;
-      cursor: pointer;
-      background: #0d0d0d;
-      line-height: 0;
-    }
-    .video-poster-wrap img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.25s;
-    }
-    .video-poster-wrap:hover img { opacity: 0.85; }
-    .video-poster-wrap .vp-play {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      border: 1px solid rgba(245,243,239,0.55);
-      background: rgba(245,243,239,0.1);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      pointer-events: none;
-      transition: transform 0.25s, background 0.25s;
-    }
-    .video-poster-wrap:hover .vp-play {
-      transform: translate(-50%, -50%) scale(1.08);
-      background: rgba(245,243,239,0.2);
-    }
-    .video-poster-wrap .vp-play::after {
-      content: '';
-      position: absolute;
-      top: 50%; left: 55%;
-      transform: translate(-50%, -50%);
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 9px 0 9px 17px;
-      border-color: transparent transparent transparent rgba(245,243,239,0.9);
-    }
-    .video-poster-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 600px) {
-      .media-contained { padding: 0; }
-    }
-  </style>
+  <title>Paddy Power 2012–2015 · Joe Bruce</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav" id="nav">
-    <a href="index.html#projects" class="nav-back">Back to creative</a>
-    <a href="index.html#about" class="nav-label">About Joe</a>
+    <a href="index.html" class="nav-mark">Joe Bruce</a>
+    <div class="nav-links">
+      <a href="index.html">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
   </nav>
 
-  <!-- Project header -->
   <header class="project-header">
-    <h1 class="project-title">Paddy Power</h1>
-    <p class="project-brief">Three and a half years as both a writer and Creative Director on the Paddy Power account, creating big platforms, huge stunts and loads of social campaigns.</p>
+    <h1>Paddy Power 2012–2015</h1>
   </header>
 
-  <div class="media-full">
-    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/125036803">
-      <img src="PADDY POWER VID THUMBS/Paddy power Thumb 1.png" alt="Paddy Power" loading="lazy" />
-      <div class="vp-play"></div>
-    </div>
+  <div class="project-desc">
+    <p>At Crispin Porter + Bogusky I spent three years working on the Paddy Power account, both as a writer and a creative director. We produced loads of great work in that time and had a lot of fun.</p>
   </div>
+
   <div class="media-full">
-    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/72093468">
-      <img src="PADDY POWER VID THUMBS/P{addy Power tumb 2.jpg" alt="Paddy Power" loading="lazy" />
-      <div class="vp-play"></div>
-    </div>
+    <img src="assets/media/paddy-power-vid-thumbs-paddy-power-thumb-1.jpg" alt="Paddy Power 2012–2015" loading="lazy" />
   </div>
+
   <div class="media-full">
-    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/77392472">
-      <img src="PADDY POWER VID THUMBS/Paddy Power thumb 3.png" alt="Paddy Power" loading="lazy" />
-      <div class="vp-play"></div>
-    </div>
+    <img src="assets/media/paddy-power-vid-thumbs-p-addy-power-tumb-2.jpg" alt="Paddy Power 2012–2015" loading="lazy" />
   </div>
+
   <div class="media-full">
-    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/83381788">
-      <img src="PADDY POWER VID THUMBS/Paddy Power thumb 4.png" alt="Paddy Power" loading="lazy" />
-      <div class="vp-play"></div>
-    </div>
+    <img src="assets/media/paddy-power-vid-thumbs-paddy-power-thumb-3.jpg" alt="Paddy Power 2012–2015" loading="lazy" />
   </div>
+
   <div class="media-full">
-    <div class="video-poster-wrap" data-src="https://player.vimeo.com/video/92724792">
-      <img src="PADDY POWER VID THUMBS/Paddy power thumb 5.png" alt="Paddy Power" loading="lazy" />
-      <div class="vp-play"></div>
-    </div>
+    <img src="assets/media/paddy-power-vid-thumbs-paddy-power-thumb-4.jpg" alt="Paddy Power 2012–2015" loading="lazy" />
   </div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/107905928?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/64308429?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-  <div class="media-full"><div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;"><iframe src="https://player.vimeo.com/video/122417142?app_id=122963" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
 
-  <!-- Next project -->
-  <nav class="next-project">
-    <p class="next-label">Next project</p>
-    <a href="turkish-airlines-fly-africa.html" class="next-link">Turkish Airlines — Fly Africa</a>
-  </nav>
+  <div class="media-full">
+    <img src="assets/media/paddy-power-vid-thumbs-paddy-power-thumb-5.jpg" alt="Paddy Power 2012–2015" loading="lazy" />
+  </div>
 
-  <!-- HLS.js for cross-browser video -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    // ── Nav scroll ──────────────────────────────
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+  <div class="media-full">
+    <div class="embed-wrap"><iframe src="https://player.vimeo.com/video/107905928?app_id=122963" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
-    // ── Video players ───────────────────────────
-    document.querySelectorAll('.video-wrap').forEach(wrap => {
-      const video   = wrap.querySelector('video');
-      const overlay = wrap.querySelector('.video-overlay');
-      const hlsSrc  = wrap.dataset.hls;
-      let   ready   = false;
+  <div class="media-full">
+    <div class="embed-wrap"><iframe src="https://player.vimeo.com/video/64308429?app_id=122963" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
-      function initVideo() {
-        if (ready) return;
-        ready = true;
+  <div class="media-full">
+    <div class="embed-wrap"><iframe src="https://player.vimeo.com/video/122417142?app_id=122963" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
-        if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-          const hls = new Hls({ startLevel: -1 });
-          hls.loadSource(hlsSrc);
-          hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          // Safari — native HLS support
-          video.src = hlsSrc;
-        }
+  <a class="back-link" href="index.html">← Back to Creative</a>
 
-        // Show native controls after first load
-        video.controls = true;
-      }
-
-      // Click on overlay or video → play/pause
-      wrap.addEventListener('click', (e) => {
-        initVideo();
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-      });
-
-      video.addEventListener('play',  () => overlay.classList.add('hidden'));
-      video.addEventListener('pause', () => overlay.classList.remove('hidden'));
-      video.addEventListener('ended', () => overlay.classList.remove('hidden'));
-    });
-  </script>
-
-<script>
-  document.querySelectorAll('.video-poster-wrap').forEach(wrap => {
-    wrap.addEventListener('click', () => {
-      const src = wrap.dataset.src;
-      wrap.innerHTML = '<iframe src="' + src + '?autoplay=1&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
-      wrap.style.cursor = 'default';
-    });
-  });
-</script>
-<script src="project.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

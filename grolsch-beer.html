@@ -2,337 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-    <meta name="google-site-verification" content="TdikAlAwt69GHviiEOdyxM7JVKc-AHozHW4YCdFsAmY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- SEO -->
-  <meta name="description" content="Grolsch Big Bold — campaign by Joe Bruce, Executive Creative Director." />
+  <meta name="description" content="I&#x27;ve included this campaign from 2010 because I am really proud of the interactive elements we developed. The films were also beautifully shot and still…" />
   <link rel="canonical" href="https://josephbruce.com/grolsch-beer.html" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://josephbruce.com/grolsch-beer.html" />
-  <meta property="og:title" content="Grolsch — Big Bold · Joe Bruce" />
-  <meta property="og:description" content="Grolsch Big Bold — campaign by Joe Bruce, Executive Creative Director." />
-  <meta property="og:image" content="https://josephbruce.com/Grolsch%20Thumb.png" />
+  <meta property="og:title" content="Grolsch Big Bold · Joe Bruce" />
+  <meta property="og:description" content="I&#x27;ve included this campaign from 2010 because I am really proud of the interactive elements we developed. The films were also beautifully shot and still…" />
+  <meta property="og:image" content="assets/thumbs/grolsch-beer.jpg" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://josephbruce.com/grolsch-beer.html" />
-  <meta name="twitter:title" content="Grolsch — Big Bold · Joe Bruce" />
-  <meta name="twitter:description" content="Grolsch Big Bold — campaign by Joe Bruce, Executive Creative Director." />
-  <meta name="twitter:image" content="https://josephbruce.com/Grolsch%20Thumb.png" />
-  <title>Grolsch — Big Bold · Joe Bruce</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:     #f5f3ef;
-      --ink:    #111111;
-      --muted:  #888880;
-      --border: rgba(17, 17, 17, 0.12);
-      --pad:    clamp(1.5rem, 5vw, 4rem);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ─────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem var(--pad);
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .nav.scrolled {
-      background: rgba(245, 243, 239, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-color: var(--border);
-    }
-    .nav-back {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-back:hover { opacity: 1; }
-    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
-    .nav-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-label:hover { opacity: 1; }
-
-    /* ── PROJECT HEADER ──────────────────────── */
-    .project-header {
-      padding: calc(5.5rem + var(--pad)) var(--pad) 4.5rem;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .project-client {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .project-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2.6rem, 6vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1.06;
-      margin-bottom: 2rem;
-    }
-    .project-brief {
-      font-size: 0.93rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 580px;
-      margin: 0 auto;
-    }
-
-    /* ── MEDIA BLOCKS ────────────────────────── */
-    .media-full {
-      width: 100%;
-      line-height: 0;
-      margin-bottom: 3px;
-    }
-    .media-full img {
-      width: 100%;
-      display: block;
-    }
-
-    /* Contained (narrower) block for square social cut */
-    .media-contained {
-      padding: 0 var(--pad);
-      margin-bottom: 3px;
-    }
-    .media-contained .video-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    /* ── VIDEO PLAYER ────────────────────────── */
-    .video-wrap {
-      position: relative;
-      background: #0d0d0d;
-      cursor: pointer;
-      line-height: 0;
-    }
-    .video-wrap video {
-      width: 100%;
-      display: block;
-    }
-    /* Custom play overlay — visible until first play */
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.22);
-      transition: opacity 0.35s;
-    }
-    .video-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .play-btn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 1px solid rgba(245, 243, 239, 0.55);
-      background: rgba(245, 243, 239, 0.1);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s, background 0.25s;
-    }
-    .video-wrap:hover .play-btn {
-      transform: scale(1.08);
-      background: rgba(245, 243, 239, 0.2);
-    }
-    .play-btn::after {
-      content: '';
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 9px 0 9px 17px;
-      border-color: transparent transparent transparent rgba(245, 243, 239, 0.9);
-      margin-left: 4px;
-    }
-
-    /* ── VIMEO EMBED ─────────────────────────── */
-    .vimeo-wrap {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0d0d0d;
-      line-height: 0;
-    }
-    .vimeo-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-
-    /* ── NEXT PROJECT ────────────────────────── */
-    .next-project {
-      border-top: 1px solid var(--border);
-      padding: 3.5rem var(--pad) 4rem;
-      text-align: center;
-    }
-    .next-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.9rem;
-    }
-    .next-link {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      text-decoration: none;
-      transition: opacity 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .next-link:hover { opacity: 0.45; }
-    .next-link::after { content: '→'; font-style: normal; }
-
-    /* ── 2-COL VIDEO GRID ────────────────────── */
-    .media-grid-2-vid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3px;
-      margin-bottom: 3px;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 600px) {
-      .media-contained { padding: 0; }
-      .media-grid-2-vid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <title>Grolsch Big Bold · Joe Bruce</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav" id="nav">
-    <a href="index.html#projects" class="nav-back">Back to creative</a>
-    <a href="index.html#about" class="nav-label">About Joe</a>
+    <a href="index.html" class="nav-mark">Joe Bruce</a>
+    <div class="nav-links">
+      <a href="index.html">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
   </nav>
 
-  <!-- Project header -->
   <header class="project-header">
-    <h1 class="project-title">Grolsch — Big Bold</h1>
-    <p class="project-brief">2010 TV and social campaign for Grolsch beer, where viewers could interact with the main characters in real time.</p>
+    <h1>Grolsch Big Bold</h1>
   </header>
 
-  <!-- Video 1 — Vimeo hero film -->
-  <div class="media-full"><div class="vimeo-wrap"><iframe src="https://player.vimeo.com/video/48131191" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div></div>
-
-  <!-- Videos 2 & 3 — YouTube campaign cuts, side by side -->
-  <div class="media-grid-2-vid">
-    <div class="vimeo-wrap"><iframe src="https://www.youtube.com/embed/cyZfNfLI758" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-    <div class="vimeo-wrap"><iframe src="https://www.youtube.com/embed/GnIfRWkX_jA" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="project-desc">
+    <p>I&#x27;ve included this campaign from 2010 because I am really proud of the interactive elements we developed. The films were also beautifully shot and still look fantastic all these years later.</p>
   </div>
 
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/438b3169-b76f-4509-b701-b2bfd2933619/Grolsch_Tab_2_1260.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/82744729-882e-495c-942a-5c8972520a6f/image-asset-1.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/5a936de3-8f56-4ae7-a776-a2a310a969c6/image-asset.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" /></div>
-  <div class="media-full"><img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/97959d7c-0ea9-41ef-897e-d2b075d4ab1c/Screen%2BShot%2B2015-03-11%2Bat%2B8.53.45%2BPM.png?format=2500w" alt="Grolsch Big Bold" loading="lazy" /></div>
+  <div class="media-full">
+    <div class="embed-wrap"><iframe src="https://player.vimeo.com/video/48131191" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
-  <!-- Next project -->
-  <nav class="next-project">
-    <p class="next-label">Next project</p>
-    <a href="nike-a-beautiful-run.html" class="next-link">Nike — A Beautiful Run</a>
-  </nav>
+  <div class="media-grid" style="--cols: 2;">
+    <div class="embed-wrap"><iframe src="https://www.youtube.com/embed/cyZfNfLI758" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="embed-wrap"><iframe src="https://www.youtube.com/embed/GnIfRWkX_jA" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
-  <!-- HLS.js for cross-browser video -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    // ── Nav scroll ──────────────────────────────
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+  <div class="media-full">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/438b3169-b76f-4509-b701-b2bfd2933619/Grolsch_Tab_2_1260.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" />
+  </div>
 
-    // ── Video players ───────────────────────────
-    document.querySelectorAll('.video-wrap').forEach(wrap => {
-      const video   = wrap.querySelector('video');
-      const overlay = wrap.querySelector('.video-overlay');
-      const hlsSrc  = wrap.dataset.hls;
-      let   ready   = false;
+  <div class="media-full">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/82744729-882e-495c-942a-5c8972520a6f/image-asset-1.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" />
+  </div>
 
-      function initVideo() {
-        if (ready) return;
-        ready = true;
+  <div class="media-full">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/5a936de3-8f56-4ae7-a776-a2a310a969c6/image-asset.jpg?format=2500w" alt="Grolsch Big Bold" loading="lazy" />
+  </div>
 
-        if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-          const hls = new Hls({ startLevel: -1 });
-          hls.loadSource(hlsSrc);
-          hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          // Safari — native HLS support
-          video.src = hlsSrc;
-        }
+  <div class="media-full">
+    <img src="https://images.squarespace-cdn.com/content/v1/6512f5ae617945473b691c71/97959d7c-0ea9-41ef-897e-d2b075d4ab1c/Screen%2BShot%2B2015-03-11%2Bat%2B8.53.45%2BPM.png?format=2500w" alt="Grolsch Big Bold" loading="lazy" />
+  </div>
 
-        // Show native controls after first load
-        video.controls = true;
-      }
+  <a class="back-link" href="index.html">← Back to Creative</a>
 
-      // Click on overlay or video → play/pause
-      wrap.addEventListener('click', (e) => {
-        initVideo();
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-      });
-
-      video.addEventListener('play',  () => overlay.classList.add('hidden'));
-      video.addEventListener('pause', () => overlay.classList.remove('hidden'));
-      video.addEventListener('ended', () => overlay.classList.remove('hidden'));
-    });
-  </script>
-
-<script src="project.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

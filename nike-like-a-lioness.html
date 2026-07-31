@@ -2,499 +2,145 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-    <meta name="google-site-verification" content="TdikAlAwt69GHviiEOdyxM7JVKc-AHozHW4YCdFsAmY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- SEO -->
-  <meta name="description" content="Nike Like a Lioness — campaign celebrating women's football by Joe Bruce, Creative Director at Wieden+Kennedy London." />
+  <meta name="description" content="We worked with Nike to create a platform for the England Women&#x27;s Team. One that would encourage girls to engage with football during the World Cup, and…" />
   <link rel="canonical" href="https://josephbruce.com/nike-like-a-lioness.html" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:url" content="https://josephbruce.com/nike-like-a-lioness.html" />
-  <meta property="og:title" content="Nike — Like a Lioness · Joe Bruce" />
-  <meta property="og:description" content="Nike Like a Lioness — campaign celebrating women's football by Joe Bruce, Creative Director at Wieden+Kennedy London." />
-  <meta property="og:image" content="https://josephbruce.com/Like%20a%20lioness%20thumb.png" />
+  <meta property="og:title" content="Nike Like a Lioness · Joe Bruce" />
+  <meta property="og:description" content="We worked with Nike to create a platform for the England Women&#x27;s Team. One that would encourage girls to engage with football during the World Cup, and…" />
+  <meta property="og:image" content="assets/thumbs/nike-like-a-lioness.jpg" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://josephbruce.com/nike-like-a-lioness.html" />
-  <meta name="twitter:title" content="Nike — Like a Lioness · Joe Bruce" />
-  <meta name="twitter:description" content="Nike Like a Lioness — campaign celebrating women's football by Joe Bruce, Creative Director at Wieden+Kennedy London." />
-  <meta name="twitter:image" content="https://josephbruce.com/Like%20a%20lioness%20thumb.png" />
-  <title>Nike — Like a Lioness · Joe Bruce</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:     #f5f3ef;
-      --ink:    #111111;
-      --muted:  #888880;
-      --border: rgba(17, 17, 17, 0.12);
-      --pad:    clamp(1.5rem, 5vw, 4rem);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAV ─────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem var(--pad);
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .nav.scrolled {
-      background: rgba(245, 243, 239, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-color: var(--border);
-    }
-    .nav-back {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-back:hover { opacity: 1; }
-    .nav-back::before { content: '←'; font-size: 0.9rem; letter-spacing: 0; }
-    .nav-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      opacity: 0.55;
-      transition: opacity 0.2s;
-    }
-    .nav-label:hover { opacity: 1; }
-
-    /* ── PROJECT HEADER ──────────────────────── */
-    .project-header {
-      padding: calc(5.5rem + var(--pad)) var(--pad) 4.5rem;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .project-client {
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-    .project-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2.6rem, 6vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1.06;
-      margin-bottom: 2rem;
-    }
-    .project-brief {
-      font-size: 0.93rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 580px;
-      margin: 0 auto;
-    }
-
-    /* ── MEDIA BLOCKS ────────────────────────── */
-    .media-full {
-      width: 100%;
-      line-height: 0;
-      margin-bottom: 3px;
-    }
-    .media-full img {
-      width: 100%;
-      display: block;
-    }
-
-    /* Contained (narrower) block for square social cut */
-    .media-contained {
-      padding: 0 var(--pad);
-      margin-bottom: 3px;
-    }
-    .media-contained .video-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    /* ── VIDEO PLAYER ────────────────────────── */
-    .video-wrap {
-      position: relative;
-      background: #0d0d0d;
-      cursor: pointer;
-      line-height: 0;
-    }
-    .video-wrap video {
-      width: 100%;
-      display: block;
-    }
-    /* Custom play overlay — visible until first play */
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.22);
-      transition: opacity 0.35s;
-    }
-    .video-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .play-btn {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 1px solid rgba(245, 243, 239, 0.55);
-      background: rgba(245, 243, 239, 0.1);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s, background 0.25s;
-    }
-    .video-wrap:hover .play-btn {
-      transform: scale(1.08);
-      background: rgba(245, 243, 239, 0.2);
-    }
-    .play-btn::after {
-      content: '';
-      width: 0; height: 0;
-      border-style: solid;
-      border-width: 9px 0 9px 17px;
-      border-color: transparent transparent transparent rgba(245, 243, 239, 0.9);
-      margin-left: 4px;
-    }
-
-    /* ── VIMEO EMBED ─────────────────────────── */
-    .vimeo-wrap {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0d0d0d;
-      line-height: 0;
-    }
-    .vimeo-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-
-    /* ── NEXT PROJECT ────────────────────────── */
-    .next-project {
-      border-top: 1px solid var(--border);
-      padding: 3.5rem var(--pad) 4rem;
-      text-align: center;
-    }
-    .next-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.9rem;
-    }
-    .next-link {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ink);
-      text-decoration: none;
-      transition: opacity 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .next-link:hover { opacity: 0.45; }
-    .next-link::after { content: '→'; font-style: normal; }
-
-    /* ── 3-COL PORTRAIT GRID ─────────────────── */
-    .media-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      margin-bottom: 3px;
-      line-height: 0;
-    }
-    .media-grid-3 img {
-      width: 100%;
-      display: block;
-    }
-
-    /* ── LANDSCAPE IMAGE GRIDS ───────────────── */
-    .media-grid-3-ls,
-    .media-grid-2-ls {
-      display: grid;
-      gap: 3px;
-      margin-bottom: 3px;
-      line-height: 0;
-    }
-    .media-grid-3-ls { grid-template-columns: repeat(3, 1fr); }
-    .media-grid-2-ls { grid-template-columns: repeat(2, 1fr); }
-    .media-grid-3-ls img,
-    .media-grid-2-ls img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-    }
-
-    /* ── 3-COL VIDEO GRID ────────────────────── */
-    .media-grid-3-vid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      margin-bottom: 3px;
-    }
-
-    /* ── GIF GRID ────────────────────────────── */
-    .media-gif-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3px;
-      margin-bottom: 3px;
-      line-height: 0;
-    }
-    .media-gif-grid img {
-      width: 100%;
-      display: block;
-    }
-
-    /* ── 2-COL EQUAL HEIGHT (crop to match taller) ── */
-    .media-grid-2-equal {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3px;
-      margin-bottom: 3px;
-      line-height: 0;
-      align-items: stretch;
-    }
-    .media-grid-2-equal img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────── */
-    @media (max-width: 600px) {
-      .media-contained { padding: 0; }
-      .media-grid-3   { grid-template-columns: repeat(2, 1fr); }
-      .media-grid-3-ls { grid-template-columns: repeat(2, 1fr); }
-      .media-grid-3-vid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <title>Nike Like a Lioness · Joe Bruce</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav" id="nav">
-    <a href="index.html#projects" class="nav-back">Back to creative</a>
-    <a href="index.html#about" class="nav-label">About Joe</a>
+    <a href="index.html" class="nav-mark">Joe Bruce</a>
+    <div class="nav-links">
+      <a href="index.html">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
   </nav>
 
-  <!-- Project header -->
   <header class="project-header">
-    <h1 class="project-title">Nike — Like a Lioness</h1>
-    <p class="project-brief">A huge new creative platform for the Lionesses.</p>
+    <h1>Nike Like a Lioness</h1>
   </header>
 
-  <!-- Main campaign film -->
+  <div class="project-desc">
+    <p>We worked with Nike to create a platform for the England Women&#x27;s Team. One that would encourage girls to engage with football during the World Cup, and beyond.</p>
+  </div>
+
   <div class="media-full">
-    <div class="vimeo-wrap">
-      <iframe
-        src="https://player.vimeo.com/video/848797254?dnt=1&autopause=1"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
-      ></iframe>
-    </div>
+    <div class="embed-wrap"><iframe src="https://player.vimeo.com/video/848797254?dnt=1&autopause=1" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
   </div>
 
-  <!-- Post hero full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/post video images.webp" alt="Nike Like a Lioness" loading="lazy" /></div>
-
-  <!-- Phone shots full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Phone shots.png" alt="Nike Like a Lioness" loading="lazy" /></div>
-
-  <!-- Tweet gifs -->
-  <div class="media-grid-3">
-    <img src="Like a Lioness Project images and gifs/Like a lioness tweet gifs/f8858a_138a5424e3144b48b75a55bc03520725mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Like a lioness tweet gifs/f8858a_11d403dacee748b3b7e6e566d9a561b0mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Like a lioness tweet gifs/f8858a_baab255325a04ce981a6c8968c698235mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-post-video-images.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Merch full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Merch LAL.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
-
-  <!-- Seeding 1 + 2 side by side -->
-  <div class="media-gif-grid">
-    <img src="Like a Lioness Project images and gifs/Seeding-1.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Seeding2.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-phone-shots.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Mason Mount full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Mason Mount.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
-
-  <!-- Row 4 -->
-  <div class="media-grid-3">
-    <img src="Like a Lioness Project images and gifs/Row 4 images/Screenshot-2023-08-11-at-14_35_57-1.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 4 images/Screenshot-2023-08-11-at-14_36_50-1.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 4 images/f8858a_b915825511d94316b699fd42c5d22837mv2-1.gif" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-grid" style="--cols: 3;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-like-a-lioness-tweet-gifs-f8858a-138a5424e3144b48b75a55bc03520725mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-like-a-lioness-tweet-gifs-f8858a-11d403dacee748b3b7e6e566d9a561b0mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-like-a-lioness-tweet-gifs-f8858a-baab255325a04ce981a6c8968c698235mv2.gif" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Row 6 -->
-  <div class="media-grid-3">
-    <img src="Like a Lioness Project images and gifs/Row 6 images/28961070-A4AF-413A-8039-503DD20E4357.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 6 images/Phone_09_MM.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 6 images/Seedin02.png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-merch-lal.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Row 8 -->
-  <div class="media-grid-2-equal">
-    <img src="Like a Lioness Project images and gifs/Row 8 images/js.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 8 images/9528c579-9fd0-4939-86cc-6e57826a7c2f.jpg" alt="Nike Like a Lioness" loading="lazy" />
-  </div>
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Row 8 images/34057b46-814a-425f-a3de-86ddeb35eaef.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
-
-  <!-- Row 9 -->
-  <div class="media-grid-3">
-    <img src="Like a Lioness Project images and gifs/Row 9 images/Screenshot-2023-09-16-at-21.03.31.png" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 9 images/Screenshot-2023-09-16-at-21.06.04.png" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 9 images/Screenshot-2023-09-17-at-00.13.50.png" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-grid" style="--cols: 2;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-seeding-1-png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-seeding2-png.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Row 10 -->
-  <div class="media-gif-grid">
-    <img src="Like a Lioness Project images and gifs/Row 10 images/7d51c3c6-b33d-42f1-8248-bdd4c44b9c07.jpg" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 10 images/Screenshot-2023-09-16-at-21.07.03.png" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-mason-mount.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Row 11 -->
-  <div class="media-gif-grid">
-    <img src="Like a Lioness Project images and gifs/Row 11 images/giphy-copy.gif" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 11 images/giphy-copy-2.gif" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-grid" style="--cols: 3;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-4-images-screenshot-2023-08-11-at-14-35-57-1-png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-4-images-screenshot-2023-08-11-at-14-36-50-1-png.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-4-images-f8858a-b915825511d94316b699fd42c5d22837mv2-1.gif" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Row 12 -->
-  <div class="media-grid-3">
-    <img src="Like a Lioness Project images and gifs/Row 12 images/Screenshot-2023-09-17-at-00.25.30.png" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 12 images/Screenshot-2023-09-17-at-00.26.10.png" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 12 images/Screenshot-2023-09-17-at-01.09.25.png" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-grid" style="--cols: 3;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-6-images-28961070-a4af-413a-8039-503dd20e4357.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-6-images-phone-09-mm.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-6-images-seedin02-png.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- GRM Daily Duppy films — side by side -->
-  <div class="media-grid-3-vid">
-    <div class="vimeo-wrap">
-      <iframe src="https://www.youtube.com/embed/TE-zuPFFy14" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Cristale - Daily Duppy | GRM Daily"></iframe>
-    </div>
-    <div class="vimeo-wrap">
-      <iframe src="https://www.youtube.com/embed/AmwrPt6y7Z0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="Blasian Baddie - Daily Duppy | GRM Daily"></iframe>
-    </div>
-    <div class="vimeo-wrap">
-      <iframe src="https://www.youtube.com/embed/wuI2jT8qBCw" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy" title="TeeZandos - Daily Duppy | GRM Daily"></iframe>
-    </div>
+  <div class="media-grid" style="--cols: 2;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-8-images-js.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-8-images-9528c579-9fd0-4939-86cc-6e57826a7c2f.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Row 13 -->
-  <div class="media-gif-grid">
-    <img src="Like a Lioness Project images and gifs/Row 13 gifs/f8858a_9b5ab8b6fa314cbe8189434567c664cemv2.gif" alt="Nike Like a Lioness" loading="lazy" />
-    <img src="Like a Lioness Project images and gifs/Row 13 gifs/f8858a_dfed8554e5394813b21c3724bdb00ebdmv2-1.gif" alt="Nike Like a Lioness" loading="lazy" />
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-8-images-34057b46-814a-425f-a3de-86ddeb35eaef.jpg" alt="Nike Like a Lioness" loading="lazy" />
   </div>
 
-  <!-- Spotify full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Like a lioness spotify.png" alt="Nike Like a Lioness" loading="lazy" /></div>
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Like a lioness spotify 2.jpg" alt="Nike Like a Lioness" loading="lazy" /></div>
+  <div class="media-grid" style="--cols: 3;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-9-images-screenshot-2023-09-16-at-21-03-31.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-9-images-screenshot-2023-09-16-at-21-06-04.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-9-images-screenshot-2023-09-17-at-00-13-50.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-  <!-- Custom gifs full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Custom.gif" alt="Nike Like a Lioness" loading="lazy" /></div>
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Custom 2.gif" alt="Nike Like a Lioness" loading="lazy" /></div>
+  <div class="media-grid" style="--cols: 2;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-10-images-7d51c3c6-b33d-42f1-8248-bdd4c44b9c07.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-10-images-screenshot-2023-09-16-at-21-07-03.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-  <!-- Prem boards full width -->
-  <div class="media-full"><img src="Like a Lioness Project images and gifs/Prem boards.gif" alt="Nike Like a Lioness" loading="lazy" /></div>
+  <div class="media-grid" style="--cols: 2;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-11-images-giphy-copy.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-11-images-giphy-copy-2.gif" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-  <!-- Next project -->
-  <nav class="next-project">
-    <p class="next-label">Next project</p>
-    <a href="nike-own-the-floor.html" class="next-link">Nike — Own the Floor</a>
-  </nav>
+  <div class="media-grid" style="--cols: 3;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-12-images-screenshot-2023-09-17-at-00-25-30.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-12-images-screenshot-2023-09-17-at-00-26-10.jpg" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-12-images-screenshot-2023-09-17-at-01-09-25.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-  <!-- HLS.js for cross-browser video -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    // ── Nav scroll ──────────────────────────────
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
+  <div class="media-grid" style="--cols: 3;">
+    <div class="embed-wrap"><iframe src="https://www.youtube.com/embed/TE-zuPFFy14" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="embed-wrap"><iframe src="https://www.youtube.com/embed/AmwrPt6y7Z0" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+    <div class="embed-wrap"><iframe src="https://www.youtube.com/embed/wuI2jT8qBCw" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  </div>
 
-    // ── Video players ───────────────────────────
-    document.querySelectorAll('.video-wrap').forEach(wrap => {
-      const video   = wrap.querySelector('video');
-      const overlay = wrap.querySelector('.video-overlay');
-      const hlsSrc  = wrap.dataset.hls;
-      let   ready   = false;
+  <div class="media-grid" style="--cols: 2;">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-13-gifs-f8858a-9b5ab8b6fa314cbe8189434567c664cemv2.gif" alt="Nike Like a Lioness" loading="lazy" />
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-row-13-gifs-f8858a-dfed8554e5394813b21c3724bdb00ebdmv2-1.gif" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-      function initVideo() {
-        if (ready) return;
-        ready = true;
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-like-a-lioness-spotify.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-        if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-          const hls = new Hls({ startLevel: -1 });
-          hls.loadSource(hlsSrc);
-          hls.attachMedia(video);
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-          // Safari — native HLS support
-          video.src = hlsSrc;
-        }
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-like-a-lioness-spotify-2.jpg" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-        // Show native controls after first load
-        video.controls = true;
-      }
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-custom.gif" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-      // Click on overlay or video → play/pause
-      wrap.addEventListener('click', (e) => {
-        initVideo();
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-      });
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-custom-2.gif" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-      video.addEventListener('play',  () => overlay.classList.add('hidden'));
-      video.addEventListener('pause', () => overlay.classList.remove('hidden'));
-      video.addEventListener('ended', () => overlay.classList.remove('hidden'));
-    });
-  </script>
+  <div class="media-full">
+    <img src="assets/media/like-a-lioness-project-images-and-gifs-prem-boards.gif" alt="Nike Like a Lioness" loading="lazy" />
+  </div>
 
-<script src="project.js"></script>
+  <a class="back-link" href="index.html">← Back to Creative</a>
+
+  <script src="script.js"></script>
 </body>
 </html>
