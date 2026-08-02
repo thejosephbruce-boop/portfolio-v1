@@ -37,8 +37,10 @@ def render_video(item):
         source = f'data-mp4="{item["mp4"]}"'
     else:
         source = f'data-hls="{item["hls"]}"'
+    # Some films open on a slate; `start` skips to the first real frame.
+    start = f' data-start="{item["start"]}"' if item.get("start") else ""
     return (
-        f'<div class="video-wrap" {source}>'
+        f'<div class="video-wrap" {source}{start}>'
         f'<video poster="{poster}" preload="none" playsinline></video>'
         f'<div class="video-overlay"><div class="play-btn"></div></div>'
         f"</div>"
@@ -117,7 +119,8 @@ def main():
                 if "playlist_url" in item:
                     item = {"type": "video", "hls": v["playlist_url"], "poster": v.get("thumbnail_url")}
                 elif item.get("type") == "mp4":
-                    item = {"type": "video", "mp4": v["src"], "poster": v.get("poster")}
+                    item = {"type": "video", "mp4": v["src"], "poster": v.get("poster"),
+                            "start": v.get("start")}
                 blocks.append({"layout": "full", "items": [item]})
             for src in p.get("images", []) + p.get("gifs", []):
                 blocks.append({"layout": "full", "items": [{"type": "image", "src": src}]})

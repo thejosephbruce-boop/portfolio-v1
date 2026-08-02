@@ -14,7 +14,8 @@
       {
         "type": "mp4",
         "src": "assets/anthropic-hard-questions.mp4",
-        "poster": "assets/thumbs/anthropic-hard-questions.jpg"
+        "poster": "assets/thumbs/anthropic-hard-questions.jpg",
+        "start": 7
       }
     ]
   },

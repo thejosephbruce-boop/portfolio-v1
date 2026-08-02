@@ -99,9 +99,22 @@
     const overlay = wrap.querySelector('.video-overlay');
     const mp4 = wrap.dataset.mp4;
     const hls = wrap.dataset.hls;
+    const start = parseFloat(wrap.dataset.start);
     if (!video || (!mp4 && !hls)) return;
 
     let attached = false;
+
+    // Films that open on a slate start further in. Seeking needs the metadata,
+    // and only applies to the first play so the viewer can still scrub back.
+    if (start > 0) {
+      let seeked = false;
+      video.addEventListener('loadedmetadata', () => {
+        if (!seeked && start < video.duration) {
+          video.currentTime = start;
+          seeked = true;
+        }
+      });
+    }
 
     function attach() {
       if (attached) return Promise.resolve();
