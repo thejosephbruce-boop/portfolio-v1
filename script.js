@@ -140,14 +140,20 @@
       });
     }
 
-    wrap.addEventListener('click', () => {
-      attach().then(() => {
-        if (video.paused) video.play(); else video.pause();
-      });
+    // Only the overlay starts playback. This used to be bound to the whole
+    // wrapper as a play/pause toggle, but the wrapper also contains the native
+    // controls — so clicking pause ran the toggle too and instantly resumed,
+    // making the player look unresponsive. Once the overlay hides, the native
+    // controls own every click.
+    (overlay || wrap).addEventListener('click', () => {
+      attach().then(() => video.play());
     });
 
     video.addEventListener('play', () => overlay && overlay.classList.add('hidden'));
-    video.addEventListener('pause', () => overlay && overlay.classList.remove('hidden'));
+    // Not restored on pause: the overlay covers the full frame, controls
+    // included, so bringing it back mid-film would block scrubbing. The native
+    // controls already show a play button. It only returns once the film ends,
+    // where it reads as "replay".
     video.addEventListener('ended', () => overlay && overlay.classList.remove('hidden'));
   });
 }());
