@@ -71,15 +71,11 @@
 // Project-page video: poster + click-to-play. Nothing is fetched until the
 // viewer actually clicks, so a case study with a dozen films stays light.
 // Sources are either a local mp4 (data-mp4) or a Squarespace HLS stream
-// (data-hls) — HLS plays natively in Safari, and hls.js is pulled in on
-// demand for browsers that need it.
+// (data-hls). hls.js is pulled in on demand and drives playback wherever it
+// works; only Safari/iOS, which demux HLS themselves, use the native player.
 (function () {
   const wraps = document.querySelectorAll('.video-wrap');
   if (!wraps.length) return;
-
-  const nativeHls = !!document
-    .createElement('video')
-    .canPlayType('application/vnd.apple.mpegurl');
 
   let hlsLoader = null;
   function loadHlsLib() {
@@ -125,17 +121,21 @@
         video.src = mp4;
         return Promise.resolve();
       }
-      if (nativeHls) {
-        video.src = hls;
-        return Promise.resolve();
-      }
+      // This used to hand the .m3u8 straight to the browser whenever
+      // canPlayType('application/vnd.apple.mpegurl') was truthy. That check is
+      // a trap: canPlayType returns "", "maybe" or "probably", and Chrome and
+      // Edge answer "maybe" while shipping no HLS demuxer at all — so every
+      // stream was assigned as a plain src, hls.js was never fetched, and the
+      // player sat on the poster forever with no error. Ask hls.js whether it
+      // can run instead, and keep native playback for the browsers where
+      // isSupported() is false because HLS is built in (Safari, iOS).
       return loadHlsLib().then((Hls) => {
         if (Hls && Hls.isSupported()) {
           const inst = new Hls({ startLevel: -1 });
           inst.loadSource(hls);
           inst.attachMedia(video);
         } else {
-          video.src = hls; // last resort
+          video.src = hls;
         }
       });
     }
